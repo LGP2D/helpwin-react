@@ -1,2 +1,3 @@
 # helpwin-react
-This is the front end for the Helpwin application. 
+
+This demo is VERY BASIC. Still under development!

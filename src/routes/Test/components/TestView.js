@@ -1,11 +1,10 @@
 import React from 'react'
-import DuckImage from '../assets/Duck.jpg'
-import './HomeView.scss'
+import './TestView.scss'
 
-export const HomeView = () => (
+export const TestView = () => (
   <div>
     <h4>Welcome to the test!</h4>
   </div>
 );
 
-export default HomeView
+export default TestView

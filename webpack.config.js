@@ -16,7 +16,19 @@ module.exports = {
           presets: ['react', 'es2015', 'stage-0'],
           plugins: ['react-html-attrs', 'transform-class-properties', 'transform-decorators-legacy'],
         }
-      }
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.svg$/,
+        use: ['svg-url-loader']
+      },
+      {
+        test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+        loader: 'url-loader?limit=100000'
+      },
     ]
   },
   output: {
@@ -28,4 +40,8 @@ module.exports = {
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
   ],
+  devServer: {
+    host: 'localhost',
+    port: 3000,
+  },
 };

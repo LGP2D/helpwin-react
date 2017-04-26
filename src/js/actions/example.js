@@ -1,4 +1,4 @@
-import dispatcher from '../dispatcher/dispatcher';
+import dispatcher from 'app/dispatcher/dispatcher';
 
 export function doSomething(title, text, tags) {
     dispatcher.dispatch({

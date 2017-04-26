@@ -8,7 +8,7 @@ $ npm start       # Compile and launch
 ```
 If everything works, you should see the following:
 
-<img src="http://i.imgur.com/Kk2qTHC.png" />
+<img src="http://image.prntscr.com/image/e44e998bb57d45f0b16f6fb1ddebffb8.png" />
 
 > http://localhost:3000
 

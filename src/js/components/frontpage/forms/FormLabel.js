@@ -17,4 +17,4 @@ FormLabel.propTypes = {
     htmlFor: PropTypes.string.isRequired,
     className: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired
-}
+};

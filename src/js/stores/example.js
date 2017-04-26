@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
 
-import dispatcher from '../dispatcher/dispatcher';
+import dispatcher from 'app/dispatcher/dispatcher';
 
 class PostItStore extends EventEmitter {
 

@@ -1,13 +1,13 @@
 import React from "react";
 
 export default class Header extends React.Component {
-    render() {
+    render () {
         const footerStyles = {
-            marginTop: "30px",
+            marginTop: "30px"
         };
 
         return (
-            <header style={footerStyles}>
+            <header style={ footerStyles }>
                 This is our header
             </header>
         );

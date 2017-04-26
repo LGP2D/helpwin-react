@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default class FormLabel extends React.Component {
-    constructor() {
+    constructor () {
         super();
     }
 
-    render() {
+    render () {
         return (
-            <label htmlFor={this.props.htmlFor} className={this.props.className}>{this.props.title}</label>
+            <label htmlFor={ this.props.htmlFor } className={ this.props.className }>{ this.props.title }</label>
         );
     }
 }

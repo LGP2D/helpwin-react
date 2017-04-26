@@ -4,7 +4,7 @@ import dispatcher from 'app/dispatcher/dispatcher';
 
 class PostItStore extends EventEmitter {
 
-    constructor() {
+    constructor () {
         super();
         this.postIts = [
             {
@@ -17,11 +17,11 @@ class PostItStore extends EventEmitter {
         ];
     }
 
-    getAll() {
+    getAll () {
         return this.postIts;
     }
 
-    addPostIt(title, text, tags) {
+    addPostIt (title, text, tags) {
         const id = Date.now();
 
         this.postIts.push({
@@ -33,13 +33,13 @@ class PostItStore extends EventEmitter {
         this.emit('change');
     }
 
-    deletePostIt(id) {
+    deletePostIt (id) {
         this.postIts = this.postIts.filter(postIt => postIt.id !== id);
         this.emit('change');
     }
 
 
-    handleActions(action) {
+    handleActions (action) {
         switch (action.type) {
             case 'ADD_POST_IT': {
                 this.addPostIt(action.title, action.text, action.tags);

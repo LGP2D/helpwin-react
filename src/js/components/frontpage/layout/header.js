@@ -33,6 +33,9 @@ export default class Header extends React.Component {
                                 <li>
                                     <a class='page-scroll' href='#contact'>Contact</a>
                                 </li>
+                                <li>
+                                    <a class='page-scroll' href='#/register'>Register</a>
+                                </li>
                             </ul>
                         </div>
                         { /* /.navbar-collapse */ }

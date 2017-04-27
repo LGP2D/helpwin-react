@@ -38,8 +38,12 @@ module.exports = {
                 use: ['svg-url-loader']
             },
             {
-                test: /\.(png|jpg|woff|woff2|eot|ttf|svg)$/,
+                test: /\.(png|jpg|woff|woff2|eot|ttf|svg|gif)$/,
                 loader: 'url-loader?limit=10000'
+            },
+            {
+                test: /\.less$/,
+                loader: ['style-loader', 'css-loader', 'less-loader']
             }
         ]
     },

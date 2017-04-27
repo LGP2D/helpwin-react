@@ -26,16 +26,20 @@ export default class Register extends React.Component {
             repassword: '',
             role: this.roles[0]
         }
+
+        this.onRegister = this.onRegister.bind(this);
+    }
+
+    onRegister() {
+        console.log('user is now registered');
     }
 
     componentWillMount() {''
-        UserStore.on('register', () => {
-           console.log('User is now registered');
-        });
+        UserStore.on('register', this.onRegister);
     }
 
     componentWillUnmount() {
-
+        UserStore.removeListener('register', this.onRegister);
     }
 
     render() {

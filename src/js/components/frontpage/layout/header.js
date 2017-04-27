@@ -14,7 +14,7 @@ export default class Header extends React.Component {
                                     data-target='.navbar-main-collapse'>
                                 Menu <i class='fa fa-bars'/>
                             </button>
-                            <a class='navbar-brand page-scroll' href='#page-top'>
+                            <a class='navbar-brand page-scroll' href='#'>
                                 <i class='fa fa-play-circle'/> <span class='light'>HELP</span> WIN
                             </a>
                         </div>

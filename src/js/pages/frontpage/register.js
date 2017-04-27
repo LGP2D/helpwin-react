@@ -5,16 +5,15 @@ import * as UserActions from 'app/actions/userActions';
 import Combobox from 'react-widgets/lib/Combobox';
 import 'react-widgets/lib/less/react-widgets.less';
 
-
 export default class Register extends React.Component {
     constructor() {
         super();
 
         this.roles = [
-            { id: 1, description: 'ADMIN' },
-            { id: 2, description: 'GUEST' },
-            { id: 3, description: 'VOLUNTEER' },
-            { id: 4, description: 'COMPANY' }
+            { id: 1, description: 'Administrator' },
+            { id: 2, description: 'Institution' },
+            { id: 3, description: 'Volunteer' },
+            { id: 4, description: 'Company' }
         ]
 
         this.state = {
@@ -29,84 +28,90 @@ export default class Register extends React.Component {
         }
     }
 
-    componentWillMount() {
+    componentWillMount() {''
         UserStore.on('register', () => {
            console.log('User is now registered');
         });
     }
 
+    componentWillUnmount() {
+
+    }
+
     render() {
         return(
-            <form className='form-horizontal' onSubmit={ this.handleSubmit }>
-                <div className='form-group'>
-                    <LabelForm htmlFor='formName' title='Name' className='control-label col-sm-2'/>
-                    <div className='col-sm-6'>
-                        <input id='formName' className='form-control' name='name' type='text'
-                               required onChange={ this.handleChange } value={ this.state.name }
-                               placeholder='Type your name...'/>
+            <div>
+                <h1 className='col-sm-offset-5'>Register Form</h1>
+                <form className='form-horizontal' onSubmit={ this.handleSubmit }>
+                    <div className='form-group'>
+                        <LabelForm htmlFor='formName' title='Name' className='control-label col-sm-2 col-sm-offset-1'/>
+                        <div className='col-sm-6'>
+                            <input id='formName' className='form-control' name='name' type='text'
+                                   required onChange={ this.handleChange } value={ this.state.name }
+                                   placeholder='Type your name...'/>
+                        </div>
                     </div>
-                </div>
-                <div className='form-group'>
-                    <LabelForm htmlFor='formEmail' title='Email' className='control-label col-sm-2'/>
-                    <div className='col-sm-6'>
-                        <input id='formEmail' className='form-control' name='email' type='text'
-                               required onChange={ this.handleChange } value={ this.state.email }
-                               placeholder='Type your email...'/>
+                    <div className='form-group'>
+                        <LabelForm htmlFor='formEmail' title='Email' className='control-label col-sm-2 col-sm-offset-1'/>
+                        <div className='col-sm-6'>
+                            <input id='formEmail' className='form-control' name='email' type='text'
+                                   required onChange={ this.handleChange } value={ this.state.email }
+                                   placeholder='Type your email...'/>
+                        </div>
                     </div>
-                </div>
-                <div className='form-group'>
-                    <LabelForm htmlFor='birthdate' title='Birthdate' className='control-label col-sm-2'/>
-                    <div className='col-sm-6'>
-                        <input id='birthdate' className='form-control' name='birthdate' type='date'
-                               required onChange={ this.handleChange } value={ this.state.birthdate }
-                               placeholder='Choose your birthdate...'/>
+                    <div className='form-group'>
+                        <LabelForm htmlFor='birthdate' title='Birthdate' className='control-label col-sm-2 col-sm-offset-1'/>
+                        <div className='col-sm-6'>
+                            <input id='birthdate' className='form-control' name='birthdate' type='date'
+                                   required onChange={ this.handleChange } value={ this.state.birthdate }
+                                   placeholder='Choose your birthdate...'/>
+                        </div>
                     </div>
-                </div>
-                <div className='form-group'>
-                    <LabelForm htmlFor='password' title='Password' className='control-label col-sm-2'/>
-                    <div className='col-sm-6'>
-                        <input id='password' className='form-control' name='password' type='password'
-                               required onChange={ this.handleChange } value={ this.state.password }
-                               placeholder='Type password...' minLength='6'/>
+                    <div className='form-group'>
+                        <LabelForm htmlFor='password' title='Password' className='control-label col-sm-2 col-sm-offset-1'/>
+                        <div className='col-sm-6'>
+                            <input id='password' className='form-control' name='password' type='password'
+                                   required onChange={ this.handleChange } value={ this.state.password }
+                                   placeholder='Type password...' minLength='6'/>
+                        </div>
                     </div>
-                </div>
-                <div className='form-group'>
-                    <LabelForm htmlFor='retypepassword' title='Retype Password' className='control-label col-sm-2'/>
-                    <div className='col-sm-6'>
-                        <input id='retypepassword' className='form-control' name='repassword' type='password'
-                               required onChange={ this.handleChange } value={ this.state.repassword }
-                               placeholder='Retype password...' minLength='6'/>
+                    <div className='form-group'>
+                        <LabelForm htmlFor='retypepassword' title='Retype Password' className='control-label col-sm-2 col-sm-offset-1'/>
+                        <div className='col-sm-6'>
+                            <input id='retypepassword' className='form-control' name='repassword' type='password'
+                                   required onChange={ this.handleChange } value={ this.state.repassword }
+                                   placeholder='Retype password...' minLength='6'/>
+                        </div>
                     </div>
-                </div>
-                <div className='form-group'>
-                    <LabelForm htmlFor='profession' title='Profession' className='control-label col-sm-2'/>
-                    <div className='col-sm-6'>
-                        <input id='profession' className='form-control' name='profession' type='text'
-                               required onChange={ this.handleChange } value={ this.state.profession }
-                               placeholder='Type profession...'/>
+                    <div className='form-group'>
+                        <LabelForm htmlFor='profession' title='Profession' className='control-label col-sm-2 col-sm-offset-1'/>
+                        <div className='col-sm-6'>
+                            <input id='profession' className='form-control' name='profession' type='text'
+                                   required onChange={ this.handleChange } value={ this.state.profession }
+                                   placeholder='Type profession...'/>
+                        </div>
                     </div>
-                </div>
-                <div className='form-group'>
-                    <LabelForm htmlFor='image' title='Image' className='control-label col-sm-2'/>
-                    <div className='col-sm-6'>
-                        <input id='image' className='form-control file' name='image' type='file'
-                               onChange={ this.handleChange } value={ this.state.image }
-                               placeholder='test...'/>
+                    <div className='form-group'>
+                        <LabelForm htmlFor='image' title='Image' className='control-label col-sm-2 col-sm-offset-1'/>
+                        <div className='col-sm-6'>
+                            <input id='image' className='form-control file' name='image' type='file'
+                                   onChange={ this.handleChange } value={ this.state.image } />
+                        </div>
                     </div>
-                </div>
-                <div className='form-group'>
-                    <LabelForm htmlFor='role' title='Role' className='control-label col-sm-2'/>
-                    <div className='col-sm-6'>
-                        <Combobox valueField='id' textField='description' data={ this.roles }
-                                      onChange={ this.handleChangeDropdown } defaultValue={ this.state.role }  />
+                    <div className='form-group'>
+                        <LabelForm htmlFor='role' title='Role' className='control-label col-sm-2 col-sm-offset-1'/>
+                        <div className='col-sm-6'>
+                            <Combobox valueField='id' textField='description' data={ this.roles }
+                                          onChange={ this.handleChangeDropdown } defaultValue={ this.state.role }  />
+                        </div>
                     </div>
-                </div>
-                <div className='form-group'>
-                    <div className='col-sm-offset-2 col-sm-6'>
-                        <button type='submit' value='Submit' className='btn btn-default'>Submit</button>
+                    <div className='form-group'>
+                        <div className='col-sm-offset-3 col-sm-6'>
+                            <button type='submit' value='Submit' className='btn btn-default'>Submit</button>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         );
     }
 
@@ -126,6 +131,9 @@ export default class Register extends React.Component {
         event.preventDefault();
         console.log('handled submit');
 
+        let role = this.state.role;
+        role.description = role.description.toUpperCase();
+
         let user = {
             name: this.state.name,
             email: this.state.email,
@@ -133,12 +141,10 @@ export default class Register extends React.Component {
             password: this.state.password,
             profession: this.state.profession,
             imageUrl: this.state.image,
-            role: this.state.role,
+            role: role,
             uniqueId: '',
             id: ''
         };
-
-        console.log(user);
 
         UserActions.registerUser(user);
     }

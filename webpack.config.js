@@ -19,35 +19,40 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: ['style-loader', 'css-loader']
+                use: [
+                    'style-loader',
+                    'css-loader'
+                ]
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    { loader: "style-loader" },
+                    { loader: 'css-loader' },
+                    { loader: "sass-loader" }
+                ]
+
             },
             {
                 test: /\.svg$/,
                 use: ['svg-url-loader']
             },
             {
-                test: /\.(png|woff|woff2|eot|ttf|svg)$/,
-                loader: 'url-loader?limit=100000'
+                test: /\.(png|jpg|woff|woff2|eot|ttf|svg|gif)$/,
+                loader: 'url-loader?limit=10000'
             },
             {
                 test: /\.less$/,
                 loader: ['style-loader', 'css-loader', 'less-loader']
-            },
-            {
-                test: /\.(jpe?g|png|gif|svg)$/i,
-                use: [
-                    'url-loader?limit=10000',
-                    'img-loader'
-                ]
             }
         ]
     },
     resolve: {
         alias: {
             app: path.resolve(__dirname, 'src/js/'),
-            assets: path.resolve(__dirname, 'src/assets/'),
+            assets: path.resolve(__dirname, 'src/assets/')
         },
-        extensions: ['.js', '.jsx']
+        extensions: ['.css', '.js', '.jsx']
     },
     output: {
         path: __dirname + "/src/",
@@ -56,10 +61,10 @@ module.exports = {
     plugins: debug ? [] : [
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.OccurenceOrderPlugin(),
-        new webpack.optimize.UglifyJsPlugin({mangle: false, sourcemap: false}),
+        new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false })
     ],
     devServer: {
         host: 'localhost',
-        port: 3000,
-    },
+        port: 3000
+    }
 };

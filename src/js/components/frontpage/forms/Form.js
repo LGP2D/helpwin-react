@@ -3,11 +3,11 @@ import '../../../../assets/css/bootstrap.css';
 import PropTypes from 'prop-types';
 
 class Form extends React.Component {
-    constructor(props) {
+    constructor (props) {
         super(props);
     }
 
-    render() {
+    render () {
         return (
             <form className='form-horizontal' >
                 { this.props.children }
@@ -18,6 +18,7 @@ class Form extends React.Component {
 
 Form.propTypes = {
     children: PropTypes.array.isRequired
-};
+}
+
 
 export default Form;

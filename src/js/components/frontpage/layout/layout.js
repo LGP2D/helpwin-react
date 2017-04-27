@@ -8,13 +8,13 @@ export default class Layout extends React.Component {
     render() {
         const { location } = this.props;
         const layoutStyles = {
-            textAlign: "center",
+            textAlign: "center"
         };
 
         return (
             <div>
                 <Header />
-                    {this.props.children}
+                { this.props.children }
                 <Footer />
             </div>
 

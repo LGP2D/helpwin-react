@@ -3,7 +3,7 @@ import React from 'react';
 import Footer from './footer';
 import Header from './header';
 
-import styles from './layout-onepage.scss';
+import './layout-onepage.scss';
 
 export default class Layout extends React.Component {
     render () {

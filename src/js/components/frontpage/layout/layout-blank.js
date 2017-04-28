@@ -2,6 +2,8 @@ import React from 'react';
 import Footer from './footer';
 import Header from './header'
 
+import './layout-onepage.scss';
+
 export default class LayoutBlank extends React.Component {
     constructor() {
         super();

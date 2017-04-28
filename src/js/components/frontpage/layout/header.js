@@ -31,7 +31,7 @@ export default class Header extends React.Component {
                                     <a class='page-scroll' href='#download'>Download</a>
                                 </li>
                                 <li>
-                                    <a class='page-scroll' href='#contact'>Contact</a>
+                                    <a class='page-scroll' href='#voluntlist'>Volunteering List</a>
                                 </li>
                                 <li>
                                     <a class='page-scroll' href='#register'>Register</a>

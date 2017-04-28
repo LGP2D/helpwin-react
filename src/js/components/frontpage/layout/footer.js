@@ -2,13 +2,10 @@ import React from "react";
 
 export default class Footer extends React.Component {
     render () {
-        const footerStyles = {
-            marginTop: "30px"
-        };
 
         return (
-            <footer style={ footerStyles }>
-                This is our footer
+            <footer class='text-gray'>
+                <p>© 2017 - We've consumed 374 cups of <i class='fa fa-coffee' /> while building Helpwin</p>
             </footer>
         );
     }

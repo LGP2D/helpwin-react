@@ -70,8 +70,9 @@ Related to One Page theme
     }
     .navbar-custom.top-nav-collapse {
         padding: 0;
-        background: black;
+        background: dimgray;
         border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        opacity: 0.9;
     }
 }
 
@@ -185,4 +186,27 @@ Related to One Page theme
         -moz-transform: scale(1);
         transform: scale(1);
     }
+}
+
+.content-section {
+    width: 100%;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    text-align: center;
+}
+.content-section h1 {
+    text-transform: uppercase;
+    font-weight: 700;
+}
+.content-section .body {
+    padding-top: 15px;
+}
+
+footer {
+    height: 200px;
+    background-color: #111;
+    text-align: center;
+}
+footer p {
+    padding-top: 100px;
 }

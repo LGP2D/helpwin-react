@@ -7,6 +7,7 @@ import LayoutBlank from 'app/components/frontpage/layout/layout-blank';
 import FrontHome from 'app/pages/frontpage/home';
 import DashHome from 'app/pages/dashboard/home';
 import Register from 'app/pages/frontpage/register'
+import GetVouchers from 'app/pages/frontpage/vouchersList'
 
 const app = document.getElementById('app');
 
@@ -20,6 +21,9 @@ ReactDOM.render(
         </Route>
         <Route path='/register' component={ LayoutBlank }>
             <IndexRoute component={ Register }/>
+        </Route>
+        <Route path='/vouchers' component={ LayoutBlank }>
+            <IndexRoute component={ GetVouchers }/>
         </Route>
     </Router>,
     app

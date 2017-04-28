@@ -6,7 +6,7 @@ import Combobox from 'react-widgets/lib/Combobox';
 import 'react-widgets/lib/less/react-widgets.less';
 
 export default class Register extends React.Component {
-    constructor() {
+    constructor () {
         super();
 
         this.roles = [
@@ -34,11 +34,11 @@ export default class Register extends React.Component {
         console.log('user is now registered');
     }
 
-    componentWillMount() {''
+    componentWillMount () {''
         UserStore.on('register', this.onRegister);
     }
 
-    componentWillUnmount() {
+    componentWillUnmount () {
         UserStore.removeListener('register', this.onRegister);
     }
 

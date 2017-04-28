@@ -3,11 +3,11 @@ import Footer from './footer';
 import Header from './header'
 
 export default class LayoutBlank extends React.Component {
-    constructor() {
+    constructor () {
         super();
     }
 
-    render() {
+    render () {
         return (
             <div>
                 <Header/>

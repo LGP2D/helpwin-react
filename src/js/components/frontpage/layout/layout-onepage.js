@@ -5,11 +5,14 @@ import Header from './header';
 
 import './layout-onepage.scss';
 
-
 export default class Layout extends React.Component {
 
     componentDidMount () {
         window.addEventListener('scroll', this.handleScroll.bind(null, this.refs.navbar), false);
+    }
+
+    componentWillUnmount () {
+        window.removeEventListener('scroll', this.handleScroll.bind(null, this.refs.navbar), false);
     }
 
     render () {

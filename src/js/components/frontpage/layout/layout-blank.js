@@ -9,6 +9,14 @@ export default class LayoutBlank extends React.Component {
         super();
     }
 
+    componentDidMount () {
+        window.addEventListener('scroll', this.handleScroll.bind(null, this.refs.navbar), false);
+    }
+
+    componentWillUnmount () {
+        window.removeEventListener('scroll', this.handleScroll.bind(null, this.refs.navbar), false);
+    }
+
     render () {
         return (
             <div>

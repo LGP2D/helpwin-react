@@ -32,7 +32,7 @@ export default class Layout extends React.Component {
                                     data-target='.navbar-main-collapse'>
                                 Menu <i class='fa fa-bars'/>
                             </button>
-                            <a class='navbar-brand page-scroll' href='#page-top'>
+                            <a class='navbar-brand page-scroll' href='#'>
                                 <i class='fa fa-play-circle'/> <span class='light'>HELP</span> WIN
                             </a>
                         </div>
@@ -46,10 +46,10 @@ export default class Layout extends React.Component {
                                     <a class='page-scroll' href='#about'>About</a>
                                 </li>
                                 <li>
-                                    <a class='page-scroll' href='#download'>Download</a>
+                                    <a class='page-scroll' href='#/voluntlist'>Volunteering List</a>
                                 </li>
                                 <li>
-                                    <a class='page-scroll' href='#contact'>Contact</a>
+                                    <a class='page-scroll' href='#/register'>Register</a>
                                 </li>
                             </ul>
                         </div>

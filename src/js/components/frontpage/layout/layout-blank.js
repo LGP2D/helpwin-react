@@ -5,11 +5,11 @@ import Header from './header'
 import './layout-onepage.scss';
 
 export default class LayoutBlank extends React.Component {
-    constructor() {
+    constructor () {
         super();
     }
 
-    render() {
+    render () {
         return (
             <div>
                 <Header/>

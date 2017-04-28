@@ -10,6 +10,23 @@ body, html {
 Related to One Page theme
  */
 
+footer {
+    margin-top: 100px;
+    min-height: 200px;
+    padding: 80px 0 50px 0;
+    background-color: #222222;
+}
+
+.fa.fa-facebook,
+.fa.fa-twitter,
+.fa.fa-instagram,
+.fa.fa-linkedin {
+    color: #b1aca1;
+    font-size: 20px;
+    padding: 10px;
+    margin-bottom: 50px;
+}
+
 .navbar-custom {
     margin-bottom: 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);

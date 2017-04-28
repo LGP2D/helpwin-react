@@ -10,6 +10,7 @@
     "test": "NODE_ENV=test node ./node_modules/karma/bin/karma start"
   },
   "dependencies": {
+    "axios": "^0.16.1",
     "babel-core": "^6.17.0",
     "babel-loader": "^6.2.5",
     "babel-plugin-react-html-attrs": "^2.0.0",
@@ -27,6 +28,7 @@
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-router": "^3.0.0",
+    "react-widgets": "^3.4.6",
     "sass-loader": "^4.0.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.6",
@@ -41,12 +43,15 @@
     "eslint": "^1.8.0",
     "eslint-config-airbnb": "^2.0.0",
     "eslint-plugin-react": "^3.6.3",
+    "img-loader": "^2.0.0",
     "karma": "^1.0.0",
     "karma-coverage": "^1.0.0",
     "karma-mocha": "^1.0.1",
     "karma-mocha-reporter": "^2.0.0",
     "karma-phantomjs-launcher": "^1.0.2",
     "karma-webpack-with-fast-source-maps": "^1.9.2",
+    "less": "^2.7.2",
+    "less-loader": "^4.0.3",
     "mocha": "^3.0.1",
     "svg-url-loader": "^2.0.2"
   }

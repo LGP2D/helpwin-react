@@ -3,7 +3,7 @@ import dispatcher from 'app/dispatcher/dispatcher';
 import axios from 'axios';
 
 class UserStore extends EventEmitter {
-    constructor() {
+    constructor () {
         super();
 
         this.user = {
@@ -12,12 +12,12 @@ class UserStore extends EventEmitter {
         };
     }
 
-    getUser() {
+    getUser () {
         console.log('getUser', this.user);
         return this.user;
     }
 
-    handleActions(action) {
+    handleActions (action) {
         switch(action.type) {
             case 'REGISTER_USER': {
                 axios({

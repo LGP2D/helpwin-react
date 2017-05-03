@@ -6,7 +6,7 @@ import Combobox from 'react-widgets/lib/Combobox';
 import 'react-widgets/lib/less/react-widgets.less';
 
 export default class Register extends React.Component {
-    constructor() {
+    constructor () {
         super();
 
         this.roles = [
@@ -14,7 +14,7 @@ export default class Register extends React.Component {
             { id: 2, description: 'Institution' },
             { id: 3, description: 'Volunteer' },
             { id: 4, description: 'Company' }
-        ]
+        ];
 
         this.state = {
             name: '',
@@ -25,24 +25,24 @@ export default class Register extends React.Component {
             image: '',
             repassword: '',
             role: this.roles[0]
-        }
+        };
 
         this.onRegister = this.onRegister.bind(this);
     }
 
-    onRegister() {
+    onRegister () {
         console.log('user is now registered');
     }
 
-    componentWillMount() {''
+    componentWillMount () {
         UserStore.on('register', this.onRegister);
     }
 
-    componentWillUnmount() {
+    componentWillUnmount () {
         UserStore.removeListener('register', this.onRegister);
     }
 
-    render() {
+    render () {
         return(
             <div>
                 <h1 className='col-sm-offset-5'>Register Form</h1>
@@ -123,13 +123,13 @@ export default class Register extends React.Component {
         this.setState({
             role: value
         })
-    }
+    };
 
     handleChange = (event) => {
         let newState = {};
         newState[event.target.name] = event.target.value;
         this.setState(newState);
-    }
+    };
 
     handleSubmit = (event) => {
         event.preventDefault();

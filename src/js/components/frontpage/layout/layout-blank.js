@@ -2,6 +2,8 @@ import React from 'react';
 import Footer from './footer';
 import Header from './header'
 
+require('./layout-onepage.scss');
+
 export default class LayoutBlank extends React.Component {
     constructor () {
         super();
@@ -11,7 +13,7 @@ export default class LayoutBlank extends React.Component {
         return (
             <div>
                 { /* Navigation */ }
-                <nav class='navbar navbar-custom navbar-fixed-top' role='navigation'>
+                <nav class='navbar navbar-custom navbar-fixed-top top-nav-collapse' role='navigation'>
                     <div class='container'>
                         <div class='navbar-header'>
                             <button type='button' class='navbar-toggle' data-toggle='collapse'
@@ -46,7 +48,9 @@ export default class LayoutBlank extends React.Component {
                     </div>
                     { /* /.container */ }
                 </nav>
-                { this.props.children }
+                <div class='blank-content'>
+                    { this.props.children }
+                </div>
                 <Footer/>
             </div>
         );

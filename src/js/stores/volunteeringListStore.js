@@ -7,17 +7,45 @@ class VolunteeringListStore extends EventEmitter {
         super();
 
         this.data = [
-            { id: 1, description: 'Lorem ipsum dolor sit amet, tritani dolorum voluptu pro et, mel ipsum...', image: '', coins: 200, date: '2017-05-19', type: 'Children', institution: 'Caritas' },
-            { id: 2, description: 'Lorem ipsum dolor sit amet, tritani dolorum voluptu pro et, mel ipsum...', image: '', coins: 300, date: '2017-05-19', type: 'Adult', institution: 'Medicos S. Fronteiras' },
-            { id: 3, description: 'Lorem ipsum dolor sit amet, tritani dolorum voluptu pro et, mel ipsum...', image: '', coins: 500, date: '2017-05-19', type: 'Adult', institution: 'Diocesana' },
-            { id: 4, description: 'Lorem ipsum dolor sit amet, tritani dolorum voluptu pro et, mel ipsum...', image: '', coins: 1000, date: '2017-05-19', type: 'Homeless', institution: 'AMI' },
-            { id: 5, description: 'Lorem ipsum dolor sit amet, tritani dolorum voluptu pro et, mel ipsum...', image: '', coins: 50, date: '2017-05-19', type: 'Food', institution: 'Caritas' },
-            { id: 6, description: 'Lorem ipsum dolor sit amet, tritani dolorum voluptu pro et, mel ipsum...', image: '', coins: 100, date: '2017-05-19', type: 'Food', institution: 'Igreja' },
-            { id: 7, description: 'Lorem ipsum dolor sit amet, tritani dolorum voluptu pro et, mel ipsum...' +
-            'Lorem ipsum dolor sit amet, tritani dolorum voluptu pro et, mel ipsum...' +
-            'Lorem ipsum dolor sit amet, tritani dolorum voluptu pro et, mel ipsum...' +
-            'Lorem ipsum dolor sit amet, tritani dolorum voluptu pro et, mel ipsum...' +
-            'Lorem ipsum dolor sit amet, tritani dolorum voluptu pro et, mel ipsum...', image: '', coins: 2500, date: '2017-05-19', type: 'Homeless', institution: 'Medicos S. Fronteiras' }
+            {
+                id: 1,
+                credits: 10,
+                location: 'Porto',
+                description: 'Lorem ipsum dolor sit amet, vis no dicit noluisse suscipit, ea quo regione convenire facilisis, ad mea affert mentitum.',
+                dateStart: '2016-01-01',
+                dateEnd: '2017-01-01',
+                type: 'Children',
+                institution: {
+                    name: 'Assistência Médica Internacional (AMI)',
+                    imageUrl: 'http://www.opticaldas.com/wp-content/uploads/logotipos/Logo-ami.png'
+                }
+            },
+            {
+                id: 2,
+                credits: 15,
+                location: 'Braga',
+                description: 'Lorem ipsum dolor sit amet, vis no dicit noluisse suscipit, ea quo regione convenire facilisis, ad mea affert mentitum.',
+                dateStart: '2016-01-01',
+                dateEnd: '2017-01-01',
+                type: 'Children',
+                institution: {
+                    name: 'Cruz Vermelha',
+                    imageUrl: 'http://www.focandoanoticia.com.br/wp-content/uploads/2014/07/auditoria-comprova-desvio-de-recursos-na-cruz-vermelha1.png'
+                }
+            },
+            {
+                id: 3,
+                credits: 25,
+                location: 'Lisboa',
+                description: 'Lorem ipsum dolor sit amet, vis no dicit noluisse suscipit, ea quo regione convenire facilisis, ad mea affert mentitum.',
+                dateStart: '2016-01-01',
+                dateEnd: '2017-01-01',
+                type: 'Food',
+                institution: {
+                    name: 'Banco Alimentar',
+                    imageUrl: 'https://upload.wikimedia.org/wikipedia/pt/a/ab/Log%C3%B3tipo_do_Banco_Alimentar_Contra_a_Fome.png'
+                }
+            }
         ]
     }
 

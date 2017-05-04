@@ -8,7 +8,6 @@ import FrontHome from 'app/pages/frontpage/home';
 import DashHome from 'app/pages/dashboard/home';
 import Register from 'app/pages/frontpage/register';
 import VolunteeringList from 'app/pages/frontpage/volunteering-list';
-import VolunteerUser from 'app/pages/frontpage/volunteering-user';
 
 const app = document.getElementById('app');
 
@@ -24,10 +23,7 @@ ReactDOM.render(
             <IndexRoute component={ Register }/>
         </Route>
         <Route path='/voluntlist' component={ LayoutBlank }>
-        <IndexRoute component={ VolunteeringList }/>
-    </Route>
-        <Route path='/voluntuser' component={ LayoutBlank }>
-            <IndexRoute component={ VolunteerUser }/>
+            <IndexRoute component={ VolunteeringList }/>
         </Route>
     </Router>,
     app

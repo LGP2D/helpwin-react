@@ -1,6 +1,7 @@
 import { EventEmitter } from 'events';
 import dispatcher from 'app/dispatcher/dispatcher';
 import axios from 'axios';
+import config from './config';
 
 class UserStore extends EventEmitter {
     constructor () {
@@ -22,7 +23,7 @@ class UserStore extends EventEmitter {
             case 'REGISTER_USER': {
                 axios({
                     method: 'post',
-                    url: 'http://localhost:8080/api/user',
+                    url: config.API_URL + 'user',
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json'

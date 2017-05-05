@@ -1,6 +1,7 @@
 import { EventEmitter } from 'events';
 import dispatcher from 'app/dispatcher/dispatcher';
 import axios from 'axios';
+import config from './config';
 
 class VolunteeringListStore extends EventEmitter {
     constructor (){
@@ -49,16 +50,16 @@ class VolunteeringListStore extends EventEmitter {
         ]
     }
 
-    getAll(){
+    getAll (){
         return this.data;
     }
 
-    handleActions(action) {
+    handleActions (action) {
         switch (action.type) {
             case 'FETCH_DATA': {
                 axios({
                     method: 'get',
-                    url: 'http://localhost:8080/api/proposals',
+                    url: config.API_URL + 'proposals',
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json'

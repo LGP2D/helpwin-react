@@ -5,7 +5,7 @@ import 'react-widgets/lib/less/react-widgets.less';
 
 require('./voucherList.scss');
 
-export default class Register extends React.Component {
+export default class VoucherList extends React.Component {
     constructor (){
         super();
 
@@ -28,14 +28,9 @@ export default class Register extends React.Component {
         return(
             <div class='container'>
                 <div class='row'>
-                    <div class='col-md-3 col-sm-4 col-xs-6'><img class='img-responsive' src='http://2.bp.blogspot.com/-H6MAoWN-UIE/TuRwLbHRSWI/AAAAAAAABBk/89iiEulVsyg/s400/Free%2BNature%2BPhoto.jpg' /></div>
-                    <div class='col-md-3 col-sm-4 col-xs-6'><img class='img-responsive' src='http://2.bp.blogspot.com/-H6MAoWN-UIE/TuRwLbHRSWI/AAAAAAAABBk/89iiEulVsyg/s400/Free%2BNature%2BPhoto.jpg' /></div>
-                    <div class='col-md-3 col-sm-4 col-xs-6'><img class='img-responsive' src='http://2.bp.blogspot.com/-H6MAoWN-UIE/TuRwLbHRSWI/AAAAAAAABBk/89iiEulVsyg/s400/Free%2BNature%2BPhoto.jpg' /></div>
-                    <div class='col-md-3 col-sm-4 col-xs-6'><img class='img-responsive' src='http://2.bp.blogspot.com/-H6MAoWN-UIE/TuRwLbHRSWI/AAAAAAAABBk/89iiEulVsyg/s400/Free%2BNature%2BPhoto.jpg' /></div>
-                    <div class='col-md-3 col-sm-4 col-xs-6'><img class='img-responsive' src='http://2.bp.blogspot.com/-H6MAoWN-UIE/TuRwLbHRSWI/AAAAAAAABBk/89iiEulVsyg/s400/Free%2BNature%2BPhoto.jpg' /></div>
-                    <div class='col-md-3 col-sm-4 col-xs-6'><img class='img-responsive' src='http://2.bp.blogspot.com/-H6MAoWN-UIE/TuRwLbHRSWI/AAAAAAAABBk/89iiEulVsyg/s400/Free%2BNature%2BPhoto.jpg' /></div>
-                    <div class='col-md-3 col-sm-4 col-xs-6'><img class='img-responsive' src='http://2.bp.blogspot.com/-H6MAoWN-UIE/TuRwLbHRSWI/AAAAAAAABBk/89iiEulVsyg/s400/Free%2BNature%2BPhoto.jpg' /></div>
-                    <div class='col-md-3 col-sm-4 col-xs-6'><img class='img-responsive' src='http://2.bp.blogspot.com/-H6MAoWN-UIE/TuRwLbHRSWI/AAAAAAAABBk/89iiEulVsyg/s400/Free%2BNature%2BPhoto.jpg' /></div>
+                    <div class='col-md-3 col-sm-4 col-xs-6'>
+                        <img class='img-responsive' src='http://2.bp.blogspot.com/-H6MAoWN-UIE/TuRwLbHRSWI/AAAAAAAABBk/89iiEulVsyg/s400/Free%2BNature%2BPhoto.jpg' />
+                    </div>
                 </div>
             </div>
 

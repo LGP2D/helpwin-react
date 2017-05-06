@@ -2,28 +2,18 @@ import React from 'react';
 import Footer from './footer';
 import Header from './header'
 
-import './layout-onepage.scss';
+require('./layout-onepage.scss');
 
 export default class LayoutBlank extends React.Component {
     constructor () {
         super();
     }
 
-    componentDidMount () {
-        window.addEventListener('scroll', this.handleScroll.bind(null, this.refs.navbar), false);
-    }
-
-    componentWillUnmount () {
-        window.removeEventListener('scroll', this.handleScroll.bind(null, this.refs.navbar), false);
-    }
-
     render () {
         return (
             <div>
-                <Header/>
                 { /* Navigation */ }
-                <nav class='navbar navbar-custom navbar-fixed-top' role='navigation'
-                     onScroll={ this.handleScroll.bind(this) } ref='navbar'>
+                <nav class='navbar navbar-custom navbar-fixed-top top-nav-collapse' role='navigation'>
                     <div class='container'>
                         <div class='navbar-header'>
                             <button type='button' class='navbar-toggle' data-toggle='collapse'
@@ -41,7 +31,7 @@ export default class LayoutBlank extends React.Component {
                                     <a href='#page-top'/>
                                 </li>
                                 <li>
-                                    <a class='page-scroll' href='#about'>About</a>
+                                    <a class='page-scroll' href='#'>About</a>
                                 </li>
                                 <li>
                                     <a class='page-scroll' href='#/voluntlist'>Volunteering List</a>
@@ -55,18 +45,11 @@ export default class LayoutBlank extends React.Component {
                     </div>
                     { /* /.container */ }
                 </nav>
-                { this.props.children }
+                <div class='blank-content'>
+                    { this.props.children }
+                </div>
                 <Footer/>
             </div>
         );
-    }
-
-    handleScroll (navbar, event) {
-        if(event.srcElement.body.scrollTop > 50) {
-            navbar.classList.add('top-nav-collapse');
-        }
-        else {
-            navbar.classList.remove('top-nav-collapse');
-        }
     }
 }

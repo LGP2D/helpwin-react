@@ -1,9 +1,10 @@
 import { EventEmitter } from 'events';
 import dispatcher from 'app/dispatcher/dispatcher';
 import axios from 'axios';
+import config from './config';
 
 class UserStore extends EventEmitter {
-    constructor() {
+    constructor () {
         super();
 
         this.user = {
@@ -12,17 +13,17 @@ class UserStore extends EventEmitter {
         };
     }
 
-    getUser() {
+    getUser () {
         console.log('getUser', this.user);
         return this.user;
     }
 
-    handleActions(action) {
+    handleActions (action) {
         switch(action.type) {
             case 'REGISTER_USER': {
                 axios({
                     method: 'post',
-                    url: 'http://localhost:8080/api/user',
+                    url: config.API_URL + 'user',
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json'

@@ -46,7 +46,7 @@ export default class Layout extends React.Component {
                                     <a href='#page-top'/>
                                 </li>
                                 <li>
-                                    <a class='page-scroll' href='#about'>About</a>
+                                    <a class='page-scroll' href='#'>About</a>
                                 </li>
                                 <li>
                                     <a class='page-scroll' href='#/voluntlist'>Volunteering List</a>

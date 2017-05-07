@@ -1,0 +1,29 @@
+.image-col > img {
+    width: 100px;
+    height: 100px;
+}
+
+.volunteering-table {
+    margin: 10px 10px 10px 10px;
+}
+
+//Override React Table css
+.-odd {
+    background:rgba(0,0,0,0.02);
+}
+
+.volunteering-table-text-margin {
+    margin-left: 5px;
+}
+
+.volunteering-coins {
+    text-align: center;
+}
+
+.volunteering-coins > button {
+    margin-top: 20%;
+}
+
+.coin {
+    color: #fdd835;
+}

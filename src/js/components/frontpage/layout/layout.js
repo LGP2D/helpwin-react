@@ -5,7 +5,7 @@ import Footer from "./footer";
 import Header from "./header";
 
 export default class Layout extends React.Component {
-    render() {
+    render () {
         const { location } = this.props;
         const layoutStyles = {
             textAlign: "center"

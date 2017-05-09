@@ -17,3 +17,11 @@
 .blank-content {
     margin-top: 100px;
 }
+
+.rt-tbody > .rt-td {
+    vertical-align: middle;
+}
+
+#app {
+    height: 100%;
+}

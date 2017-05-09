@@ -15,42 +15,41 @@ export default class LayoutBlank extends React.Component {
         let loggedIn = UserStore.isLoggedIn();
         if (!loggedIn) {
             return (
-                <ul class='nav navbar-nav'>
-                    <li class='hidden'>
+                <ul className='nav navbar-nav'>
+                    <li className='hidden'>
                         <a href='#page-top'/>
                     </li>
                     <li>
-                        <a class='page-scroll' href='#'>About</a>
+                        <a className='page-scroll' href='#'>About</a>
                     </li>
                     <li>
-                        <a class='page-scroll' href='#/voluntlist'>Volunteering List</a>
+                        <a className='page-scroll' href='#/voluntlist'>Volunteering List</a>
                     </li>
                     <li>
-                        <a class='page-scroll' href='#/register'>Register</a>
+                        <a className='page-scroll' href='#/register'>Register</a>
                     </li>
                     <li>
-                        <a class='page-scroll' href='#/login'>Login</a>
+                        <a className='page-scroll' href='#/login'>Login</a>
                     </li>
                 </ul>
             );
         } else {
-            let username = UserStore.getUser.sub;
             return (
-                <ul class='nav navbar-nav'>
-                    <li class='hidden'>
+                <ul className='nav navbar-nav'>
+                    <li className='hidden'>
                         <a href='#page-top'/>
                     </li>
                     <li>
-                        <a class='page-scroll' href='#'>About</a>
+                        <a className='page-scroll' href='#'>About</a>
                     </li>
                     <li>
-                        <a class='page-scroll' href='#/voluntlist'>Volunteering List</a>
+                        <a className='page-scroll' href='#/voluntlist'>Volunteering List</a>
                     </li>
                     <li>
-                        <a class='page-scroll' href='#/register'>Register</a>
+                        <a className='page-scroll' href='#/register'>Register</a>
                     </li>
                     <li>
-                        <a class='page-scroll' href='#'>Welcome, { username }</a>
+                        <a className='page-scroll' href='#'>Welcome, { UserStore.getUserName }</a>
                     </li>
                 </ul>
             );
@@ -61,26 +60,26 @@ export default class LayoutBlank extends React.Component {
         return (
             <div>
                 { /* Navigation */ }
-                <nav class='navbar navbar-custom navbar-fixed-top top-nav-collapse' role='navigation'>
-                    <div class='container'>
-                        <div class='navbar-header'>
-                            <button type='button' class='navbar-toggle' data-toggle='collapse'
+                <nav className='navbar navbar-custom navbar-fixed-top top-nav-collapse' role='navigation'>
+                    <div className='container'>
+                        <div className='navbar-header'>
+                            <button type='button' className='navbar-toggle' data-toggle='collapse'
                                     data-target='.navbar-main-collapse'>
-                                Menu <i class='fa fa-bars'/>
+                                Menu <i className='fa fa-bars'/>
                             </button>
-                            <a class='navbar-brand page-scroll' href='#'>
-                                <i class='fa fa-play-circle'/> <span class='light'>HELP</span> WIN
+                            <a className='navbar-brand page-scroll' href='#'>
+                                <i className='fa fa-play-circle'/> <span className='light'>HELP</span> WIN
                             </a>
                         </div>
 
-                        <div class='collapse navbar-collapse navbar-right navbar-main-collapse'>
+                        <div className='collapse navbar-collapse navbar-right navbar-main-collapse'>
                             { this.headerItems }
                         </div>
                         { /* /.navbar-collapse */ }
                     </div>
                     { /* /.container */ }
                 </nav>
-                <div class='blank-content'>
+                <div className='blank-content'>
                     { this.props.children }
                 </div>
                 <Footer/>

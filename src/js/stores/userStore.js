@@ -65,6 +65,8 @@ class UserStore extends EventEmitter {
 
     get getUser () { return this.user; }
 
+    get getUserName() { return this.user.sub; }
+
     isLoggedIn () { return !!this.user; }
 }
 

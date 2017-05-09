@@ -6,20 +6,10 @@ import config from './config';
 class UserStore extends EventEmitter {
     constructor () {
         super();
-
-        this.user = {
-            name: '',
-            email: ''
-        };
-    }
-
-    getUser () {
-        console.log('getUser', this.user);
-        return this.user;
     }
 
     handleActions (action) {
-        switch(action.type) {
+        switch (action.type) {
             case 'REGISTER_USER': {
                 axios({
                     method: 'post',
@@ -31,11 +21,38 @@ class UserStore extends EventEmitter {
                     data: action.user
                 }).then(response => {
                     console.log(response);
+                    this.emit('REGISTER_SUCCESS');
                 }).catch(error => {
                     console.log(error);
                 });
-                console.log('Register user ->', action.user);
+                break;
             }
+            case 'LOGIN_USER': {
+                let data = {
+                    email: action.email,
+                    password: action.password
+                };
+                axios({
+                    method: 'post',
+                    url: config.API_URL + 'user/login',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    data: { data }
+                }).then(response => {
+                    //Save token to local storage
+                    localStorage.setItem('jwt', response.data.token);
+                    this.emit('LOGIN_SUCCESS');
+                }).catch(error => {
+                    console.log(error);
+                    this.emit('LOGIN_ERROR');
+                });
+                break;
+            }
+            default:
+                console.log('Action not found in userStore');
+                break;
         }
     }
 }

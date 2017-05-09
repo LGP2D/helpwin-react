@@ -1,5 +1,4 @@
 import dispatcher from 'app/dispatcher/dispatcher';
-import { REGISTER_USER, LOGIN_USER } from './constants/userConstants';
 
 export default {
     registerUser: (user) => {

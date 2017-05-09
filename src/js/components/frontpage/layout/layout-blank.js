@@ -1,12 +1,60 @@
 import React from 'react';
 import Footer from './footer';
-import Header from './header'
+import Header from './header';
+
+import UserStore from 'app/stores/userStore';
 
 require('./layout-onepage.scss');
 
 export default class LayoutBlank extends React.Component {
     constructor () {
         super();
+    }
+
+    get headerItems () {
+        let loggedIn = UserStore.isLoggedIn();
+        if (!loggedIn) {
+            return (
+                <ul class='nav navbar-nav'>
+                    <li class='hidden'>
+                        <a href='#page-top'/>
+                    </li>
+                    <li>
+                        <a class='page-scroll' href='#'>About</a>
+                    </li>
+                    <li>
+                        <a class='page-scroll' href='#/voluntlist'>Volunteering List</a>
+                    </li>
+                    <li>
+                        <a class='page-scroll' href='#/register'>Register</a>
+                    </li>
+                    <li>
+                        <a class='page-scroll' href='#/login'>Login</a>
+                    </li>
+                </ul>
+            );
+        } else {
+            let username = UserStore.getUser.sub;
+            return (
+                <ul class='nav navbar-nav'>
+                    <li class='hidden'>
+                        <a href='#page-top'/>
+                    </li>
+                    <li>
+                        <a class='page-scroll' href='#'>About</a>
+                    </li>
+                    <li>
+                        <a class='page-scroll' href='#/voluntlist'>Volunteering List</a>
+                    </li>
+                    <li>
+                        <a class='page-scroll' href='#/register'>Register</a>
+                    </li>
+                    <li>
+                        <a class='page-scroll' href='#'>Welcome, { username }</a>
+                    </li>
+                </ul>
+            );
+        }
     }
 
     render () {
@@ -26,23 +74,7 @@ export default class LayoutBlank extends React.Component {
                         </div>
 
                         <div class='collapse navbar-collapse navbar-right navbar-main-collapse'>
-                            <ul class='nav navbar-nav'>
-                                <li class='hidden'>
-                                    <a href='#page-top'/>
-                                </li>
-                                <li>
-                                    <a class='page-scroll' href='#'>About</a>
-                                </li>
-                                <li>
-                                    <a class='page-scroll' href='#/voluntlist'>Volunteering List</a>
-                                </li>
-                                <li>
-                                    <a class='page-scroll' href='#/register'>Register</a>
-                                </li>
-                                <li>
-                                    <a class='page-scroll' href='#/login'>Login</a>
-                                </li>
-                            </ul>
+                            { this.headerItems }
                         </div>
                         { /* /.navbar-collapse */ }
                     </div>

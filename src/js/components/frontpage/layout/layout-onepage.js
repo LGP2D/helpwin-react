@@ -5,7 +5,12 @@ import Header from './header';
 
 import './layout-onepage.scss';
 
+import UserStore from 'app/stores/userStore';
+
 export default class Layout extends React.Component {
+    constructor () {
+        super();
+    }
 
     componentDidMount () {
         window.addEventListener('scroll', this.handleScroll.bind(null, this.refs.navbar), false);
@@ -13,6 +18,52 @@ export default class Layout extends React.Component {
 
     componentWillUnmount () {
         window.removeEventListener('scroll', this.handleScroll.bind(null, this.refs.navbar), false);
+    }
+
+    get headerItems () {
+        let loggedIn = UserStore.isLoggedIn();
+        if (!loggedIn) {
+            return (
+                <ul class='nav navbar-nav'>
+                    <li class='hidden'>
+                        <a href='#page-top'/>
+                    </li>
+                    <li>
+                        <a class='page-scroll' href='#'>About</a>
+                    </li>
+                    <li>
+                        <a class='page-scroll' href='#/voluntlist'>Volunteering List</a>
+                    </li>
+                    <li>
+                        <a class='page-scroll' href='#/register'>Register</a>
+                    </li>
+                    <li>
+                        <a class='page-scroll' href='#/login'>Login</a>
+                    </li>
+                </ul>
+            );
+        } else {
+            let username = UserStore.getUser.sub;
+            return (
+                <ul class='nav navbar-nav'>
+                    <li class='hidden'>
+                        <a href='#page-top'/>
+                    </li>
+                    <li>
+                        <a class='page-scroll' href='#'>About</a>
+                    </li>
+                    <li>
+                        <a class='page-scroll' href='#/voluntlist'>Volunteering List</a>
+                    </li>
+                    <li>
+                        <a class='page-scroll' href='#/register'>Register</a>
+                    </li>
+                    <li>
+                        <a class='page-scroll' href='#'>Welcome, { username }</a>
+                    </li>
+                </ul>
+            );
+        }
     }
 
     render () {
@@ -41,23 +92,7 @@ export default class Layout extends React.Component {
                         </div>
 
                         <div class='collapse navbar-collapse navbar-right navbar-main-collapse'>
-                            <ul class='nav navbar-nav'>
-                                <li class='hidden'>
-                                    <a href='#page-top'/>
-                                </li>
-                                <li>
-                                    <a class='page-scroll' href='#'>About</a>
-                                </li>
-                                <li>
-                                    <a class='page-scroll' href='#/voluntlist'>Volunteering List</a>
-                                </li>
-                                <li>
-                                    <a class='page-scroll' href='#/register'>Register</a>
-                                </li>
-                                <li>
-                                    <a class='page-scroll' href='#/login'>Login</a>
-                                </li>
-                            </ul>
+                            { this.headerItems }
                         </div>
                         { /* /.navbar-collapse */ }
                     </div>
@@ -70,7 +105,7 @@ export default class Layout extends React.Component {
     }
 
     handleScroll (navbar, event) {
-        if(event.srcElement.body.scrollTop > 50) {
+        if (event.srcElement.body.scrollTop > 50) {
             navbar.classList.add('top-nav-collapse');
         }
         else {

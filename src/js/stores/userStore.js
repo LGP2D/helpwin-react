@@ -2,10 +2,14 @@ import { EventEmitter } from 'events';
 import dispatcher from 'app/dispatcher/dispatcher';
 import axios from 'axios';
 import config from './config';
+import jwt_decode from 'jwt-decode';
 
 class UserStore extends EventEmitter {
     constructor () {
         super();
+
+        this.user = null;
+        this.jwt = null;
     }
 
     handleActions (action) {
@@ -28,10 +32,8 @@ class UserStore extends EventEmitter {
                 break;
             }
             case 'LOGIN_USER': {
-                let data = {
-                    email: action.email,
-                    password: action.password
-                };
+                let email = action.email;
+                let password = action.password;
                 axios({
                     method: 'post',
                     url: config.API_URL + 'user/login',
@@ -39,10 +41,13 @@ class UserStore extends EventEmitter {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json'
                     },
-                    data: { data }
+                    data: { email, password }
                 }).then(response => {
                     //Save token to local storage
                     localStorage.setItem('jwt', response.data.token);
+                    this.jwt = response.data.token;
+                    this.user = jwt_decode(this.jwt);
+                    window.location.user = this.user;
                     this.emit('LOGIN_SUCCESS');
                 }).catch(error => {
                     console.log(error);
@@ -55,6 +60,12 @@ class UserStore extends EventEmitter {
                 break;
         }
     }
+
+    get getJwt () { return this.jwt; }
+
+    get getUser () { return this.user; }
+
+    isLoggedIn () { return !!this.user; }
 }
 
 const userStore = new UserStore;

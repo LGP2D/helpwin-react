@@ -3,6 +3,7 @@ import Footer from './footer';
 import Header from './header';
 
 import UserStore from 'app/stores/userStore';
+import UserActions from 'app/actions/userActions';
 
 require('./layout-onepage.scss');
 
@@ -10,6 +11,10 @@ export default class LayoutBlank extends React.Component {
     constructor () {
         super();
     }
+
+    static contextTypes = {
+        router: React.PropTypes.object.isRequired
+    };
 
     get headerItems () {
         let loggedIn = UserStore.isLoggedIn();
@@ -51,10 +56,18 @@ export default class LayoutBlank extends React.Component {
                     <li>
                         <a className='page-scroll' href='#'>Welcome, { UserStore.getUserName }</a>
                     </li>
+                    <li>
+                        <a className='page-scroll' onClick={ this.handleLogout } href='#'>Logout</a>
+                    </li>
                 </ul>
             );
         }
     }
+
+    handleLogout = () => {
+        UserActions.logout();
+        this.context.router.push('/');
+    };
 
     render () {
         return (

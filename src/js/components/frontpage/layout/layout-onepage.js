@@ -6,6 +6,7 @@ import Header from './header';
 import './layout-onepage.scss';
 
 import UserStore from 'app/stores/userStore';
+import UserActions from 'app/actions/userActions';
 
 export default class Layout extends React.Component {
     constructor () {
@@ -19,6 +20,10 @@ export default class Layout extends React.Component {
     componentWillUnmount () {
         window.removeEventListener('scroll', this.handleScroll.bind(null, this.refs.navbar), false);
     }
+
+    static contextTypes = {
+        router: React.PropTypes.object.isRequired
+    };
 
     get headerItems () {
         let loggedIn = UserStore.isLoggedIn();
@@ -60,10 +65,18 @@ export default class Layout extends React.Component {
                     <li>
                         <a className='page-scroll' href='#'>Welcome, { UserStore.getUserName }</a>
                     </li>
+                    <li>
+                        <a className='page-scroll' onClick={ this.handleLogout } href='#'>Logout</a>
+                    </li>
                 </ul>
             );
         }
     }
+
+    handleLogout = () => {
+        UserActions.logout();
+        this.context.router.push('/');
+    };
 
     render () {
         const { location } = this.props;

@@ -47,12 +47,18 @@ class UserStore extends EventEmitter {
                     localStorage.setItem('jwt', response.data.token);
                     this.jwt = response.data.token;
                     this.user = jwt_decode(this.jwt);
-                    window.location.user = this.user;
                     this.emit('LOGIN_SUCCESS');
                 }).catch(error => {
                     console.log(error);
                     this.emit('LOGIN_ERROR');
                 });
+                break;
+            }
+            case 'LOGOUT_USER': {
+                this.jwt = null;
+                this.user = null;
+                localStorage.setItem('jwt', '');
+                this.emit('LOGOUT_USER');
                 break;
             }
             default:

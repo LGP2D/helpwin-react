@@ -14,5 +14,11 @@ export default {
             email: email,
             password: password
         });
+    },
+
+    logout: () => {
+        dispatcher.dispatch({
+           type: 'LOGOUT_USER'
+        });
     }
 }

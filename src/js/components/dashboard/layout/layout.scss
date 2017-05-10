@@ -261,7 +261,7 @@ ul.notifications>li>.more:focus, ul.notifications>li>.more:hover {
 .sidebar .nav > li > a[data-toggle="collapse"] .icon-submenu {
     display: inline-block;
     vertical-align: middle;
-    *vertical-align: auto;
+    *vertical-align: unset;
     *zoom: 1;
     *display: inline;
     -webkit-transition: all 0.2s ease-out;
@@ -554,7 +554,7 @@ fieldset[disabled] .btn {
     font-size: 14px; }
 .panel .panel-body {
     padding-top: 10px;
-    padding-bottom: 15px; }
+    padding-bottom: 30px; }
 .panel .panel-note {
     font-size: 13px;
     line-height: 2.6;
@@ -869,3 +869,13 @@ ul.activity-list > li .timestamp {
     width: 130px; }
 .easy-pie-chart#system-load .percent {
     line-height: 128px; }
+
+/********************
+ * HELPER
+ ********************/
+.react-bs-table table td,
+.react-bs-table table th {
+    overflow: auto !important;
+    white-space: normal !important;
+    text-overflow: ellipsis;
+}

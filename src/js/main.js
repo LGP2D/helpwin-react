@@ -18,11 +18,6 @@ import InstitutionHome from 'app/pages/dashboard/institution';
 import CompanyHome from 'app/pages/dashboard/company';
 import ListInstitution from 'app/pages/dashboard/list-institution';
 
-import CollaboratorRoutes from 'app/stores/sidebar-routes/sidebar-colab'
-import VolunteerRoutes from 'app/stores/sidebar-routes/sidebar-volun'
-import InstitutionRoutes from 'app/stores/sidebar-routes/sidebar-insti'
-import CompanyRoutes from 'app/stores/sidebar-routes/sidebar-compa'
-
 const app = document.getElementById('app');
 
 ReactDOM.render(

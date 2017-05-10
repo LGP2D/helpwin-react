@@ -1,10 +1,10 @@
 import React from 'react';
-import ReactTable from 'react-table'
-import 'react-table/react-table.css';
-import 'assets/scss/volunteeringtable.scss';
+import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
 import * as VolunteeringActions from 'app/actions/volunteeringListActions';
 import VolunteeringStore from 'app/stores/volunteeringListStore';
+
+import 'react-bootstrap-table/dist/react-bootstrap-table.min.css';
 
 export default class ListInstitution extends React.Component {
 
@@ -94,15 +94,32 @@ export default class ListInstitution extends React.Component {
                     </div>
                 </div>
                 <div class='panel-body'>
-                    <ReactTable
-                        className='-highlight -striped volunteering-table'
-                        data={ this.state.data }
-                        columns={ this.columns }
-                        defaultPageSize={ 3 }
-                        resizable={ false }
-                    />
+                    <BootstrapTable data={ this.state.data } striped={ true } hover={ true }>
+                        <TableHeaderColumn dataField='institution' dataFormat={ this.imageFormatter }
+                                           isKey={ true }>
+                            Logo
+                        </TableHeaderColumn>
+                        <TableHeaderColumn dataField='institution' dataFormat={ this.locationFormatter }>
+                            Name
+                        </TableHeaderColumn>
+                        <TableHeaderColumn dataField='description'>
+                            Description
+                        </TableHeaderColumn>
+                    </BootstrapTable>
                 </div>
             </div>
+        );
+    }
+
+    locationFormatter (cell, row) {
+        return (
+            cell.name
+        );
+    }
+
+    imageFormatter (cell, row) {
+        return (
+            <img height='50' src={ cell.imageUrl } />
         );
     }
 }

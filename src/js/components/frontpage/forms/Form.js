@@ -18,7 +18,6 @@ class Form extends React.Component {
 
 Form.propTypes = {
     children: PropTypes.array.isRequired
-}
-
+};
 
 export default Form;

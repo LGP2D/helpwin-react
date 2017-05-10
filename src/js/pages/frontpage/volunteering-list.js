@@ -99,4 +99,4 @@ export default class VolunteeringList extends React.Component {
             />
         );
     }
-}
+};

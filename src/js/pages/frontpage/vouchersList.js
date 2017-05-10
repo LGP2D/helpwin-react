@@ -5,7 +5,6 @@ import 'react-widgets/lib/less/react-widgets.less';
 import ImgGrid from 'app/components/frontpage/imgs/ImgGrid';
 import ImgOnGrid from 'app/components/frontpage/imgs/ImgOnGrid';
 
-
 require('./voucherList.scss');
 
 export default class VoucherList extends React.Component {
@@ -16,6 +15,7 @@ export default class VoucherList extends React.Component {
     }
 
     getVouchers (){
+        VoucherActions.getVouchers();
         console.log('vouchers get succeed');
     }
 
@@ -37,4 +37,6 @@ export default class VoucherList extends React.Component {
 
         );
     }
+
+
 }

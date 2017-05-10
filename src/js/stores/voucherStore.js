@@ -12,13 +12,14 @@ class VoucherStore extends EventEmitter {
             case 'GET_VOUCHERS' : {
                 axios({
                     method: 'get',
-                    url: 'http://localhost:8080/api/voucher',
+                    url: 'http://localhost:8080/api/vouchers',
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json'
                     }
                 }).then(response => {
                     console.log('Get vouchers ->', response);
+                    this.emit('change');
                 }).catch(error => {
                     console.log(error);
                 });

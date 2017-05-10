@@ -94,7 +94,7 @@ export default class VolunteeringList extends React.Component {
                 className='-highlight -striped volunteering-table'
                 data={ this.state.data }
                 columns={ this.columns }
-                defaultPageSize={ 3 }
+                defaultPageSize={ 5 }
                 resizable={ false }
             />
         );

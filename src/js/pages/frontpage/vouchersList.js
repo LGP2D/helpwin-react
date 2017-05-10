@@ -10,33 +10,42 @@ require('./voucherList.scss');
 export default class VoucherList extends React.Component {
     constructor (){
         super();
-
+        this.state = {
+            vouchers : []
+        }
         this.getVouchers = this.getVouchers.bind(this);
     }
 
     getVouchers (){
-        VoucherActions.getVouchers();
-        console.log('vouchers get succeed');
+        this.setState({
+            vouchers : VoucherStore.getVouchers()
+        })
+        window.location.vouchers = this.state.vouchers;
     }
 
-    componentWillMount() {''
-        VoucherStore.on('getVouchers', this.getVouchers);
+    componentWillMount() {
+        VoucherActions.getVouchers();
+        VoucherStore.on('CHANGE_VOUCHERS', this.getVouchers);
     }
 
     componentWillUnmount() {
-        VoucherStore.removeListener('getVoucher', this.getVouchers);
+        VoucherStore.removeListener('CHANGE_VOUCHERS', this.getVouchers);
     }
 
     render (){
         return(
             <div class='container'>
                 <ImgGrid>
-                    <ImgOnGrid  imagePath='http://2.bp.blogspot.com/-H6MAoWN-UIE/TuRwLbHRSWI/AAAAAAAABBk/89iiEulVsyg/s400/Free%2BNature%2BPhoto.jpg'/>
+                    { this.state.vouchers.map(voucher => (
+                        <ImgOnGrid imagePath = { voucher.imagePath } />
+                    )) }
                 </ImgGrid>
             </div>
 
         );
     }
+
+
 
 
 }

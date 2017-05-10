@@ -8,6 +8,7 @@ import FrontHome from 'app/pages/frontpage/home';
 import DashHome from 'app/pages/dashboard/home';
 import Register from 'app/pages/frontpage/register';
 import VolunteeringList from 'app/pages/frontpage/volunteering-list';
+import CompanyVoucher from 'app/pages/frontpage/company-voucher';
 
 const app = document.getElementById('app');
 
@@ -24,6 +25,9 @@ ReactDOM.render(
         </Route>
         <Route path='/voluntlist' component={ LayoutBlank }>
             <IndexRoute component={ VolunteeringList }/>
+        </Route>
+        <Route path='/companyvoucher' component={ LayoutBlank }>
+            <IndexRoute component={ CompanyVoucher }/>
         </Route>
     </Router>,
     app

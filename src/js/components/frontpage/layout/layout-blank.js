@@ -39,6 +39,9 @@ export default class LayoutBlank extends React.Component {
                                 <li>
                                     <a class='page-scroll' href='#/register'>Register</a>
                                 </li>
+                                <li>
+                                    <a class='page-scroll' href='#/companyvoucher'>Company Voucher</a>
+                                </li>
                             </ul>
                         </div>
                         { /* /.navbar-collapse */ }

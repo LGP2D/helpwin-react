@@ -10,6 +10,7 @@ class UserStore extends EventEmitter {
 
         this.user = null;
         this.jwt = null;
+        this.name = null;
 
         this.autoLogin();
     }
@@ -19,6 +20,7 @@ class UserStore extends EventEmitter {
         if (jwt) {
             this.jwt = jwt;
             this.user = jwt_decode(jwt);
+            this.name = localStorage.getItem('name');
         }
     }
 
@@ -55,8 +57,10 @@ class UserStore extends EventEmitter {
                 }).then(response => {
                     //Save token to local storage
                     localStorage.setItem('jwt', response.data.token);
+                    localStorage.setItem('name', response.data.name);
                     this.jwt = response.data.token;
                     this.user = jwt_decode(this.jwt);
+                    this.name = response.data.name;
                     this.emit('LOGIN_SUCCESS');
                 }).catch(error => {
                     console.log(error);
@@ -67,7 +71,9 @@ class UserStore extends EventEmitter {
             case 'LOGOUT_USER': {
                 this.jwt = null;
                 this.user = null;
+                this.name = null;
                 localStorage.setItem('jwt', '');
+                localStorage.setItem('name', '');
                 this.emit('LOGOUT_USER');
                 break;
             }
@@ -81,7 +87,7 @@ class UserStore extends EventEmitter {
 
     get getUser () { return this.user; }
 
-    get getUserName () { return this.user.sub; }
+    get getUserName () { return this.name; }
 
     isLoggedIn () { return !!this.user; }
 }

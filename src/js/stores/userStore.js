@@ -10,6 +10,16 @@ class UserStore extends EventEmitter {
 
         this.user = null;
         this.jwt = null;
+
+        this.autoLogin();
+    }
+
+    autoLogin () {
+        let jwt = localStorage.getItem('jwt');
+        if (jwt) {
+            this.jwt = jwt;
+            this.user = jwt_decode(jwt);
+        }
     }
 
     handleActions (action) {
@@ -71,7 +81,7 @@ class UserStore extends EventEmitter {
 
     get getUser () { return this.user; }
 
-    get getUserName() { return this.user.sub; }
+    get getUserName () { return this.user.sub; }
 
     isLoggedIn () { return !!this.user; }
 }

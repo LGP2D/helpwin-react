@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import ReactTable from 'react-table'
 import 'react-table/react-table.css';
 import 'assets/scss/volunteeringtable.scss';
@@ -6,14 +6,10 @@ import 'assets/scss/volunteeringtable.scss';
 import * as VolunteeringActions from 'app/actions/volunteeringListActions';
 import VolunteeringStore from 'app/stores/volunteeringListStore';
 
-export default class VolunteeringList extends React.Component {
+export default class ListInstitution extends React.Component {
+
     constructor () {
-
         super();
-
-        this.state = {
-            data: []
-        };
 
         this.columns = [
             {
@@ -59,7 +55,7 @@ export default class VolunteeringList extends React.Component {
                     </div>
                 )
             }
-        ]
+        ];
     }
 
     updateTable = () => {
@@ -82,14 +78,31 @@ export default class VolunteeringList extends React.Component {
     }
 
     render () {
+
         return (
-            <ReactTable
-                className='-highlight -striped volunteering-table'
-                data={ this.state.data }
-                columns={ this.columns }
-                defaultPageSize={ 3 }
-                resizable={ false }
-            />
-        )
+            <div class='panel panel-headline'>
+                <div class='panel-heading'>
+                    <h3 class='panel-title'>Institution List</h3>
+                    <p class='panel-subtitle'>A list with all registered institutions</p>
+                    <div class='right'>
+                        <button type='button' class='btn-toggle-collapse'>
+                            <i class='ti ti-angle-up' />
+                        </button>
+                        <button type='button' class='btn-remove'>
+                            <i class='ti ti-close' />
+                        </button>
+                    </div>
+                </div>
+                <div class='panel-body'>
+                    <ReactTable
+                        className='-highlight -striped volunteering-table'
+                        data={ this.state.data }
+                        columns={ this.columns }
+                        defaultPageSize={ 3 }
+                        resizable={ false }
+                    />
+                </div>
+            </div>
+        );
     }
 }

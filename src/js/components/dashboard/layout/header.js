@@ -22,9 +22,9 @@ export default class Header extends React.Component {
                         <div id='navbar-menu' class='navbar-collapse collapse' aria-expanded='false'>
                             <form class='navbar-form navbar-left hidden-xs'>
                                 <div class='input-group'>
-                                    <input type='text' value='' class='form-control' placeholder='Search dashboard...' />
+                                    <input type='text' class='form-control' placeholder='Search dashboard...' />
                                     <span class='input-group-btn'>
-                                        <button type='button' class='btn btn-primary'>Go</button>
+                                        <button type='button' class='btn btn-primary disabled'>Go</button>
                                     </span>
                                 </div>
                             </form>

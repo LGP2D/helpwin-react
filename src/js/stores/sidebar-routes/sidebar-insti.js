@@ -2,30 +2,20 @@ import React from 'react';
 
 const routes = [
     {
-        href: 'index.html',
+        href: '/dashboard',
         class: 'active',
         icon: 'ti ti-home',
-        name: 'Institutions'
+        name: 'Home'
     },
     {
-        href: 'index.html',
-        icon: 'ti ti-hand-open',
+        href: '/dashboard/list-volunteers/:id',
+        icon: 'ti ti-crown',
         name: 'Volunteers'
     },
     {
-        href: 'index.html',
+        href: '/dashboard/proposals-volunteer/:id',
         icon: 'ti ti-bolt-alt',
-        name: 'Companies'
-    },
-    {
-        href: 'index.html',
-        icon: 'ti ti-write',
-        name: 'Volunteering Proposals'
-    },
-    {
-        href: 'index.html',
-        icon: 'ti ti-medall',
-        name: 'Vouchers'
+        name: 'Candidates'
     },
 ];
 

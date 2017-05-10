@@ -12,11 +12,16 @@ import VolunteeringList from 'app/pages/frontpage/volunteering-list';
 import DashLayout from 'app/components/dashboard/layout/layout';
 import Sidebar from 'app/components/dashboard/layout/sidebar';
 
-import CollaboratorDash from 'app/pages/dashboard/collaborator';
-import VolunteerDash from 'app/pages/dashboard/volunteer';
+import CollaboratorHome from 'app/pages/dashboard/collaborator';
+import VolunteerHome from 'app/pages/dashboard/volunteer';
+import InstitutionHome from 'app/pages/dashboard/institution';
+import CompanyHome from 'app/pages/dashboard/company';
+import ListInstitution from 'app/pages/dashboard/list-institution';
 
 import CollaboratorRoutes from 'app/stores/sidebar-routes/sidebar-colab'
 import VolunteerRoutes from 'app/stores/sidebar-routes/sidebar-volun'
+import InstitutionRoutes from 'app/stores/sidebar-routes/sidebar-insti'
+import CompanyRoutes from 'app/stores/sidebar-routes/sidebar-compa'
 
 const app = document.getElementById('app');
 
@@ -28,8 +33,13 @@ ReactDOM.render(
         </Route>
 
         <Route path='/dashboard' component={ DashLayout } >
-            <IndexRoute components={ { main: CollaboratorDash, sidebar: Sidebar } } paths={ CollaboratorRoutes } />
-            <Route path='volunteer' components={ { main: VolunteerDash, sidebar: Sidebar } } paths={ VolunteerRoutes } />
+            /* Home pages */
+            <IndexRoute components={ { main: VolunteerHome, sidebar: Sidebar } } />
+            <Route path='collaborator' components={ { main: CollaboratorHome, sidebar: Sidebar } } />
+            <Route path='institution' components={ { main: InstitutionHome, sidebar: Sidebar } } />
+            <Route path='company' components={ { main: CompanyHome, sidebar: Sidebar } } />
+            /* Content pages */
+            <Route path='list-institutions' components={ { main: ListInstitution, sidebar: Sidebar } } />
         </Route>
 
         <Route path='/register' component={ LayoutBlank }>

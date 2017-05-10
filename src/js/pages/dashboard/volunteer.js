@@ -7,7 +7,7 @@ export default class Volunteer extends React.Component {
         return (
             <div class='panel panel-headline'>
                 <div class='panel-heading'>
-                    <h3 class='panel-title'>Volunteer</h3>
+                    <h3 class='panel-title'>Volunteer's Dashboard</h3>
                     <p class='panel-subtitle'>Period: Oct 14, 2016 - Oct 21, 2016</p>
                     <div class='right'>
                         <button type='button' class='btn-toggle-collapse'>

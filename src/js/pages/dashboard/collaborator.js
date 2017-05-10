@@ -2,12 +2,11 @@ import React from 'react';
 
 export default class Collaborator extends React.Component {
     render () {
-        const { location } = this.props;
 
         return (
             <div class='panel panel-headline'>
                 <div class='panel-heading'>
-                    <h3 class='panel-title'>Collaborator</h3>
+                    <h3 class='panel-title'>Collaborator's Dashboard</h3>
                     <p class='panel-subtitle'>Period: Oct 14, 2016 - Oct 21, 2016</p>
                     <div class='right'>
                         <button type='button' class='btn-toggle-collapse'>

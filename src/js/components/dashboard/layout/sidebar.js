@@ -1,8 +1,18 @@
 import React from 'react';
+import { Link } from 'react-router'
+
+import CollaboratorRoutes from 'app/stores/sidebar-routes/sidebar-colab'
+import VolunteerRoutes from 'app/stores/sidebar-routes/sidebar-volun'
+import InstitutionRoutes from 'app/stores/sidebar-routes/sidebar-insti'
+import CompanyRoutes from 'app/stores/sidebar-routes/sidebar-compa'
 
 export default class Sidebar extends React.Component {
+
     render () {
-        const { paths } = this.props.route;
+
+        const { location } = this.props;
+        const role = 1;
+        const paths = this.getSidebar(location, role);
 
         return (
             <div id='sidebar-nav' class='sidebar'>
@@ -19,14 +29,16 @@ export default class Sidebar extends React.Component {
                             { /* Dynamically add sidebar content */ }
                             { paths.map((paths, index) => (
                                 <li key={ index }>
-                                    <a key={ index }
-                                       href={ paths.child ? null : paths.href }
-                                       class={ paths.class }
-                                       data-toggle={ paths.child ? 'collapse' : null }
-                                       data-target='.sidebarCollapse'>
+                                    <Link key={ index }
+                                          to={ paths.href }
+                                          href={ paths.child ? null : paths.href }
+                                          activeClassName='active'
+                                          data-toggle={ paths.child ? 'collapse' : null }
+                                          data-target='.sidebarCollapse'>
                                         <i class={ paths.icon }/> <span>{ paths.name }</span>
                                         { paths.child ? <i class='icon-submenu fa fa-caret-left'/> : '' }
-                                    </a>
+                                    </Link>
+
                                     <div class='collapse sidebarCollapse'>
                                         <ul class='nav'>
                                             { paths.child ? paths.child.map((child, index) => (
@@ -43,5 +55,18 @@ export default class Sidebar extends React.Component {
                 </div>
             </div>
         );
+    }
+
+    getSidebar(location, role) {
+        switch (role) {
+            case 3:
+                return InstitutionRoutes;
+            case 2:
+                return CompanyRoutes;
+            case 1:
+                return CollaboratorRoutes;
+            default:
+                return VolunteerRoutes;
+        }
     }
 }

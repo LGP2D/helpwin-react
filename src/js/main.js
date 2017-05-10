@@ -5,12 +5,14 @@ import { Router, Route, IndexRoute, hashHistory, Redirect } from 'react-router';
 import Layout from 'app/components/frontpage/layout/layout-onepage';
 import LayoutBlank from 'app/components/frontpage/layout/layout-blank';
 import FrontHome from 'app/pages/frontpage/home';
-import DashHome from 'app/pages/dashboard/home';
 import Register from 'app/pages/frontpage/register';
 import VolunteeringList from 'app/pages/frontpage/volunteering-list';
 import Login from 'app/pages/frontpage/login';
 
 import UserStore from 'app/stores/userStore';
+
+import DashLayout from 'app/components/dashboard/layout/layout'
+import DashHome from 'app/pages/dashboard/home';
 
 const app = document.getElementById('app');
 
@@ -32,7 +34,9 @@ ReactDOM.render(
     <Router history={ hashHistory }>
         <Route path='/' component={ Layout }>
             <IndexRoute component={ FrontHome }/>
-            <Route path='/dashboard' component={ DashHome }/>
+        </Route>
+        <Route path='/dashboard' component={ DashLayout }>
+            <IndexRoute component={ DashHome }/>
         </Route>
         <Route path='/register' component={ LayoutBlank }>
             <IndexRoute component={ Register }/>

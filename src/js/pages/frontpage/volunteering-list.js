@@ -18,7 +18,7 @@ export default class VolunteeringList extends React.Component {
             {
                 maxWidth: 110,
                 render: row => (
-                    <div className='image-col'>
+                    <div className='image-col text-center'>
                         <img src={ row.row.institution.imageUrl }/>
                     </div>
                 )
@@ -42,7 +42,7 @@ export default class VolunteeringList extends React.Component {
                 header: 'Location & Date',
                 maxWidth: 200,
                 render: row => (
-                    <div>
+                    <div className='text-center'>
                         <p> { row.row.location } </p>
                         <i className='fa fa-calendar'/><span
                         className='volunteering-table-text-margin'>Starting: { row.row.dateStart }</span>
@@ -76,7 +76,7 @@ export default class VolunteeringList extends React.Component {
     };
 
     handleClick = (event) => {
-        console.log(event.target.name);
+        console.log(event.target.name)
     };
 
     componentWillMount () {
@@ -91,10 +91,10 @@ export default class VolunteeringList extends React.Component {
     render () {
         return (
             <ReactTable
-                className='volunteering-table'
+                className='-highlight -striped volunteering-table'
                 data={ this.state.data }
                 columns={ this.columns }
-                defaultPageSize={ 10 }
+                defaultPageSize={ 3 }
                 resizable={ false }
             />
         );

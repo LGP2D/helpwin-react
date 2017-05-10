@@ -93,7 +93,9 @@ export default class LayoutBlank extends React.Component {
                     { /* /.container */ }
                 </nav>
                 <div className='blank-content'>
-                    { this.props.children }
+                    <div className='container'>
+                        { this.props.children }
+                    </div>
                 </div>
                 <Footer/>
             </div>

@@ -13,6 +13,7 @@ import UserStore from 'app/stores/userStore';
 
 import DashLayout from 'app/components/dashboard/layout/layout'
 import DashHome from 'app/pages/dashboard/home';
+import CompanyVoucher from 'app/pages/frontpage/company-voucher';
 
 const app = document.getElementById('app');
 
@@ -46,6 +47,9 @@ ReactDOM.render(
         </Route>
         <Route path='/login' component={ LayoutBlank }>
             <IndexRoute component={ Login }/>
+        </Route>
+        <Route path='/companyvoucher' component={ LayoutBlank }>
+            <IndexRoute component={ CompanyVoucher }/>
         </Route>
     </Router>,
     app

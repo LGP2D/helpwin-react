@@ -31,6 +31,9 @@ export default class LayoutBlank extends React.Component {
                         <a className='page-scroll' href='#/voluntlist'>Volunteering List</a>
                     </li>
                     <li>
+                        <a className='page-scroll' href='#/companyvoucher'>Company Voucher</a>
+                    </li>
+                    <li>
                         <a className='page-scroll' href='#/register'>Register</a>
                     </li>
                     <li>
@@ -49,6 +52,9 @@ export default class LayoutBlank extends React.Component {
                     </li>
                     <li>
                         <a className='page-scroll' href='#/voluntlist'>Volunteering List</a>
+                    </li>
+                    <li>
+                        <a className='page-scroll' href='#/companyvoucher'>Company Voucher</a>
                     </li>
                     <li>
                         <a className='page-scroll' href='#/register'>Register</a>
@@ -84,7 +90,6 @@ export default class LayoutBlank extends React.Component {
                                 <i className='fa fa-play-circle'/> <span className='light'>HELP</span> WIN
                             </a>
                         </div>
-
                         <div className='collapse navbar-collapse navbar-right navbar-main-collapse'>
                             { this.headerItems }
                         </div>

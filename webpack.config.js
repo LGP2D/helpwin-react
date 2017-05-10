@@ -66,6 +66,6 @@ module.exports = {
     devServer: {
         host: '0.0.0.0',
         port: 3000,
-        public: 'ec2-35-176-15-190.eu-west-2.compute.amazonaws.com'
+        //public: 'ec2-35-176-15-190.eu-west-2.compute.amazonaws.com'
     }
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import LabelForm from 'app/components/frontpage/forms/FormLabel';
 import UserStore from 'app/stores/userStore';
-import * as UserActions from 'app/actions/userActions';
+import UserActions from 'app/actions/userActions';
 import Combobox from 'react-widgets/lib/Combobox';
 import 'react-widgets/lib/less/react-widgets.less';
 
@@ -26,24 +26,26 @@ export default class Register extends React.Component {
             repassword: '',
             role: this.roles[0]
         };
-
-        this.onRegister = this.onRegister.bind(this);
     }
 
-    onRegister () {
-        console.log('user is now registered');
-    }
+    static contextTypes = {
+        router: React.PropTypes.object.isRequired
+    };
+
+    onRegisterSuccess = () => {
+        this.context.router.push('/login');
+    };
 
     componentWillMount () {
-        UserStore.on('register', this.onRegister);
+        UserStore.on('REGISTER_SUCCESS', this.onRegisterSuccess);
     }
 
     componentWillUnmount () {
-        UserStore.removeListener('register', this.onRegister);
+        UserStore.removeListener('REGISTER_SUCCESS', this.onRegisterSuccess);
     }
 
     render () {
-        return(
+        return (
             <div>
                 <h1 className='col-sm-offset-5'>Register Form</h1>
                 <form className='form-horizontal' onSubmit={ this.handleSubmit }>
@@ -56,7 +58,8 @@ export default class Register extends React.Component {
                         </div>
                     </div>
                     <div className='form-group'>
-                        <LabelForm htmlFor='formEmail' title='Email' className='control-label col-sm-2 col-sm-offset-1'/>
+                        <LabelForm htmlFor='formEmail' title='Email'
+                                   className='control-label col-sm-2 col-sm-offset-1'/>
                         <div className='col-sm-6'>
                             <input id='formEmail' className='form-control' name='email' type='text'
                                    required onChange={ this.handleChange } value={ this.state.email }
@@ -64,7 +67,8 @@ export default class Register extends React.Component {
                         </div>
                     </div>
                     <div className='form-group'>
-                        <LabelForm htmlFor='birthdate' title='Birthdate' className='control-label col-sm-2 col-sm-offset-1'/>
+                        <LabelForm htmlFor='birthdate' title='Birthdate'
+                                   className='control-label col-sm-2 col-sm-offset-1'/>
                         <div className='col-sm-6'>
                             <input id='birthdate' className='form-control' name='birthdate' type='date'
                                    required onChange={ this.handleChange } value={ this.state.birthdate }
@@ -72,7 +76,8 @@ export default class Register extends React.Component {
                         </div>
                     </div>
                     <div className='form-group'>
-                        <LabelForm htmlFor='password' title='Password' className='control-label col-sm-2 col-sm-offset-1'/>
+                        <LabelForm htmlFor='password' title='Password'
+                                   className='control-label col-sm-2 col-sm-offset-1'/>
                         <div className='col-sm-6'>
                             <input id='password' className='form-control' name='password' type='password'
                                    required onChange={ this.handleChange } value={ this.state.password }
@@ -80,7 +85,8 @@ export default class Register extends React.Component {
                         </div>
                     </div>
                     <div className='form-group'>
-                        <LabelForm htmlFor='retypepassword' title='Retype Password' className='control-label col-sm-2 col-sm-offset-1'/>
+                        <LabelForm htmlFor='retypepassword' title='Retype Password'
+                                   className='control-label col-sm-2 col-sm-offset-1'/>
                         <div className='col-sm-6'>
                             <input id='retypepassword' className='form-control' name='repassword' type='password'
                                    required onChange={ this.handleChange } value={ this.state.repassword }
@@ -88,7 +94,8 @@ export default class Register extends React.Component {
                         </div>
                     </div>
                     <div className='form-group'>
-                        <LabelForm htmlFor='profession' title='Profession' className='control-label col-sm-2 col-sm-offset-1'/>
+                        <LabelForm htmlFor='profession' title='Profession'
+                                   className='control-label col-sm-2 col-sm-offset-1'/>
                         <div className='col-sm-6'>
                             <input id='profession' className='form-control' name='profession' type='text'
                                    required onChange={ this.handleChange } value={ this.state.profession }
@@ -99,14 +106,14 @@ export default class Register extends React.Component {
                         <LabelForm htmlFor='image' title='Image' className='control-label col-sm-2 col-sm-offset-1'/>
                         <div className='col-sm-6'>
                             <input id='image' className='form-control file' name='image' type='file'
-                                   onChange={ this.handleChange } value={ this.state.image } />
+                                   onChange={ this.handleChange } value={ this.state.image }/>
                         </div>
                     </div>
                     <div className='form-group'>
                         <LabelForm htmlFor='role' title='Role' className='control-label col-sm-2 col-sm-offset-1'/>
                         <div className='col-sm-6'>
                             <Combobox valueField='id' textField='description' data={ this.roles }
-                                          onChange={ this.handleChangeDropdown } defaultValue={ this.state.role }  />
+                                      onChange={ this.handleChangeDropdown } defaultValue={ this.state.role }/>
                         </div>
                     </div>
                     <div className='form-group'>
@@ -122,7 +129,7 @@ export default class Register extends React.Component {
     handleChangeDropdown = (value) => {
         this.setState({
             role: value
-        })
+        });
     };
 
     handleChange = (event) => {
@@ -151,5 +158,5 @@ export default class Register extends React.Component {
         };
 
         UserActions.registerUser(user);
-    }
+    };
 }

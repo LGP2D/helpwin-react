@@ -37,6 +37,9 @@ export default class LayoutBlank extends React.Component {
                                     <a class='page-scroll' href='#/voluntlist'>Volunteering List</a>
                                 </li>
                                 <li>
+                                    <a class='page-scroll' href='#/vouchers'>Vouchers</a>
+                                </li>
+                                <li>
                                     <a class='page-scroll' href='#/register'>Register</a>
                                 </li>
                             </ul>

@@ -35,10 +35,11 @@ export default class VoucherList extends React.Component {
     render (){
         return(
             <div class='container'>
+                <h1> Vouchers </h1>
                 <ImgGrid>
-                    { this.state.vouchers.map(voucher => (
-                        <ImgOnGrid imagePath = { voucher.imagePath } />
-                    )) }
+                    { this.state.vouchers.map(function(result) {
+                        return < ImgOnGrid imagePath={ result.imagePath }/>;
+                    }) }
                 </ImgGrid>
             </div>
 

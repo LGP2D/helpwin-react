@@ -9,7 +9,7 @@ class VoucherStore extends EventEmitter {
         this.vouchers = [];
     }
 
-    get getVouchers(){
+    getVouchers(){
         return this.vouchers;
     }
     handleActions(action) {
@@ -23,7 +23,6 @@ class VoucherStore extends EventEmitter {
                         'Accept': 'application/json'
                     }
                 }).then(response => {
-                    console.log('Get vouchers ->', response);
                     this.vouchers = response.data;
                     this.emit('CHANGE_VOUCHERS');
                 }).catch(error => {

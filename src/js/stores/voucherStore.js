@@ -1,6 +1,7 @@
 import { EventEmitter } from 'events';
 import dispatcher from 'app/dispatcher/dispatcher';
 import axios from 'axios';
+import config from './config'
 
 class VoucherStore extends EventEmitter {
 

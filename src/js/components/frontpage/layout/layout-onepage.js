@@ -40,7 +40,10 @@ export default class Layout extends React.Component {
                         <a className='page-scroll' href='#/voluntlist'>Volunteering List</a>
                     </li>
                     <li>
-                        <a class='page-scroll' href='#/companyvoucher'>Company Voucher</a>
+                        <a className='page-scroll' href='#/companyvoucher'>Company Voucher</a>
+                    </li>
+                    <li>
+                        <a className='page-scroll' href='#/vouchers'>Vouchers</a>
                     </li>
                     <li>
                         <a className='page-scroll' href='#/register'>Register</a>
@@ -63,7 +66,10 @@ export default class Layout extends React.Component {
                         <a className='page-scroll' href='#/voluntlist'>Volunteering List</a>
                     </li>
                     <li>
-                        <a class='page-scroll' href='#/companyvoucher'>Company Voucher</a>
+                        <a className='page-scroll' href='#/companyvoucher'>Company Voucher</a>
+                    </li>
+                    <li>
+                        <a className='page-scroll' href='#/vouchers'>Vouchers</a>
                     </li>
                     <li>
                         <a className='page-scroll' href='#/register'>Register</a>
@@ -122,7 +128,7 @@ export default class Layout extends React.Component {
     }
 
     handleScroll (navbar, event) {
-        if (event.srcElement.body.scrollTop > 50) {
+        if(event.srcElement.body.scrollTop > 50) {
             navbar.classList.add('top-nav-collapse');
         }
         else {

@@ -1,16 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Router, Route, IndexRoute, hashHistory, Redirect } from 'react-router';
+import React from "react";
+import ReactDOM from "react-dom";
+import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
 import Layout from 'app/components/frontpage/layout/layout-onepage';
 import LayoutBlank from 'app/components/frontpage/layout/layout-blank';
 import FrontHome from 'app/pages/frontpage/home';
 import Register from 'app/pages/frontpage/register';
 import VolunteeringList from 'app/pages/frontpage/volunteering-list';
+import GetVouchers from 'app/pages/frontpage/vouchersList'
 import Login from 'app/pages/frontpage/login';
-
 import UserStore from 'app/stores/userStore';
-
 import DashLayout from 'app/components/dashboard/layout/layout'
 import DashHome from 'app/pages/dashboard/home';
 import CompanyVoucher from 'app/pages/frontpage/company-voucher';
@@ -42,6 +41,9 @@ ReactDOM.render(
         <Route path='/register' component={ LayoutBlank }>
             <IndexRoute component={ Register }/>
         </Route>
+        <Route path='/vouchers' component={ LayoutBlank }>
+            <IndexRoute component={ GetVouchers }/>
+        </Route>
         <Route path='/voluntlist' component={ LayoutBlank }>
             <IndexRoute component={ VolunteeringList }/>
         </Route>
@@ -51,6 +53,7 @@ ReactDOM.render(
         <Route path='/companyvoucher' component={ LayoutBlank }>
             <IndexRoute component={ CompanyVoucher }/>
         </Route>
+
     </Router>,
     app
 );

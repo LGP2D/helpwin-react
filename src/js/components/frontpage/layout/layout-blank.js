@@ -34,6 +34,9 @@ export default class LayoutBlank extends React.Component {
                         <a className='page-scroll' href='#/companyvoucher'>Company Voucher</a>
                     </li>
                     <li>
+                        <a className='page-scroll' href='#/vouchers'>Voucher</a>
+                    </li>
+                    <li>
                         <a className='page-scroll' href='#/register'>Register</a>
                     </li>
                     <li>
@@ -55,6 +58,9 @@ export default class LayoutBlank extends React.Component {
                     </li>
                     <li>
                         <a className='page-scroll' href='#/companyvoucher'>Company Voucher</a>
+                    </li>
+                    <li>
+                        <a className='page-scroll' href='#/vouchers'>Vouchers</a>
                     </li>
                     <li>
                         <a className='page-scroll' href='#/register'>Register</a>
@@ -97,10 +103,8 @@ export default class LayoutBlank extends React.Component {
                     </div>
                     { /* /.container */ }
                 </nav>
-                <div className='blank-content'>
-                    {/*<div className='container'>*/}
-                        { this.props.children }
-                    {/*</div>*/}
+                <div class='blank-content'>
+                    { this.props.children }
                 </div>
                 <Footer/>
             </div>

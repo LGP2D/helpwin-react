@@ -17,7 +17,7 @@ class VoucherStore extends EventEmitter {
             case 'GET_VOUCHERS' : {
                 axios({
                     method: 'get',
-                    url: 'http://localhost:8080/api/voucher',
+                    url: config.API_URL + 'voucher',
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json'

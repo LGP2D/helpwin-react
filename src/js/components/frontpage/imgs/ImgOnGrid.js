@@ -1,5 +1,4 @@
 import React from 'react';
-import '../../../../assets/css/bootstrap.css';
 import PropTypes from 'prop-types';
 
 class ImgOnGrid extends React.Component {
@@ -18,7 +17,7 @@ class ImgOnGrid extends React.Component {
 
 ImgOnGrid.propTypes = {
     imagePath: PropTypes.string.isRequired
-}
+};
 
 ImgOnGrid.defaultProps = {
     imagePath: 'http://2.bp.blogspot.com/-H6MAoWN-UIE/TuRwLbHRSWI/AAAAAAAABBk/89iiEulVsyg/s400/Free%2BNature%2BPhoto.jpg'

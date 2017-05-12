@@ -1,5 +1,4 @@
 import React from 'react';
-import '../../../../assets/css/bootstrap.css';
 import PropTypes from 'prop-types';
 
 class Form extends React.Component {

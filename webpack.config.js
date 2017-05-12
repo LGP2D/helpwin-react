@@ -9,12 +9,16 @@ module.exports = {
     module: {
         loaders: [
             {
+                test: /\.json$/,
+                loader: "json-loader"
+            },
+            {
                 test: /\.jsx?$/,
                 exclude: /(node_modules|bower_components)/,
                 loader: 'babel-loader',
                 query: {
                     presets: ['react', 'es2015', 'stage-0'],
-                    plugins: ['react-html-attrs', 'transform-class-properties', 'transform-decorators-legacy'],
+                    plugins: ['react-html-attrs', 'transform-class-properties', 'transform-decorators-legacy']
                 }
             },
             {

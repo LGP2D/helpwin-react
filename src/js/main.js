@@ -5,9 +5,14 @@ import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import Layout from 'app/components/frontpage/layout/layout-onepage';
 import LayoutBlank from 'app/components/frontpage/layout/layout-blank';
 
+import UserStore from 'app/stores/userStore';
+
 import FrontHome from 'app/pages/frontpage/home';
 import Register from 'app/pages/frontpage/register';
 import VolunteeringList from 'app/pages/frontpage/volunteering-list';
+import GetVouchers from 'app/pages/frontpage/vouchersList';
+import Login from 'app/pages/frontpage/login';
+import CompanyVoucher from 'app/pages/frontpage/company-voucher';
 
 import DashLayout from 'app/components/dashboard/layout/layout';
 import Sidebar from 'app/components/dashboard/layout/sidebar';
@@ -20,6 +25,20 @@ import ListInstitution from 'app/pages/dashboard/list-institution';
 
 const app = document.getElementById('app');
 
+export default function requireAuth (nextState, replace) {
+    let loggedIn = UserStore.isLoggedIn();
+    if (!loggedIn) {
+        replace({
+            pathname: '/login',
+            state: { nextPathname: nextState.location.pathname }
+        });
+    }
+};
+/**
+ * Auth guard is not on any of the pages as of right now.
+ * If you wish to use it, just type onEnter on the route and direct it to { requireAuth }
+ * E.g <IndexRoute component={ VolunteeringList } onEnter={ requireAuth }
+ */
 ReactDOM.render(
 
     <Router history={ hashHistory }>
@@ -39,6 +58,18 @@ ReactDOM.render(
 
         <Route path='/register' component={ LayoutBlank }>
             <IndexRoute component={ Register }/>
+        </Route>
+
+        <Route path='/vouchers' component={ LayoutBlank }>
+            <IndexRoute component={ GetVouchers }/>
+        </Route>
+
+        <Route path='/login' component={ LayoutBlank }>
+            <IndexRoute component={ Login }/>
+        </Route>
+
+        <Route path='/companyvoucher' component={ LayoutBlank }>
+            <IndexRoute component={ CompanyVoucher }/>
         </Route>
 
         <Route path='/voluntlist' component={ LayoutBlank }>

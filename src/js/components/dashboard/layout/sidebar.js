@@ -1,77 +1,72 @@
 import React from 'react';
+import { Link } from 'react-router'
 
-export default class Header extends React.Component {
+import CollaboratorRoutes from 'app/stores/sidebar-routes/sidebar-colab'
+import VolunteerRoutes from 'app/stores/sidebar-routes/sidebar-volun'
+import InstitutionRoutes from 'app/stores/sidebar-routes/sidebar-insti'
+import CompanyRoutes from 'app/stores/sidebar-routes/sidebar-compa'
+
+export default class Sidebar extends React.Component {
+
     render () {
+
+        const { location } = this.props;
+        const role = 1;
+        const paths = this.getSidebar(location, role);
 
         return (
             <div id='sidebar-nav' class='sidebar'>
                 <div class='brand'>
                     HelpWin
                     { /*<a href='index.html'>
-                        <img src='http://image.prntscr.com/image/e1343e51b8834758bf5c00bf0fcd22e0.png'
-                             alt='logo' class='img-responsive logo'/>
-                    </a>*/ }
+                     <img src='http://image.prntscr.com/image/e1343e51b8834758bf5c00bf0fcd22e0.png'
+                     alt='logo' class='img-responsive logo'/>
+                     </a>*/ }
                 </div>
                 <div class='sidebar-scroll'>
                     <nav>
                         <ul class='nav'>
-                            <li>
-                                <a href='index.html' class='active'>
-                                    <i class='ti ti-home'/> <span>Dashboard</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href='elements.html' class=''>
-                                    <i class='ti ti-comment'/> <span>Elements</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href='charts.html' class=''>
-                                    <i class='ti ti-bar-chart-alt'/> <span>Charts</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href='panels.html' class=''>
-                                    <i class='ti ti-panel'/> <span>Panels</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href='notifications.html' class=''>
-                                    <i class='ti ti-announcement'/> <span>Notifications</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href='#subPages' data-toggle='collapse' class='collapsed'>
-                                    <i class='ti ti-file'/> <span>Pages</span>
-                                    <i class='icon-submenu fa fa-caret-left'/>
-                                </a>
-                                <div id='subPages' class='collapse '>
-                                    <ul class='nav'>
-                                        <li><a href='page-profile.html' class=''>Profile</a></li>
-                                        <li><a href='page-login.html' class=''>Login</a></li>
-                                        <li><a href='page-lockscreen.html' class=''>Lockscreen</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li>
-                                <a href='tables.html' class=''>
-                                    <i class='ti ti-layout'/> <span>Tables</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href='typography.html' class=''>
-                                    <i class='ti ti-text'/> <span>Typography</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href='icons.html' class=''>
-                                    <i class='ti ti-image'/> <span>Icons</span>
-                                </a>
-                            </li>
+                            { /* Dynamically add sidebar content */ }
+                            { paths.map((paths, index) => (
+                                <li key={ index }>
+                                    <Link key={ index }
+                                          to={ paths.href }
+                                          href={ paths.child ? null : paths.href }
+                                          activeClassName='active'
+                                          data-toggle={ paths.child ? 'collapse' : null }
+                                          data-target='.sidebarCollapse'>
+                                        <i class={ paths.icon }/> <span>{ paths.name }</span>
+                                        { paths.child ? <i class='icon-submenu fa fa-caret-left'/> : '' }
+                                    </Link>
+
+                                    <div class='collapse sidebarCollapse'>
+                                        <ul class='nav'>
+                                            { paths.child ? paths.child.map((child, index) => (
+                                                <li key={ index }>
+                                                    <a key={ index } href={ child.href } class=''>{ child.name }</a>
+                                                </li>
+                                            )) : '' }
+                                        </ul>
+                                    </div>
+                                </li>
+                            )) }
                         </ul>
                     </nav>
                 </div>
             </div>
         );
+    }
+
+    getSidebar(location, role) {
+        switch (role) {
+            case 3:
+                return InstitutionRoutes;
+            case 2:
+                return CompanyRoutes;
+            case 1:
+                return CollaboratorRoutes;
+            default:
+                return VolunteerRoutes;
+        }
     }
 }

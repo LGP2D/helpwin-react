@@ -9,12 +9,16 @@ module.exports = {
     module: {
         loaders: [
             {
+                test: /\.json$/,
+                loader: "json-loader"
+            },
+            {
                 test: /\.jsx?$/,
                 exclude: /(node_modules|bower_components)/,
                 loader: 'babel-loader',
                 query: {
                     presets: ['react', 'es2015', 'stage-0'],
-                    plugins: ['react-html-attrs', 'transform-class-properties', 'transform-decorators-legacy'],
+                    plugins: ['react-html-attrs', 'transform-class-properties', 'transform-decorators-legacy']
                 }
             },
             {
@@ -50,7 +54,8 @@ module.exports = {
     resolve: {
         alias: {
             app: path.resolve(__dirname, 'src/js/'),
-            assets: path.resolve(__dirname, 'src/assets/')
+            assets: path.resolve(__dirname, 'src/assets/'),
+            node_modules: path.resolve(__dirname, 'node_modules/')
         },
         extensions: ['.css', '.js', '.jsx']
     },

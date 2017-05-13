@@ -879,3 +879,39 @@ ul.activity-list > li .timestamp {
     white-space: normal !important;
     text-overflow: ellipsis;
 }
+
+/********************
+ * PROFILE
+ ********************/
+.profile-panel-border {
+    border-color: transparent;
+}
+
+.profile-panel-header {
+    background-color: #023434;
+    color: #71BF96;
+    font-weight: bold !important;
+    padding: 8px 28px;
+    border-radius: 2px;
+}
+
+.profile-info {
+    text-align: right;
+    font-weight: bold;
+    padding: 13px;
+}
+
+.profile-image{
+    padding: 0px 88px;
+}
+
+.profile-table {
+    border-color: transparent;
+}
+
+.btn-edit {
+    background-color: #add8e6;
+    border-color: #add8e6; }
+.btn-edit:hover, .btn-edit:focus {
+    background-color: #7997a1;
+    border-color: #7997a1; }

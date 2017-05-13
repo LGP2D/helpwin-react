@@ -8,7 +8,7 @@ const routes = [
         name: 'Home'
     },
     {
-        href: '/dashboard/profile',
+        href: '/dashboard/volunteerProfile',
         class: 'active',
         icon: 'ti ti-user',
         name: 'Profile'

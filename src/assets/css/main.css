@@ -14,6 +14,14 @@
     background-color: #607D8B;
 }
 
+.bg-main-color {
+    background-color: #023434;
+}
+
+.bg-secondary-color {
+    background-color: #71BF96;
+}
+
 .blank-content {
     margin-top: 130px;
 }

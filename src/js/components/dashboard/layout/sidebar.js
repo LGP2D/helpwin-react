@@ -11,7 +11,7 @@ export default class Sidebar extends React.Component {
     render () {
 
         const { location } = this.props;
-        const role = 1;
+        const role = 0;
         const paths = this.getSidebar(location, role);
 
         return (

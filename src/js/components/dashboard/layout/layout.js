@@ -5,9 +5,14 @@ import Sidebar from "./sidebar.js";
 import Header from "./header";
 
 require('./layout.scss');
-require('./helper.js');
 
 export default class Layout extends React.Component {
+
+    componentDidMount () {
+        console.log("Mounting dashboard js");
+        this.loadJS('./helper.js');
+    }
+
     render () {
         const { main, sidebar } = this.props;
 
@@ -24,5 +29,20 @@ export default class Layout extends React.Component {
                 </div>
             </div>
         );
+    }
+
+    loadJS () {
+        const script = document.createElement("script");
+        script.id = 'helper-script';
+        script.src = "assets/js/helper.js";
+        script.async = true;
+        if(document.getElementById("helper-script")) {
+            this.removeElement(document.getElementById("helper-script"));
+        }
+        document.body.appendChild(script);
+    }
+
+    removeElement (element) {
+        element && element.parentNode && element.parentNode.removeChild(element);
     }
 }

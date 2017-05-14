@@ -19,10 +19,11 @@ import Sidebar from 'app/components/dashboard/layout/sidebar';
 
 import CollaboratorHome from 'app/pages/dashboard/collaborator';
 import VolunteerHome from 'app/pages/dashboard/volunteer';
-import VolunteerProfile from 'app/pages/dashboard/volunteerProfile';
 import InstitutionHome from 'app/pages/dashboard/institution';
 import CompanyHome from 'app/pages/dashboard/company';
 import ListInstitution from 'app/pages/dashboard/list-institution';
+import VolunteerProfile from 'app/pages/dashboard/volunteerProfile';
+import VolunteerProposals from 'app/pages/dashboard/volunteerProposals';
 
 const app = document.getElementById('app');
 
@@ -51,11 +52,12 @@ ReactDOM.render(
             /* Home pages */
             <IndexRoute components={ { main: VolunteerHome, sidebar: Sidebar } } />
             <Route path='collaborator' components={ { main: CollaboratorHome, sidebar: Sidebar } } />
-            <Route path='volunteerProfile' components={ { main: VolunteerProfile, sidebar: Sidebar } } />
             <Route path='institution' components={ { main: InstitutionHome, sidebar: Sidebar } } />
             <Route path='company' components={ { main: CompanyHome, sidebar: Sidebar } } />
             /* Content pages */
             <Route path='list-institutions' components={ { main: ListInstitution, sidebar: Sidebar } } />
+            <Route path='volunteerProfile' components={ { main: VolunteerProfile, sidebar: Sidebar } } />
+            <Route path='proposals-volunteer' components={ { main: VolunteerProposals, sidebar: Sidebar } } />
         </Route>
 
         <Route path='/register' component={ LayoutBlank }>

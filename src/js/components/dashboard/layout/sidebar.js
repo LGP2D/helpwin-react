@@ -34,7 +34,7 @@ export default class Sidebar extends React.Component {
                                           href={ paths.child ? null : paths.href }
                                           activeClassName='active'
                                           data-toggle={ paths.child ? 'collapse' : null }
-                                          data-target='.sidebarCollapse'>
+                                          data-target='.sidebarCollapse' onlyActiveOnIndex>
                                         <i class={ paths.icon }/> <span>{ paths.name }</span>
                                         { paths.child ? <i class='icon-submenu fa fa-caret-left'/> : '' }
                                     </Link>

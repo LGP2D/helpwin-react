@@ -56,7 +56,7 @@ export default class Header extends React.Component {
                                     </a>
                                     <ul class='dropdown-menu'>
                                         <li>
-                                            <a href='#'><i class='lnr lnr-user' />
+                                            <a href='/dashboard/volunteerProfile'><i class='lnr lnr-user' />
                                                 <span> My Profile</span>
                                             </a>
                                         </li>

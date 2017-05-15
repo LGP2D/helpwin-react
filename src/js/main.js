@@ -14,6 +14,7 @@ import UserStore from 'app/stores/userStore';
 import DashLayout from 'app/components/dashboard/layout/layout'
 import DashHome from 'app/pages/dashboard/home';
 import CompanyVoucher from 'app/pages/frontpage/company-voucher';
+import VolunteerApplication from 'app/pages/dashboard/volunteerApplications';
 
 const app = document.getElementById('app');
 
@@ -50,6 +51,9 @@ ReactDOM.render(
         </Route>
         <Route path='/companyvoucher' component={ LayoutBlank }>
             <IndexRoute component={ CompanyVoucher }/>
+        </Route>
+        <Route path='/voluntappli' component={ LayoutBlank }>
+            <IndexRoute component={ VolunteerApplication } onEnter={ requireAuth }/>
         </Route>
     </Router>,
     app

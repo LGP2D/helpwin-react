@@ -39,6 +39,7 @@ export default class LayoutBlank extends React.Component {
                     <li>
                         <a className='page-scroll' href='#/login'>Login</a>
                     </li>
+
                 </ul>
             );
         } else {
@@ -63,6 +64,9 @@ export default class LayoutBlank extends React.Component {
                         <a className='page-scroll' href='#'>Welcome, { UserStore.getUserName }</a>
                     </li>
                     <li>
+                        <a className='page-scroll' href='#/voluntappli'> Applications</a>
+                    </li>
+                                       <li>
                         <a className='page-scroll' onClick={ this.handleLogout } href='#'>Logout</a>
                     </li>
                 </ul>

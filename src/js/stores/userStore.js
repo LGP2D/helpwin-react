@@ -58,6 +58,7 @@ class UserStore extends EventEmitter {
                     data: action.user
                 }).then(response => {
                     console.log(response);
+                    console.log(action.user);
                     this.emit('REGISTER_SUCCESS');
                 }).catch(error => {
                     console.log(error);
@@ -100,6 +101,23 @@ class UserStore extends EventEmitter {
                 localStorage.setItem('jwt', '');
                 localStorage.setItem('name', '');
                 this.emit('LOGOUT_USER');
+                break;
+            }
+            case 'EDIT_USER': {
+                axios({
+                    method: 'put',
+                    url: config.API_URL + 'user' + '/editProfile',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    data: action.user
+                }).then(response => {
+                    console.log(response);
+                    this.emit('EDIT_USER');
+                }).catch(error => {
+                    console.log(error);
+                });
                 break;
             }
             default:

@@ -20,5 +20,12 @@ export default {
         dispatcher.dispatch({
            type: 'LOGOUT_USER'
         });
+    },
+
+    editUser: (user) => {
+        dispatcher.dispatch({
+            type: 'EDIT_USER',
+            user: user
+        });
     }
 }

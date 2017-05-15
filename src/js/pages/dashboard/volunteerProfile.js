@@ -1,6 +1,7 @@
 import React from 'react';
 import UserStore from  'app/stores/userStore';
 import LabelForm from 'app/components/frontpage/forms/FormLabel';
+import UserActions from 'app/actions/userActions'
 
 export default class VolunteerProfile extends React.Component {
     constructor (){
@@ -23,7 +24,6 @@ export default class VolunteerProfile extends React.Component {
         console.log(event.target.name);
         console.log(event.target.value);
 
-
         newState[event.target.name] = event.target.value;
         this.setState(newState);
     };
@@ -43,12 +43,12 @@ export default class VolunteerProfile extends React.Component {
             profession: this.state.profession,
             imageUrl: this.state.image,
             role: role,
-            uniqueId: '',
+            uniqueId: this.state.uniqueId,
             id: ''
         };
 
         // TODO: editUser(user)
-        UserActions.registerUser(user);
+        UserActions.editUser(user);
     };
 
     componentWillMount() {
@@ -61,6 +61,10 @@ export default class VolunteerProfile extends React.Component {
     render () {
         const { location } = this.props;
 
+        let profileName = this.state.volunteerData.name;
+
+        console.log(this.state.volunteerData);
+
         return (
             <div className='container'>
                 <div className='row'>
@@ -68,7 +72,7 @@ export default class VolunteerProfile extends React.Component {
 
                         <div className='panel panel-info profile-panel-border'>
                             <div className='profile-panel-header'>
-                                <h3>{ this.state.volunteerData.name }</h3>
+                                <h3>{ profileName }</h3>
                             </div>
                             <div className='panel-body'>
                                 <div className='row'>
@@ -105,6 +109,22 @@ export default class VolunteerProfile extends React.Component {
                                             </div>
                                         </div>
                                         <div className='form-group'>
+                                            <LabelForm htmlFor='profession' title='Profession'
+                                                       className='control-label col-sm-3 col-sm-offset-1'/>
+                                            <div className='col-sm-7'>
+                                                <input id='profession' className='form-control' name='profession' type='text'
+                                                       required onChange={ this.handleChange } value={ this.state.volunteerData.profession }
+                                                       placeholder='Type profession...'/>
+                                            </div>
+                                        </div>
+                                        <div className='form-group'>
+                                            <LabelForm htmlFor='image' title='Image' className='control-label col-sm-3 col-sm-offset-1'/>
+                                            <div className='col-sm-7'>
+                                                <input id='image' className='form-control file' name='image' type='file'
+                                                       onChange={ this.handleChange } value={ this.state.image }/>
+                                            </div>
+                                        </div>
+                                        <div className='form-group'>
                                             <LabelForm htmlFor='password' title='New Password'
                                                        className='control-label col-sm-3 col-sm-offset-1'/>
                                             <div className='col-sm-7'>
@@ -120,22 +140,6 @@ export default class VolunteerProfile extends React.Component {
                                                 <input id='retypepassword' className='form-control' name='repassword' type='password'
                                                        onChange={ this.handleChange } value={ this.state.repassword }
                                                        placeholder='Retype password...' minLength='6'/>
-                                            </div>
-                                        </div>
-                                        <div className='form-group'>
-                                            <LabelForm htmlFor='profession' title='Profession'
-                                                       className='control-label col-sm-3 col-sm-offset-1'/>
-                                            <div className='col-sm-7'>
-                                                <input id='profession' className='form-control' name='profession' type='text'
-                                                       required onChange={ this.handleChange } value={ this.state.volunteerData.profession }
-                                                       placeholder='Type profession...'/>
-                                            </div>
-                                        </div>
-                                        <div className='form-group'>
-                                            <LabelForm htmlFor='image' title='Image' className='control-label col-sm-3 col-sm-offset-1'/>
-                                            <div className='col-sm-7'>
-                                                <input id='image' className='form-control file' name='image' type='file'
-                                                       onChange={ this.handleChange } value={ this.state.image }/>
                                             </div>
                                         </div>
                                         <div className='form-group'>

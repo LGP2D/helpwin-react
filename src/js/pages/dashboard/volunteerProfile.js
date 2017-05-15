@@ -8,13 +8,15 @@ export default class VolunteerProfile extends React.Component {
         super();
 
         this.state = {
-            volunteerData: UserStore.getUserData ? UserStore.getUserData : {}
+            volunteerData: UserStore.getUserData ? UserStore.getUserData : {},
+            volunteerName: ''
         }
     }
 
     onLogin = () => {
         this.setState({
-            volunteerData: UserStore.getUserData
+            volunteerData: UserStore.getUserData,
+            volunteerName: UserStore.getUserName
         })
     };
 
@@ -61,10 +63,6 @@ export default class VolunteerProfile extends React.Component {
     render () {
         const { location } = this.props;
 
-        let profileName = this.state.volunteerData.name;
-
-        console.log(this.state.volunteerData);
-
         return (
             <div className='container'>
                 <div className='row'>
@@ -72,7 +70,7 @@ export default class VolunteerProfile extends React.Component {
 
                         <div className='panel panel-info profile-panel-border'>
                             <div className='profile-panel-header'>
-                                <h3>{ profileName }</h3>
+                                <h3>{ this.state.volunteerName }</h3>
                             </div>
                             <div className='panel-body'>
                                 <div className='row'>

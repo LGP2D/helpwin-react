@@ -7,6 +7,9 @@
  * LAYOUT
  ********************/
 
+body {
+    color: #676a6d;
+}
 #wrapper {
     height: 100%;
 }
@@ -785,16 +788,16 @@ ul.activity-list > li .timestamp {
     line-height: 2; }
 
 .toast-info {
-    background-color: #00AAFF; }
+    background-color: #00AAFF !important; }
 
 .toast-success {
-    background-color: #41B314; }
+    background-color: #41B314 !important; }
 
 .toast-warning {
-    background-color: #e4cb10; }
+    background-color: #e4cb10 !important; }
 
 .toast-danger {
-    background-color: #F9354C; }
+    background-color: #F9354C !important; }
 
 /* tabs */
 .custom-tabs-line ul {

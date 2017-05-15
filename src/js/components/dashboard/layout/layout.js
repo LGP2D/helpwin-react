@@ -9,7 +9,6 @@ require('./layout.scss');
 export default class Layout extends React.Component {
 
     componentDidMount () {
-        console.log("Mounting dashboard js");
         this.loadJS('./helper.js');
     }
 

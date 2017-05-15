@@ -59,6 +59,9 @@ export default class VolunteerProposals extends React.Component {
                         <TableHeaderColumn dataField='description'>
                             Description
                         </TableHeaderColumn>
+                        <TableHeaderColumn dataFormat={ this.helpFormatter }>
+                            Help
+                        </TableHeaderColumn>
                     </BootstrapTable>
                 </div>
             </div>
@@ -71,6 +74,10 @@ export default class VolunteerProposals extends React.Component {
             data: VolunteeringStore.getAll()
         });
     };
+
+    handleClick () {
+
+    }
 
     imageFormatter (cell, row) {
         return (
@@ -93,6 +100,20 @@ export default class VolunteerProposals extends React.Component {
                 <br />
                 <i className='fa fa-calendar'/><span
                 className='volunteering-table-text-margin'>Ending: { row.dateEnd }</span>
+            </div>
+        );
+    }
+
+    helpFormatter (cell, row) {
+        return (
+            <div className='volunteering-coins'>
+                <i className='fa fa-database coin'/><span
+                className='volunteering-table-text-margin'>{ row.credits }</span>
+                <br />
+                <button className='btn btn-default' onClick={ this.handleClick } type='button'
+                        name={ row.id }>
+                    Help
+                </button>
             </div>
         );
     }

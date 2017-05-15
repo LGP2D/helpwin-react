@@ -12,23 +12,23 @@ export default class VoucherList extends React.Component {
         super();
         this.state = {
             vouchers : []
-        }
+        };
         this.getVouchers = this.getVouchers.bind(this);
     }
 
     getVouchers (){
         this.setState({
-            vouchers : VoucherStore.getVouchers()
-        })
+            vouchers : VoucherStore.getAll()
+        });
         window.location.vouchers = this.state.vouchers;
     }
 
-    componentWillMount() {
-        VoucherActions.getVouchers();
+    componentWillMount () {
+        VoucherActions.fetchData();
         VoucherStore.on('CHANGE_VOUCHERS', this.getVouchers);
     }
 
-    componentWillUnmount() {
+    componentWillUnmount () {
         VoucherStore.removeListener('CHANGE_VOUCHERS', this.getVouchers);
     }
 
@@ -45,8 +45,4 @@ export default class VoucherList extends React.Component {
 
         );
     }
-
-
-
-
 }

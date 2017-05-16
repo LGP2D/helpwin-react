@@ -3,23 +3,11 @@ $assetsPath: "/assets/" !default;
 body, html {
     font-family: "Lato", sans-serif;
     width: 100%;
-    height: 100%;
 }
 
 /*
 Related to One Page theme
  */
-
-footer {
-    margin-top: 100px;
-    min-height: 100px;
-    padding: 80px 0 50px 0;
-    background-color: #222222;
-}
-
-.table {
-    margin-top: 30px;
-}
 
 .fa.fa-facebook,
 .fa.fa-twitter,
@@ -101,8 +89,8 @@ footer {
     position: relative;
     display: table;
     width: 100%;
-    height: auto;
-    padding: 100px 0;
+    height: 100%;
+    padding: 80px 0;
     text-align: center;
     color: white;
     background-color: white;
@@ -115,7 +103,7 @@ footer {
     position: absolute;
     width: inherit;
     height: inherit;
-    background: url($assetsPath + "img/helping-1.jpg") no-repeat;
+    background: url($assetsPath + "img/helping-optimized.jpg") no-repeat;
     background-size: cover;
     opacity: 0.8;
 }
@@ -133,7 +121,6 @@ footer {
 }
 @media (min-width: 768px) {
     .intro {
-        height: 100%;
         padding: 0;
     }
     .intro .intro-body .brand-heading {
@@ -224,6 +211,9 @@ footer {
 }
 
 footer {
+    position: absolute;
+    width: 100%;
+    margin: 0;
     text-align: center;
     min-height: 200px;
     padding: 80px 0 50px 0;

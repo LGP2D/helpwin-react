@@ -10,6 +10,8 @@ class UserStore extends EventEmitter {
 
         this.user = null;
         this.jwt = null;
+        this.name = null;
+        this.userData = null;
 
         this.autoLogin();
     }
@@ -19,8 +21,29 @@ class UserStore extends EventEmitter {
         if (jwt) {
             this.jwt = jwt;
             this.user = jwt_decode(jwt);
+            this.name = localStorage.getItem('name');
+
+            this.handleLoginToken(jwt);
         }
     }
+
+    handleLoginToken (token) {
+        axios({
+            method: 'post',
+            url: config.API_URL + 'user/loginToken',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization' : token
+            }
+        }).then(response => {
+            this.userData = response.data;
+            console.log(response);
+            console.log(this.userData);
+            this.emit('AUTO_LOGIN');
+        }).catch(error => {
+            console.log(error);
+        });    }
 
     handleActions (action) {
         switch (action.type) {
@@ -55,8 +78,13 @@ class UserStore extends EventEmitter {
                 }).then(response => {
                     //Save token to local storage
                     localStorage.setItem('jwt', response.data.token);
+                    localStorage.setItem('name', response.data.name);
+
                     this.jwt = response.data.token;
                     this.user = jwt_decode(this.jwt);
+                    this.name = response.data.name;
+                    this.userData = response.data;
+                    console.log(this.userData);
                     this.emit('LOGIN_SUCCESS');
                 }).catch(error => {
                     console.log(error);
@@ -67,7 +95,10 @@ class UserStore extends EventEmitter {
             case 'LOGOUT_USER': {
                 this.jwt = null;
                 this.user = null;
+                this.name = null;
+                this.userData = null;
                 localStorage.setItem('jwt', '');
+                localStorage.setItem('name', '');
                 this.emit('LOGOUT_USER');
                 break;
             }
@@ -81,7 +112,9 @@ class UserStore extends EventEmitter {
 
     get getUser () { return this.user; }
 
-    get getUserName () { return this.user.sub; }
+    get getUserName () { return this.name; }
+
+    get getUserData () { return this.userData; }
 
     isLoggedIn () { return !!this.user; }
 }

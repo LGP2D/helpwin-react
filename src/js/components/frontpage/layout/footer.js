@@ -8,7 +8,6 @@ export default class Footer extends React.Component {
 
         return (
             <footer style={ layoutStyles }>
-                <div className='container'>
                     <div className='row text-center'>
                         <div className='col-md-6 col-sm-6 col-xs-12'>
                             <ul className='list-inline'>
@@ -38,7 +37,6 @@ export default class Footer extends React.Component {
                             <h2>© 2017 HelpWin LOGO</h2>
                         </div>
                     </div>
-                </div>
             </footer>
         );
     }

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router'
 import Footer from './footer';
 import Header from './header';
 
@@ -18,60 +19,41 @@ export default class LayoutBlank extends React.Component {
 
     get headerItems () {
         let loggedIn = UserStore.isLoggedIn();
-        if (!loggedIn) {
-            return (
-                <ul className='nav navbar-nav'>
-                    <li className='hidden'>
-                        <a href='#page-top'/>
-                    </li>
-                    <li>
-                        <a className='page-scroll' href='#'>About</a>
-                    </li>
-                    <li>
-                        <a className='page-scroll' href='#/voluntlist'>Volunteering List</a>
-                    </li>
-                    <li>
-                        <a className='page-scroll' href='#/companyvoucher'>Company Voucher</a>
-                    </li>
-                    <li>
-                        <a className='page-scroll' href='#/register'>Register</a>
-                    </li>
-                    <li>
-                        <a className='page-scroll' href='#/login'>Login</a>
-                    </li>
-
-                </ul>
-            );
-        } else {
-            return (
-                <ul className='nav navbar-nav'>
-                    <li className='hidden'>
-                        <a href='#page-top'/>
-                    </li>
-                    <li>
-                        <a className='page-scroll' href='#'>About</a>
-                    </li>
-                    <li>
-                        <a className='page-scroll' href='#/voluntlist'>Volunteering List</a>
-                    </li>
-                    <li>
-                        <a className='page-scroll' href='#/companyvoucher'>Company Voucher</a>
-                    </li>
-                    <li>
-                        <a className='page-scroll' href='#/register'>Register</a>
-                    </li>
-                    <li>
-                        <a className='page-scroll' href='#'>Welcome, { UserStore.getUserName }</a>
-                    </li>
-                    <li>
-                        <a className='page-scroll' href='#/voluntappli'> Applications</a>
-                    </li>
-                                       <li>
-                        <a className='page-scroll' onClick={ this.handleLogout } href='#'>Logout</a>
-                    </li>
-                </ul>
-            );
-        }
+        return (
+            <ul className='nav navbar-nav'>
+                <li className='hidden'>
+                    <a href='#page-top'/>
+                </li>
+                <li>
+                    <a className='page-scroll' href='#'>About</a>
+                </li>
+                <li>
+                    <a className='page-scroll' href='#/voluntlist'>Volunteering List</a>
+                </li>
+                <li>
+                    <a className='page-scroll' href='#/companyvoucher'>Company Voucher</a>
+                </li>
+                <li>
+                    <a className='page-scroll' href='#/vouchers'>Voucher</a>
+                </li>
+                { !loggedIn &&
+                <li>
+                    <a className='page-scroll' href='#/register'>Register</a>
+                </li> }
+                { !loggedIn &&
+                <li>
+                    <a className='page-scroll' href='#/login'>Login</a>
+                </li> }
+                { loggedIn &&
+                <li>
+                    <Link className='page-scroll' to='/dashboard'>Welcome, { UserStore.getUserName }</Link>
+                </li> }
+                { loggedIn &&
+                <li>
+                    <a className='page-scroll' onClick={ this.handleLogout } href='#'>Logout</a>
+                </li> }
+            </ul>
+        );
     }
 
     handleLogout = () => {
@@ -101,10 +83,10 @@ export default class LayoutBlank extends React.Component {
                     </div>
                     { /* /.container */ }
                 </nav>
-                <div className='blank-content'>
-                    {/*<div className='container'>*/}
+                <div class='blank-content'>
+                    <div class='container'>
                         { this.props.children }
-                    {/*</div>*/}
+                    </div>
                 </div>
                 <Footer/>
             </div>

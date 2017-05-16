@@ -14,8 +14,21 @@
     background-color: #607D8B;
 }
 
+.bg-main-color {
+    background-color: #023434;
+}
+
+.bg-secondary-color {
+    background-color: #71BF96;
+}
+
 .blank-content {
-    margin-top: 100px;
+    margin-top: 130px;
+}
+@media (min-width: 768px) and (max-width:991px) {
+    .blank-content {
+        margin-top: 250px;
+    }
 }
 
 .rt-tbody > .rt-td {
@@ -24,4 +37,8 @@
 
 #app {
     height: 100%;
+}
+
+.navbar-header {
+    margin-top: 10px;
 }

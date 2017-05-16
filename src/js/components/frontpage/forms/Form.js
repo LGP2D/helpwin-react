@@ -1,5 +1,4 @@
 import React from 'react';
-import '../../../../assets/css/bootstrap.css';
 import PropTypes from 'prop-types';
 
 class Form extends React.Component {
@@ -18,7 +17,6 @@ class Form extends React.Component {
 
 Form.propTypes = {
     children: PropTypes.array.isRequired
-}
-
+};
 
 export default Form;

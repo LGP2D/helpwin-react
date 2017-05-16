@@ -1,29 +1,47 @@
 import React from "react";
 
 import Footer from "./footer";
+import Sidebar from "./sidebar.js";
 import Header from "./header";
-import Sidebar from "./sidebar";
 
 require('./layout.scss');
-require('./helper.js');
 
 export default class Layout extends React.Component {
+
+    componentDidUpdate () {
+        this.loadJS('./helper.js');
+    }
+
     render () {
-        const { location } = this.props;
+        const { main, sidebar } = this.props;
 
         return (
             <div id='wrapper'>
-                <Sidebar />
+                { sidebar }
                 <div class='main'>
                     <Header />
                     <div class='main-content'>
                         <div class='container-fluid'>
-                            { this.props.children }
+                            { main }
                         </div>
                     </div>
                 </div>
             </div>
-
         );
+    }
+
+    loadJS () {
+        const script = document.createElement("script");
+        script.id = 'helper-script';
+        script.src = "assets/js/helper.js";
+        script.async = true;
+        if(document.getElementById("helper-script")) {
+            this.removeElement(document.getElementById("helper-script"));
+        }
+        document.body.appendChild(script);
+    }
+
+    removeElement (element) {
+        element && element.parentNode && element.parentNode.removeChild(element);
     }
 }

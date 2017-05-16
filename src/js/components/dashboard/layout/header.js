@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 export default class Header extends React.Component {
     render () {
@@ -22,48 +23,18 @@ export default class Header extends React.Component {
                         <div id='navbar-menu' class='navbar-collapse collapse' aria-expanded='false'>
                             <form class='navbar-form navbar-left hidden-xs'>
                                 <div class='input-group'>
-                                    <input type='text' value='' class='form-control' placeholder='Search dashboard...' />
+                                    <input type='text' class='form-control' placeholder='Search dashboard...' />
                                     <span class='input-group-btn'>
-                                        <button type='button' class='btn btn-primary'>Go</button>
+                                        <button type='button' class='btn btn-primary disabled'>Go</button>
                                     </span>
                                 </div>
                             </form>
                             <ul class='nav navbar-nav navbar-right'>
-                                <li class='dropdown'>
-                                    <a href='#' class='dropdown-toggle icon-menu' data-toggle='dropdown'>
-                                        <i class='ti ti-announcement' />
-                                        <span class='badge bg-danger'>5</span>
-                                    </a>
-                                    <ul class='dropdown-menu notifications'>
-                                        <li>
-                                            <a href='#' class='notification-item'>
-                                                <span class='dot bg-warning' /> System space is almost full
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href='#' class='notification-item'>
-                                                <span class='dot bg-danger' />You have 9 unfinished tasks
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href='#' class='notification-item'>
-                                                <span class='dot bg-success' />Monthly report is available
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href='#' class='notification-item'>
-                                                <span class='dot bg-warning' />Weekly meeting in 1 hour
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href='#' class='notification-item'>
-                                                <span class='dot bg-success' />Your request has been approved
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href='#' class='more'>See all notifications</a>
-                                        </li>
-                                    </ul>
+                                <li>
+                                    <Link to='/' class='dropdown-toggle icon-menu'>
+                                        <i class='ti ti-announcement' /> <span>Back to Home</span>
+                                        { /* <span class='badge bg-danger'>5</span> */ }
+                                    </Link>
                                 </li>
                                 <li class='dropdown'>
                                     <a href='#' class='dropdown-toggle' data-toggle='dropdown'>
@@ -85,7 +56,7 @@ export default class Header extends React.Component {
                                     </a>
                                     <ul class='dropdown-menu'>
                                         <li>
-                                            <a href='#'><i class='lnr lnr-user' />
+                                            <a href='/dashboard/volunteerProfile'><i class='lnr lnr-user' />
                                                 <span> My Profile</span>
                                             </a>
                                         </li>

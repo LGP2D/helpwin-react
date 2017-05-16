@@ -8,7 +8,7 @@ require('./layout.scss');
 
 export default class Layout extends React.Component {
 
-    componentDidMount () {
+    componentDidUpdate () {
         this.loadJS('./helper.js');
     }
 

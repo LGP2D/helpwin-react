@@ -9,7 +9,7 @@ class ImgOnGrid extends React.Component {
     render () {
         return (
             <div className='col-md-3 col-sm-4 col-xs-6'>
-                <img id='gridImage' className='img-responsive' src={ this.props.imagePath }/>
+                <img className='img-responsive grid-image' src={ this.props.imagePath }/>
             </div>
         );
     }

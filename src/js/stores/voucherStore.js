@@ -10,7 +10,7 @@ class VoucherStore extends EventEmitter {
         this.vouchers = [];
     }
 
-    getAll (){
+    getAll () {
         return this.vouchers;
     }
 

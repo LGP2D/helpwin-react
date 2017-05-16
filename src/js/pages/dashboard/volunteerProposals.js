@@ -27,8 +27,6 @@ export default class VolunteerProposals extends React.Component {
     render () {
         const { location } = this.props;
 
-        console.log(this.state.data);
-
         return (
 
             <div class='panel panel-headline'>

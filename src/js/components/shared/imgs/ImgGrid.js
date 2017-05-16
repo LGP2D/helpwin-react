@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ImgOnGrid from 'app/components/frontpage/imgs/ImgOnGrid';
+import ImgOnGrid from 'app/components/shared/imgs/ImgOnGrid';
 
 class ImgGrid extends React.Component {
     constructor () {

@@ -5,15 +5,16 @@ import config from './config'
 
 class VoucherStore extends EventEmitter {
 
-    constructor() {
+    constructor () {
         super();
         this.vouchers = [];
     }
 
-    getVouchers(){
+    getAll () {
         return this.vouchers;
     }
-    handleActions(action) {
+
+    handleActions (action) {
         switch(action.type) {
             case 'GET_VOUCHERS' : {
                 axios({

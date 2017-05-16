@@ -1,9 +1,9 @@
 import React from 'react';
 import VoucherStore from 'app/stores/voucherStore';
-import * as VoucherActions from 'app/actions/voucherActions';
+import { VoucherActions } from 'app/actions';
 import 'react-widgets/lib/less/react-widgets.less';
-import ImgGrid from 'app/components/frontpage/imgs/ImgGrid';
-import ImgOnGrid from 'app/components/frontpage/imgs/ImgOnGrid';
+import ImgGrid from 'app/components/shared/imgs/ImgGrid';
+import ImgOnGrid from 'app/components/shared/imgs/ImgOnGrid';
 
 require('./voucherList.scss');
 
@@ -12,23 +12,23 @@ export default class VoucherList extends React.Component {
         super();
         this.state = {
             vouchers : []
-        }
+        };
         this.getVouchers = this.getVouchers.bind(this);
     }
 
     getVouchers (){
         this.setState({
-            vouchers : VoucherStore.getVouchers()
-        })
+            vouchers : VoucherStore.getAll()
+        });
         window.location.vouchers = this.state.vouchers;
     }
 
-    componentWillMount() {
-        VoucherActions.getVouchers();
+    componentWillMount () {
+        VoucherActions.fetchData();
         VoucherStore.on('CHANGE_VOUCHERS', this.getVouchers);
     }
 
-    componentWillUnmount() {
+    componentWillUnmount () {
         VoucherStore.removeListener('CHANGE_VOUCHERS', this.getVouchers);
     }
 
@@ -37,7 +37,7 @@ export default class VoucherList extends React.Component {
             <div className='container'>
                 <h1> Vouchers </h1>
                 <ImgGrid>
-                    { this.state.vouchers.map(function(result) {
+                    { this.state.vouchers.map(function (result) {
                         return < ImgOnGrid imagePath={ result.imagePath }/>;
                     }) }
                 </ImgGrid>
@@ -45,8 +45,4 @@ export default class VoucherList extends React.Component {
 
         );
     }
-
-
-
-
 }

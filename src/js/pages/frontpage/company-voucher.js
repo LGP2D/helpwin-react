@@ -3,7 +3,7 @@ import ReactTable from 'react-table'
 import 'react-table/react-table.css';
 import 'assets/scss/volunteeringtable.scss';
 
-import * as CompanyVoucherActions from 'app/actions/companyVoucherActions';
+import { CompanyVoucherActions } from 'app/actions';
 import CompanyVoucherStore from 'app/stores/companyVoucherStore';
 
 export default class CompanyVoucher extends React.Component {

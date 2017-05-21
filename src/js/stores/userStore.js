@@ -12,6 +12,7 @@ class UserStore extends EventEmitter {
         this.jwt = null;
         this.name = null;
         this.userData = null;
+        this.imageUrl = null;
 
         this.autoLogin();
     }
@@ -38,6 +39,7 @@ class UserStore extends EventEmitter {
             }
         }).then(response => {
             this.userData = response.data;
+            this.userData.imageUrl = config.API_STATIC_URL + response.data.imageUrl;
             console.log(response);
             console.log(this.userData);
             this.emit('AUTO_LOGIN');
@@ -84,6 +86,7 @@ class UserStore extends EventEmitter {
                     this.user = jwt_decode(this.jwt);
                     this.name = response.data.name;
                     this.userData = response.data;
+                    this.userData.imageUrl = config.API_STATIC_URL + response.data.imageUrl;
                     console.log(this.userData);
                     this.emit('LOGIN_SUCCESS');
                 }).catch(error => {
@@ -103,17 +106,19 @@ class UserStore extends EventEmitter {
                 break;
             }
             case 'UPLOAD_IMAGE': {
-                let imageFile = action.image;
-                let imageName = action.image.name;
+                let file = action.image;
+                console.log('file -> ', file);
                 axios({
                     method: 'post',
                     url: config.API_URL + 'user/image',
                     headers:{
-                      'Content-Type': 'multipart/form-data'
+                      'Content-Type': 'application/json'
                     },
-                    data: { imageFile, imageName }
+                    data: { file }
                 }).then(response => {
                     console.log(response);
+                    this.imageUrl = response.data;
+                    this.emit('IMAGE_UPLOAD_SUCCESSFUL');
                 }).catch(error => {
                     console.log(error);
                 });
@@ -132,6 +137,8 @@ class UserStore extends EventEmitter {
     get getUserName () { return this.name; }
 
     get getUserData () { return this.userData; }
+
+    get getUserImage () { return this.imageUrl; }
 
     isLoggedIn () { return !!this.user; }
 }

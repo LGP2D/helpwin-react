@@ -9,7 +9,7 @@ export default class VolunteerProfile extends React.Component {
 
         this.state = {
             volunteerData: UserStore.getUserData ? UserStore.getUserData : {},
-            volunteerName: ''
+            volunteerName: UserStore.getUserName ? UserStore.getUserName : ''
         }
     }
 
@@ -50,7 +50,6 @@ export default class VolunteerProfile extends React.Component {
             id: ''
         };
 
-        // TODO: editUser(user)
         UserActions.editUser(user);
     };
 

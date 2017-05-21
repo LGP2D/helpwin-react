@@ -9,13 +9,14 @@ export default class VolunteerProfile extends React.Component {
 
         this.state = {
             volunteerData: UserStore.getUserData ? UserStore.getUserData : {},
-            volunteerName: UserStore.getUserData.name ? UserStore.getUserData.name: ''
+            volunteerName: ''
         }
     }
 
     onLogin = () => {
         this.setState({
-            volunteerData: UserStore.getUserData
+            volunteerData: UserStore.getUserData,
+            volunteerName: UserStore.getUserName
         })
     };
 

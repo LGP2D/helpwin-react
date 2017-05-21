@@ -27,5 +27,12 @@ export default {
             type: 'UPLOAD_IMAGE',
             image: image
         });
+    },
+
+    editUser: (user) => {
+        dispatcher.dispatch({
+            type: 'EDIT_USER',
+            user: user
+        });
     }
 }

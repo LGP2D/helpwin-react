@@ -60,6 +60,7 @@ class UserStore extends EventEmitter {
                     data: action.user
                 }).then(response => {
                     console.log(response);
+                    console.log(action.user);
                     this.emit('REGISTER_SUCCESS');
                 }).catch(error => {
                     console.log(error);
@@ -107,7 +108,6 @@ class UserStore extends EventEmitter {
             }
             case 'UPLOAD_IMAGE': {
                 let file = action.image;
-                console.log('file -> ', file);
                 axios({
                     method: 'post',
                     url: config.API_URL + 'user/image',
@@ -119,6 +119,23 @@ class UserStore extends EventEmitter {
                     console.log(response);
                     this.imageUrl = response.data;
                     this.emit('IMAGE_UPLOAD_SUCCESSFUL');
+                }).catch(error => {
+                    console.log(error);
+                });
+                break;
+            }
+            case 'EDIT_USER': {
+                axios({
+                    method: 'put',
+                    url: config.API_URL + 'user' + '/editProfile',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    data: action.user
+                }).then(response => {
+                    console.log(response);
+                    this.emit('EDIT_USER');
                 }).catch(error => {
                     console.log(error);
                 });

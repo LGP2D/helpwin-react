@@ -948,10 +948,10 @@ fieldset[disabled] .btn {
     background-color: #023434;
     color: #71BF96;
     font-weight: bold !important;
-    padding: 8px 28px;
     border-radius: 2px;
 }
 
+<<<<<<< HEAD
 .profile-info {
     text-align: right;
     font-weight: bold;
@@ -962,6 +962,8 @@ fieldset[disabled] .btn {
     padding: 0px 88px 10px;
 }
 
+=======
+>>>>>>> 3bc30f39a2a4cf85635266f27f4b3ea86ebf2c56
 .profile-table {
     border-color: transparent;
 }

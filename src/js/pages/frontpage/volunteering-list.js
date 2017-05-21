@@ -3,7 +3,7 @@ import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import 'assets/scss/volunteeringtable.scss';
 
-import * as VolunteeringActions from 'app/actions/volunteeringListActions';
+import { VolunteeringActions } from 'app/actions';
 import VolunteeringStore from 'app/stores/volunteeringListStore';
 
 export default class VolunteeringList extends React.Component {

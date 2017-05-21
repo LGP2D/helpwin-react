@@ -19,20 +19,31 @@ import Sidebar from 'app/components/dashboard/layout/sidebar';
 
 import CollaboratorHome from 'app/pages/dashboard/collaborator';
 import VolunteerHome from 'app/pages/dashboard/volunteer';
-import VolunteerProfile from 'app/pages/dashboard/volunteerProfile';
 import InstitutionHome from 'app/pages/dashboard/institution';
 import CompanyHome from 'app/pages/dashboard/company';
 import ListInstitution from 'app/pages/dashboard/list-institution';
+import ListVouchers from 'app/pages/dashboard/list-vouchers';
+import VolunteerProfile from 'app/pages/dashboard/volunteerProfile';
+import VolunteerProposals from 'app/pages/dashboard/volunteerProposals';
 
 const app = document.getElementById('app');
 
-export default function requireAuth (nextState, replace) {
-    let loggedIn = UserStore.isLoggedIn();
-    if (!loggedIn) {
-        replace({
-            pathname: '/login',
-            state: { nextPathname: nextState.location.pathname }
-        });
+export default function requireAuth (role) {
+    return(nextState, replace) => {
+        let loggedIn = UserStore.isLoggedIn();
+        let user = UserStore.getUser;
+        if (!loggedIn) {
+            replace({
+                pathname: '/login',
+                state: { nextPathname: nextState.location.pathname }
+            });
+        }
+        else if(1 <= role) { // should be user.role instead of 1
+            replace({
+                pathname: '/login',
+                state: { nextPathname: nextState.location.pathname } // return UNAUTHORIZED
+            });
+        }
     }
 };
 /**
@@ -50,12 +61,14 @@ ReactDOM.render(
         <Route path='/dashboard' component={ DashLayout } >
             /* Home pages */
             <IndexRoute components={ { main: VolunteerHome, sidebar: Sidebar } } />
-            <Route path='collaborator' components={ { main: CollaboratorHome, sidebar: Sidebar } } />
-            <Route path='volunteerProfile' components={ { main: VolunteerProfile, sidebar: Sidebar } } />
+            <Route path='collaborator' components={ { main: CollaboratorHome, sidebar: Sidebar } } onEnter={ requireAuth(4) } />
             <Route path='institution' components={ { main: InstitutionHome, sidebar: Sidebar } } />
             <Route path='company' components={ { main: CompanyHome, sidebar: Sidebar } } />
             /* Content pages */
             <Route path='list-institutions' components={ { main: ListInstitution, sidebar: Sidebar } } />
+            <Route path='volunteerProfile' components={ { main: VolunteerProfile, sidebar: Sidebar } } />
+            <Route path='proposals-volunteer' components={ { main: VolunteerProposals, sidebar: Sidebar } } />
+            <Route path='vouchers' components={ { main: ListVouchers, sidebar: Sidebar } } />
         </Route>
 
         <Route path='/register' component={ LayoutBlank }>

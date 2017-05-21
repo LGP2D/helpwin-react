@@ -5,3 +5,4 @@ export function fetchData () {
         type: 'FETCH_DATA'
     })
 }
+

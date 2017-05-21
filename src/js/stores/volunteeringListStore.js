@@ -59,14 +59,14 @@ class VolunteeringListStore extends EventEmitter {
             case 'FETCH_DATA': {
                 axios({
                     method: 'get',
-                    url: config.API_URL + 'proposals',
+                    url: config.API_URL + 'actions',
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json'
                     }
                 }).then(response => {
-                    //this.data = response.data;
-                    //this.emit('update');
+                    this.data = response.data;
+                    this.emit('update');
                 }).catch(error => {
                     console.log(error);
                 });

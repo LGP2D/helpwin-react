@@ -40,12 +40,11 @@ class UserStore extends EventEmitter {
         }).then(response => {
             this.userData = response.data;
             this.userData.imageUrl = config.API_STATIC_URL + response.data.imageUrl;
-            console.log(response);
-            console.log(this.userData);
             this.emit('AUTO_LOGIN');
         }).catch(error => {
             console.log(error);
-        });    }
+        });
+    }
 
     handleActions (action) {
         switch (action.type) {
@@ -156,6 +155,8 @@ class UserStore extends EventEmitter {
     get getUserData () { return this.userData; }
 
     get getUserImage () { return this.imageUrl; }
+
+    get getUserRole () {return this.userData.role.id; }
 
     isLoggedIn () { return !!this.user; }
 }

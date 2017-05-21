@@ -102,6 +102,23 @@ class UserStore extends EventEmitter {
                 this.emit('LOGOUT_USER');
                 break;
             }
+            case 'UPLOAD_IMAGE': {
+                let imageFile = action.image;
+                let imageName = action.image.name;
+                axios({
+                    method: 'post',
+                    url: config.API_URL + 'user/image',
+                    headers:{
+                      'Content-Type': 'multipart/form-data'
+                    },
+                    data: { imageFile, imageName }
+                }).then(response => {
+                    console.log(response);
+                }).catch(error => {
+                    console.log(error);
+                });
+                break;
+            }
             default:
                 console.log('Action not found in userStore');
                 break;

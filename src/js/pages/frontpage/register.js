@@ -106,7 +106,7 @@ export default class Register extends React.Component {
                         <LabelForm htmlFor='image' title='Image' className='control-label col-sm-2 col-sm-offset-1'/>
                         <div className='col-sm-6'>
                             <input id='image' className='form-control file' name='image' type='file'
-                                   onChange={ this.handleChange } value={ this.state.image }/>
+                                   onChange={ (e) => this.handleChangeImage(e) } />
                         </div>
                     </div>
                     <div className='form-group'>
@@ -125,6 +125,22 @@ export default class Register extends React.Component {
             </div>
         );
     }
+
+    handleChangeImage = (event) => {
+        event.preventDefault();
+
+        let reader = new FileReader();
+        let image = event.target.files[0];
+
+        reader.onloadend = () => {
+            console.log('Set image');
+            this.setState({
+               image: image
+            });
+        };
+
+        reader.readAsDataURL(image);
+    };
 
     handleChangeDropdown = (value) => {
         this.setState({
@@ -157,6 +173,10 @@ export default class Register extends React.Component {
             id: ''
         };
 
-        UserActions.registerUser(user);
+        console.log(user.imageUrl);
+
+        UserActions.saveImage(this.state.image);
+
+        //UserActions.registerUser(user);
     };
 }

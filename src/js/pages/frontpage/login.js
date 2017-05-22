@@ -30,7 +30,6 @@ export default class Login extends React.Component {
 
     onLoginSuccessful = () => {
         this.context.router.push('/');
-        console.log('User role -> ', UserStore.getUserRole);
         console.log('Login Success');
     };
 

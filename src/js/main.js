@@ -13,6 +13,8 @@ import VolunteeringList from 'app/pages/frontpage/volunteering-list';
 import GetVouchers from 'app/pages/frontpage/vouchersList';
 import Login from 'app/pages/frontpage/login';
 import CompanyVoucher from 'app/pages/frontpage/company-voucher';
+import InstProp from 'app/pages/dashboard/listInstitutionProposals';
+
 
 import DashLayout from 'app/components/dashboard/layout/layout';
 import Sidebar from 'app/components/dashboard/layout/sidebar';
@@ -69,6 +71,8 @@ ReactDOM.render(
             <Route path='volunteerProfile' components={ { main: VolunteerProfile, sidebar: Sidebar } } />
             <Route path='proposals-volunteer' components={ { main: VolunteerProposals, sidebar: Sidebar } } />
             <Route path='vouchers' components={ { main: ListVouchers, sidebar: Sidebar } } />
+            <Route path='institutionProps' components={ { main: InstProp, sidebar: Sidebar } } />
+
         </Route>
 
         <Route path='/register' component={ LayoutBlank }>

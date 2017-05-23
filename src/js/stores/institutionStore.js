@@ -27,7 +27,7 @@ class InstitutionStore extends EventEmitter {
                     }
                 }).then(response => {
                     this.data = response.data;
-                    console.log('DATA -> ' + this.data);
+                    console.log('data -> ' + this.data);
                     this.emit('update-get-proposals-institution');
                 }).catch(error => {
                     console.log(error);

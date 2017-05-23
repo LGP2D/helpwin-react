@@ -84,13 +84,13 @@ export default class ListInstitutionProposals extends React.Component {
 
     imageFormatter (cell, row) {
         return (
-            <img height='50' src={ cell.user.imageUrl } />
+            <img height='50' src={ row.user.imageUrl } />
         );
     }
 
     nameFormatter (cell, row) {
         return (
-            cell.name
+            row.name
         );
     }
 

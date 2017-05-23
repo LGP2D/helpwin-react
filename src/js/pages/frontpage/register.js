@@ -162,10 +162,7 @@ export default class Register extends React.Component {
 
         if (this.state.data_uri === undefined || this.state.data_uri === null) {
             this.onUploadSuccess();
-            console.log('sem imagem');
         } else {
-            console.log('nao devo aparecer');
-
             let file = {
                 data_uri: this.state.data_uri,
                 filename: this.state.filename,

@@ -3,8 +3,10 @@ import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import 'assets/scss/volunteeringtable.scss';
 
-import { VolunteeringActions } from 'app/actions';
+import VolunteeringActions from 'app/actions/volunteeringListActions';
 import VolunteeringStore from 'app/stores/volunteeringListStore';
+
+import config from 'app/stores/config';
 
 export default class VolunteeringList extends React.Component {
     constructor () {
@@ -19,7 +21,7 @@ export default class VolunteeringList extends React.Component {
                 maxWidth: 110,
                 render: row => (
                     <div className='image-col text-center'>
-                        <img src={ row.row.institution.imageUrl }/>
+                        <img src={ row.row.user.imageUrl ? config.API_STATIC_URL + row.row.user.imageUrl : '' }/>
                     </div>
                 )
             },
@@ -28,7 +30,7 @@ export default class VolunteeringList extends React.Component {
                 render: row => (
                     <div>
                         <i className='fa fa-building' aria-hidden='true'/><span
-                        className='volunteering-table-text-margin'>{ row.row.institution.name }</span>
+                        className='volunteering-table-text-margin'>{ row.row.user.name }</span>
                         <br />
                         <i className='fa fa-book' aria-hidden='true'/><span
                         className='volunteering-table-text-margin'>{ row.row.type }</span>

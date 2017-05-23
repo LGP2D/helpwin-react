@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-import UserStore from 'app/stores/userStore';
+import { UserStore } from 'app/stores';
 
 class AuthorizedComponent extends React.Component {
 

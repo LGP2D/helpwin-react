@@ -5,5 +5,11 @@ export default {
         dispatcher.dispatch({
             type: 'GET_VOUCHERS'
         });
+    },
+
+    fetchCompany: () => {
+        dispatcher.dispatch({
+            type: 'FETCH_COMPANY_VOUCHER'
+        });
     }
 }

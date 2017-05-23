@@ -2,7 +2,7 @@ import React from 'react';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
 import { VoucherActions } from 'app/actions';
-import VoucherStore from 'app/stores/voucherStore';
+import { VoucherStore } from 'app/stores';
 import ImgGrid from 'app/components/shared/imgs/ImgGrid';
 import ImgOnGrid from 'app/components/shared/imgs/ImgOnGrid';
 
@@ -31,7 +31,7 @@ export default class ListVouchers extends React.Component {
     }
 
     update = (key, store) => {
-        this.state[key] = store.getAll();
+        this.state[key] = store.getVouchers();
         this.setState(this.state);
     };
 

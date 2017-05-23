@@ -5,7 +5,7 @@ import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import Layout from 'app/components/frontpage/layout/layout-onepage';
 import LayoutBlank from 'app/components/frontpage/layout/layout-blank';
 
-import UserStore from 'app/stores/userStore';
+import { UserStore } from 'app/stores';
 
 import FrontHome from 'app/pages/frontpage/home';
 import Register from 'app/pages/frontpage/register';

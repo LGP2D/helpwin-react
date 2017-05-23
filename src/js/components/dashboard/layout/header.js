@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 
 import { UserActions } from 'app/actions';
-import UserStore from 'app/stores/userStore';
+import { UserStore } from 'app/stores';
 
 export default class Header extends React.Component {
     render () {

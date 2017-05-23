@@ -3,14 +3,15 @@ import dispatcher from 'app/dispatcher/dispatcher';
 import axios from 'axios';
 import config from './config';
 
-class VolunteeringListStore extends EventEmitter {
-    constructor (){
+class VolunteeringStore extends EventEmitter {
+
+    constructor () {
         super();
 
         this.data = [];
     }
 
-    getAll (){
+    getActions () {
         return this.data;
     }
 
@@ -37,7 +38,7 @@ class VolunteeringListStore extends EventEmitter {
     }
 }
 
-const volunteeringListStore = new VolunteeringListStore;
-dispatcher.register(volunteeringListStore.handleActions.bind(volunteeringListStore));
+const volunteeringStore = new VolunteeringStore;
+dispatcher.register(volunteeringStore.handleActions.bind(volunteeringStore));
 
-export default volunteeringListStore;
+export default volunteeringStore;

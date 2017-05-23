@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 import Footer from './footer';
 import Header from './header';
 
-import UserStore from 'app/stores/userStore';
+import { UserStore } from 'app/stores';
 import { UserActions } from 'app/actions';
 
 require('./layout-onepage.scss');

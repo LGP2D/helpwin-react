@@ -1,8 +1,7 @@
 import React from 'react';
-import UserStore from  'app/stores/userStore';
+import { UserStore, config } from  'app/stores';
 import LabelForm from 'app/components/frontpage/forms/FormLabel';
 import { UserActions } from 'app/actions';
-import config from 'app/stores/config';
 
 export default class VolunteerProfile extends React.Component {
     constructor () {
@@ -144,7 +143,7 @@ export default class VolunteerProfile extends React.Component {
                         </div>
                         <div className='col-sm-12 col-md-4 col-lg-3 hidden-xs'>
                             <div className='profile-image'>
-                                <img alt='User Pic' src={ config.API_STATIC_URL + this.state.volunteerData.imageUrl }
+                                <img alt='User Pic' src={ this.state.volunteerData.imageUrl }
                                      className='img-circle img-responsive'/>
                             </div>
                         </div>

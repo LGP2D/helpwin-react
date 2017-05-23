@@ -1,6 +1,6 @@
 import React from 'react';
 import { UserActions } from 'app/actions';
-import UserStore from 'app/stores/userStore';
+import { UserStore } from 'app/stores';
 import LabelForm from 'app/components/frontpage/forms/FormLabel';
 
 export default class Login extends React.Component {

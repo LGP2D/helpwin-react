@@ -2,8 +2,7 @@ import React from 'react';
 
 import AuthorizedComponent from 'app/components/dashboard/authorization';
 import { VolunteeringActions, VoucherActions } from 'app/actions';
-import VolunteeringStore from 'app/stores/volunteeringListStore';
-import VoucherStore from 'app/stores/voucherStore';
+import { VolunteeringStore, VoucherStore } from 'app/stores';
 
 export default class Volunteer extends AuthorizedComponent {
 
@@ -11,8 +10,8 @@ export default class Volunteer extends AuthorizedComponent {
         super();
 
         this.authorize = [3];
-        this.onUpdate = this.update.bind(null, 'proposals', VolunteeringStore);
-        this.onUpdateVouchers = this.update.bind(null, 'vouchers', VoucherStore);
+        this.onUpdate = this.updateVolun.bind(this, 'proposals', VolunteeringStore);
+        this.onUpdateVouchers = this.updateVouchers.bind(this, 'vouchers', VoucherStore);
 
         this.state = {
             proposals: [],
@@ -35,8 +34,13 @@ export default class Volunteer extends AuthorizedComponent {
         VoucherStore.removeListener('CHANGE_VOUCHERS', this.onUpdateVouchers);
     }
 
-    update = (key, store) => {
-        this.state[key] = store.getAll();
+    updateVouchers = (key, store) => {
+        this.state[key] = store.getVouchers();
+        this.setState(this.state);
+    };
+
+    updateVolun = (key, store) => {
+        this.state[key] = store.getActions();
         this.setState(this.state);
     };
 

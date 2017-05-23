@@ -5,7 +5,7 @@ import Header from './header';
 
 import './layout-onepage.scss';
 
-import UserStore from 'app/stores/userStore';
+import { UserStore } from 'app/stores';
 import { UserActions } from 'app/actions';
 
 export default class Layout extends React.Component {

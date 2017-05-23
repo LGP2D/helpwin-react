@@ -2,9 +2,10 @@ import React from 'react';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
 import { VolunteeringActions } from 'app/actions';
-import VolunteeringStore from 'app/stores/volunteeringListStore';
+import { VolunteeringStore } from 'app/stores';
 
 import 'react-bootstrap-table/dist/react-bootstrap-table.min.css';
+import config from 'app/stores/config';
 
 export default class VolunteerProposals extends React.Component {
     constructor () {
@@ -69,18 +70,13 @@ export default class VolunteerProposals extends React.Component {
 
     updateTable = () => {
         this.setState({
-            data: VolunteeringStore.getAll()
+            data: VolunteeringStore.getActions()
         });
-        console.log(this.state.data);
     };
-
-    handleClick () {
-
-    }
 
     imageFormatter (cell, row) {
         return (
-            <img height='50' src={ cell.imageUrl } />
+            <img height='50' src={ config.API_STATIC_URL + cell.imageUrl } />
         );
     }
 
@@ -109,11 +105,15 @@ export default class VolunteerProposals extends React.Component {
                 <i className='fa fa-database coin'/><span
                 className='volunteering-table-text-margin'>{ row.credits }</span>
                 <br />
-                <button className='btn btn-default' onClick={ this.handleClick } type='button'
+                <button className='btn btn-default' onClick={ helpButton } type='button'
                         name={ row.id }>
                     Help
                 </button>
             </div>
         );
+
+        function helpButton () {
+            console.log("WHY U CLICK ME");
+        }
     }
 }

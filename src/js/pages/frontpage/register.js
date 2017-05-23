@@ -1,6 +1,6 @@
 import React from 'react';
 import LabelForm from 'app/components/frontpage/forms/FormLabel';
-import UserStore from 'app/stores/userStore';
+import { UserStore } from 'app/stores';
 import { UserActions } from 'app/actions';
 import Combobox from 'react-widgets/lib/Combobox';
 import 'react-widgets/lib/less/react-widgets.less';

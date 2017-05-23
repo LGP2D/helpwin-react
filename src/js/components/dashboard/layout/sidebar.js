@@ -6,7 +6,7 @@ import VolunteerRoutes from 'app/stores/sidebar-routes/sidebar-volun'
 import InstitutionRoutes from 'app/stores/sidebar-routes/sidebar-insti'
 import CompanyRoutes from 'app/stores/sidebar-routes/sidebar-compa'
 
-import UserStore from 'app/stores/userStore';
+import { UserStore } from 'app/stores';
 
 export default class Sidebar extends React.Component {
 

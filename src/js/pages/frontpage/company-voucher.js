@@ -3,8 +3,8 @@ import ReactTable from 'react-table'
 import 'react-table/react-table.css';
 import 'assets/scss/volunteeringtable.scss';
 
-import { CompanyVoucherActions } from 'app/actions';
-import CompanyVoucherStore from 'app/stores/companyVoucherStore';
+import { VoucherActions } from 'app/actions';
+import { VoucherStore } from 'app/stores';
 
 export default class CompanyVoucher extends React.Component {
     constructor () {
@@ -58,8 +58,9 @@ export default class CompanyVoucher extends React.Component {
 
     updateTable = () => {
         this.setState({
-            data: CompanyVoucherStore.getAll()
-        })
+            data: VoucherStore.getCompanyVouchers()
+        });
+        console.log(VoucherStore.getCompanyVouchers());
     };
 
     handleClick = (event) => {
@@ -67,12 +68,12 @@ export default class CompanyVoucher extends React.Component {
     };
 
     componentWillMount (){
-        CompanyVoucherStore.on('update',this.updateTable);
-        CompanyVoucherActions.fetchData();
+        VoucherStore.on('UPDATE_COMPANY_VOUCHER', this.updateTable);
+        VoucherActions.fetchCompany();
     }
 
     componentWillUnmount () {
-        CompanyVoucherStore.removeListener('update',this.updateTable);
+        VoucherStore.removeListener('UPDATE_COMPANY_VOUCHER', this.updateTable);
     }
 
     render (){

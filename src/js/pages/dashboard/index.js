@@ -1,6 +1,6 @@
 import React from 'react';
 
-import UserStore from 'app/stores/userStore';
+import { UserStore } from 'app/stores';
 
 import CollaboratorHome from 'app/pages/dashboard/collaborator';
 import VolunteerHome from 'app/pages/dashboard/volunteer';
@@ -14,7 +14,9 @@ export default class DashboardIndex extends React.Component {
     }
 
     render () {
-        switch (UserStore.getUserRole) {
+        let role = UserStore.getUserRole;
+
+        switch (role) {
             case 2:
                 return <InstitutionHome />;
             case 4:

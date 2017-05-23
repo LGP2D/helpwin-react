@@ -9,13 +9,16 @@ require('./layout.scss');
 export default class Layout extends React.Component {
 
     componentWillMount () {
-        console.log("mounting js");
+        this.setState({
+            mounted: true
+        });
         this.loadJS();
     }
 
     componentDidUpdate () {
-        console.log("mounting jss");
-        this.loadJS();
+        if(!this.state.mounted) {
+            this.loadJS();
+        }
     }
 
     render () {
@@ -49,5 +52,11 @@ export default class Layout extends React.Component {
 
     removeElement (element) {
         element && element.parentNode && element.parentNode.removeChild(element);
+    }
+
+    componentWillUnmount () {
+        this.setState({
+            mounted: false
+        });
     }
 }

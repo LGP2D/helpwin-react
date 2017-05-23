@@ -5,7 +5,7 @@ import 'assets/scss/volunteeringtable.scss';
 import config from 'app/stores/config';
 
 import { VolunteeringActions } from 'app/actions';
-import VolunteeringStore from 'app/stores/volunteeringListStore';
+import { VolunteeringStore } from 'app/stores';
 
 export default class VolunteeringList extends React.Component {
     constructor () {
@@ -72,7 +72,7 @@ export default class VolunteeringList extends React.Component {
 
     updateTable = () => {
         this.setState({
-            data: VolunteeringStore.getAll()
+            data: VolunteeringStore.getActions()
         });
     };
 

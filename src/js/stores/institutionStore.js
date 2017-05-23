@@ -22,9 +22,9 @@ class InstitutionStore extends EventEmitter {
                     url: config.API_URL + 'actions/institutionActions',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    data: action.institution
+                        'Accept': 'application/json',
+                        'Authorization': action.token
+                    }
                 }).then(response => {
                     this.data = response.data;
                     this.emit('update-get-proposals-institution');

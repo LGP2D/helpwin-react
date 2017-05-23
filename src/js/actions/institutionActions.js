@@ -1,8 +1,8 @@
 import dispatcher from 'app/dispatcher/dispatcher';
 
-export function getProposals (institution){
+export function getProposals (token){
     dispatcher.dispatch({
         type: 'GET_PROPOSALS',
-        institution: institution
+        token: token
     })
 }

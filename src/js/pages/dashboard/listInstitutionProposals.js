@@ -14,14 +14,15 @@ export default class ListInstitutionProposals extends React.Component {
 
         this.state = {
             data: [],
-            institution: UserStore.getUser()
+            institution: UserStore.getUser
         };
     }
 
     componentWillMount () {
         InstitutionStore.on('update-get-proposals-institution', this.updateTable);
-        console.log(this.state.institution);
-        InstitutionActions.getProposals(this.state.institution);
+        console.log('USER: ');
+        console.log();
+        InstitutionActions.getProposals(UserStore.getJwt);
     }
 
     componentWillUnmount () {

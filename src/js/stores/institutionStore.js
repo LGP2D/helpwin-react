@@ -18,19 +18,20 @@ class InstitutionStore extends EventEmitter {
         switch (action.type) {
             case 'GET_PROPOSALS': {
                 axios({
-                    method: 'get',
-                    url: config.API_URL + 'actions',
+                    method: 'post',
+                    url: config.API_URL + 'actions/institutionActions',
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json'
-                    }
+                    },
+                    data: action.institution
                 }).then(response => {
                     this.data = response.data;
-                    this.emit('update');
+                    this.emit('update-get-proposals-institution');
                 }).catch(error => {
                     console.log(error);
                 });
-                this.emit('update');
+                this.emit('update-get-proposals-institution');
             }
         }
     }

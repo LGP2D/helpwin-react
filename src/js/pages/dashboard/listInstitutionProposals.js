@@ -3,6 +3,8 @@ import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
 import * as InstitutionActions from 'app/actions/institutionActions';
 import InstitutionStore from 'app/stores/institutionStore';
+import UserStore from 'app/stores/userStore';
+
 
 import 'react-bootstrap-table/dist/react-bootstrap-table.min.css';
 
@@ -11,17 +13,19 @@ export default class ListInstitutionProposals extends React.Component {
         super();
 
         this.state = {
-            data: []
+            data: [],
+            institution: UserStore.getUser()
         };
     }
 
     componentWillMount () {
-        InstitutionStore.on('update', this.updateTable);
-        InstitutionActions.getProposals();
+        InstitutionStore.on('update-get-proposals-institution', this.updateTable);
+        console.log(this.state.institution);
+        InstitutionActions.getProposals(this.state.institution);
     }
 
     componentWillUnmount () {
-        InstitutionStore.removeListener('update', this.updateTable);
+        InstitutionStore.removeListener('update-get-proposals-institution', this.updateTable);
     }
 
     render () {

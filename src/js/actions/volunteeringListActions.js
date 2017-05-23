@@ -1,8 +1,9 @@
 import dispatcher from 'app/dispatcher/dispatcher';
 
-export function fetchData () {
-    dispatcher.dispatch({
-        type: 'FETCH_DATA'
-    })
+export default {
+    fetchData: () => {
+        dispatcher.dispatch({
+            type: 'FETCH_DATA'
+        });
+    },
 }
-

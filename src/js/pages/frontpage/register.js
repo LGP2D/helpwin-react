@@ -160,16 +160,20 @@ export default class Register extends React.Component {
     handleSubmit = (event) => {
         event.preventDefault();
 
-        let file = {
-            data_uri: this.state.data_uri,
-            filename: this.state.filename,
-            filetype: this.state.filetype
-        };
-        UserActions.saveImage(file);
+        if (this.state.data_uri === undefined || this.state.data_uri === null) {
+            this.onUploadSuccess();
+        } else {
+            let file = {
+                data_uri: this.state.data_uri,
+                filename: this.state.filename,
+                filetype: this.state.filetype
+            };
+            UserActions.saveImage(file);
+        }
     };
 
     onUploadSuccess = () => {
-        let imageUrl = UserStore.getUserImage;
+        let imageUrl = UserStore.getUserImage !== null ? UserStore.getUserImage : null;
 
         let role = this.state.role;
         role.description = role.description.toUpperCase();

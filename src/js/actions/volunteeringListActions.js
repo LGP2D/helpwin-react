@@ -5,5 +5,5 @@ export default {
         dispatcher.dispatch({
             type: 'FETCH_DATA'
         });
-    },
+    }
 }

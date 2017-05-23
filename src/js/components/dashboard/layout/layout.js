@@ -44,7 +44,7 @@ export default class Layout extends React.Component {
         if(document.getElementById("helper-script")) {
             this.removeElement(document.getElementById("helper-script"));
         }
-        document.body.appendChild(script);
+        document.head.appendChild(script);
     }
 
     removeElement (element) {

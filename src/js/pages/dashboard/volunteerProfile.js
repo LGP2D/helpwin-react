@@ -1,7 +1,7 @@
 import React from 'react';
 import UserStore from  'app/stores/userStore';
 import LabelForm from 'app/components/frontpage/forms/FormLabel';
-import UserActions from 'app/actions/userActions'
+import { UserActions } from 'app/actions';
 import config from 'app/stores/config';
 
 export default class VolunteerProfile extends React.Component {

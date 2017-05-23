@@ -4,7 +4,7 @@ import Footer from './footer';
 import Header from './header';
 
 import UserStore from 'app/stores/userStore';
-import UserActions from 'app/actions/userActions';
+import { UserActions } from 'app/actions';
 
 require('./layout-onepage.scss');
 

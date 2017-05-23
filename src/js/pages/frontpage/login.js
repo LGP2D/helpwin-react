@@ -1,5 +1,5 @@
 import React from 'react';
-import UserActions from 'app/actions/userActions';
+import { UserActions } from 'app/actions';
 import UserStore from 'app/stores/userStore';
 import LabelForm from 'app/components/frontpage/forms/FormLabel';
 

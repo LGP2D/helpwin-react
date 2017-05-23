@@ -1,7 +1,7 @@
 import React from 'react';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
-import * as VolunteeringActions from 'app/actions/volunteeringListActions';
+import { VolunteeringActions } from 'app/actions';
 import VolunteeringStore from 'app/stores/volunteeringListStore';
 
 import 'react-bootstrap-table/dist/react-bootstrap-table.min.css';

@@ -38,10 +38,12 @@ export default class Register extends React.Component {
 
     componentWillMount () {
         UserStore.on('REGISTER_SUCCESS', this.onRegisterSuccess);
+        UserStore.on('IMAGE_UPLOAD_SUCCESSFUL', this.onUploadSuccess);
     }
 
     componentWillUnmount () {
         UserStore.removeListener('REGISTER_SUCCESS', this.onRegisterSuccess);
+        UserStore.removeListener('IMAGE_UPLOAD_SUCCESSFUL', this.onUploadSuccess);
     }
 
     render () {
@@ -106,7 +108,7 @@ export default class Register extends React.Component {
                         <LabelForm htmlFor='image' title='Image' className='control-label col-sm-2 col-sm-offset-1'/>
                         <div className='col-sm-6'>
                             <input id='image' className='form-control file' name='image' type='file'
-                                   onChange={ this.handleChange } value={ this.state.image }/>
+                                   onChange={ (e) => this.handleChangeImage(e) } />
                         </div>
                     </div>
                     <div className='form-group'>
@@ -126,6 +128,23 @@ export default class Register extends React.Component {
         );
     }
 
+    handleChangeImage = (event) => {
+        event.preventDefault();
+
+        let reader = new FileReader();
+        let image = event.target.files[0];
+
+        reader.onloadend = (upload) => {
+            this.setState({
+                data_uri: upload.target.result,
+                filename: image.name,
+                filetype: image.type
+            });
+        };
+
+        reader.readAsDataURL(image);
+    };
+
     handleChangeDropdown = (value) => {
         this.setState({
             role: value
@@ -140,7 +159,17 @@ export default class Register extends React.Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        console.log('handled submit');
+
+        let file = {
+            data_uri: this.state.data_uri,
+            filename: this.state.filename,
+            filetype: this.state.filetype
+        };
+        UserActions.saveImage(file);
+    };
+
+    onUploadSuccess = () => {
+        let imageUrl = UserStore.getUserImage;
 
         let role = this.state.role;
         role.description = role.description.toUpperCase();
@@ -151,12 +180,12 @@ export default class Register extends React.Component {
             birthDate: this.state.birthdate,
             password: this.state.password,
             profession: this.state.profession,
-            imageUrl: this.state.image,
+            imageUrl: imageUrl,
             role: role,
             uniqueId: '',
             id: ''
         };
 
         UserActions.registerUser(user);
-    };
+    }
 }

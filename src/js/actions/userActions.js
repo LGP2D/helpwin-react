@@ -18,7 +18,14 @@ export default {
 
     logout: () => {
         dispatcher.dispatch({
-           type: 'LOGOUT_USER'
+            type: 'LOGOUT_USER'
+        });
+    },
+
+    saveImage: (image) => {
+        dispatcher.dispatch({
+            type: 'UPLOAD_IMAGE',
+            image: image
         });
     },
 

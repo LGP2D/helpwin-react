@@ -12,6 +12,7 @@ class UserStore extends EventEmitter {
         this.jwt = null;
         this.name = null;
         this.userData = null;
+        this.imageUrl = null;
 
         this.autoLogin();
     }
@@ -38,12 +39,12 @@ class UserStore extends EventEmitter {
             }
         }).then(response => {
             this.userData = response.data;
-            console.log(response);
-            console.log(this.userData);
+            this.userData.imageUrl = config.API_STATIC_URL + response.data.imageUrl;
             this.emit('AUTO_LOGIN');
         }).catch(error => {
             console.log(error);
-        });    }
+        });
+    }
 
     handleActions (action) {
         switch (action.type) {
@@ -85,6 +86,7 @@ class UserStore extends EventEmitter {
                     this.user = jwt_decode(this.jwt);
                     this.name = response.data.name;
                     this.userData = response.data;
+                    this.userData.imageUrl = config.API_STATIC_URL + response.data.imageUrl;
                     console.log(this.userData);
                     this.emit('LOGIN_SUCCESS');
                 }).catch(error => {
@@ -101,6 +103,24 @@ class UserStore extends EventEmitter {
                 localStorage.setItem('jwt', '');
                 localStorage.setItem('name', '');
                 this.emit('LOGOUT_USER');
+                break;
+            }
+            case 'UPLOAD_IMAGE': {
+                let file = action.image;
+                axios({
+                    method: 'post',
+                    url: config.API_URL + 'user/image',
+                    headers:{
+                      'Content-Type': 'application/json'
+                    },
+                    data: { file }
+                }).then(response => {
+                    console.log(response);
+                    this.imageUrl = response.data;
+                    this.emit('IMAGE_UPLOAD_SUCCESSFUL');
+                }).catch(error => {
+                    console.log(error);
+                });
                 break;
             }
             case 'EDIT_USER': {
@@ -133,6 +153,10 @@ class UserStore extends EventEmitter {
     get getUserName () { return this.name; }
 
     get getUserData () { return this.userData; }
+
+    get getUserImage () { return this.imageUrl; }
+
+    get getUserRole () {return this.userData.role.id; }
 
     isLoggedIn () { return !!this.user; }
 }

@@ -47,10 +47,10 @@ export default class VolunteeringList extends React.Component {
                     <div className='text-center'>
                         <p> { row.row.location } </p>
                         <i className='fa fa-calendar'/><span
-                        className='volunteering-table-text-margin'>Starting: { row.row.dateStart }</span>
+                        className='volunteering-table-text-margin'>Starting: { row.row.startDate }</span>
                         <br />
                         <i className='fa fa-calendar'/><span
-                        className='volunteering-table-text-margin'>Ending: { row.row.dateEnd }</span>
+                        className='volunteering-table-text-margin'>Ending: { row.row.endDate }</span>
                     </div>
                 )
             },

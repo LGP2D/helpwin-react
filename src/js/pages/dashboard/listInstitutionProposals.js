@@ -21,7 +21,7 @@ export default class ListInstitutionProposals extends React.Component {
     componentWillMount () {
         InstitutionStore.on('update-get-proposals-institution', this.updateTable);
         console.log('USER: ');
-        console.log();
+        console.log(UserStore.getJwt);
         InstitutionActions.getProposals(UserStore.getJwt);
     }
 
@@ -84,7 +84,7 @@ export default class ListInstitutionProposals extends React.Component {
 
     imageFormatter (cell, row) {
         return (
-            <img height='50' src={ cell.imageUrl } />
+            <img height='50' src={ cell.user.imageUrl } />
         );
     }
 

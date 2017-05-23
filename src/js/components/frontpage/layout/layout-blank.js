@@ -28,21 +28,21 @@ export default class LayoutBlank extends React.Component {
                     <a className='page-scroll' href='#'>About</a>
                 </li>
                 <li>
-                    <a className='page-scroll' href='#/voluntlist'>Volunteering List</a>
+                    <Link className='page-scroll' to='/voluntlist'>Volunteering List</Link>
                 </li>
                 <li>
-                    <a className='page-scroll' href='#/companyvoucher'>Company Voucher</a>
+                    <Link className='page-scroll' to='/companyvoucher'>Company Voucher</Link>
                 </li>
                 <li>
-                    <a className='page-scroll' href='#/vouchers'>Voucher</a>
+                    <Link className='page-scroll' to='/vouchers'>Voucher</Link>
                 </li>
                 { !loggedIn &&
                 <li>
-                    <a className='page-scroll' href='#/register'>Register</a>
+                    <Link className='page-scroll' to='/register'>Register</Link>
                 </li> }
                 { !loggedIn &&
                 <li>
-                    <a className='page-scroll' href='#/login'>Login</a>
+                    <Link className='page-scroll' to='/login'>Login</Link>
                 </li> }
                 { loggedIn &&
                 <li>

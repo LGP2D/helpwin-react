@@ -8,8 +8,14 @@ require('./layout.scss');
 
 export default class Layout extends React.Component {
 
+    componentWillMount () {
+        console.log("mounting js");
+        this.loadJS();
+    }
+
     componentDidUpdate () {
-        this.loadJS('./helper.js');
+        console.log("mounting jss");
+        this.loadJS();
     }
 
     render () {

@@ -16,12 +16,12 @@ export default class VolunteerProposals extends React.Component {
     }
 
     componentWillMount () {
-        VolunteeringStore.on('update', this.updateTable);
+        VolunteeringStore.on('UPDATE_VOLUNTEERING', this.updateTable);
         VolunteeringActions.fetchData();
     }
 
     componentWillUnmount () {
-        VolunteeringStore.removeListener('update', this.updateTable);
+        VolunteeringStore.removeListener('UPDATE_VOLUNTEERING', this.updateTable);
     }
 
     render () {
@@ -44,11 +44,11 @@ export default class VolunteerProposals extends React.Component {
                 </div>
                 <div class='panel-body'>
                     <BootstrapTable data={ this.state.data } striped={ true } hover={ true }>
-                        <TableHeaderColumn dataField='institution' dataFormat={ this.imageFormatter }
+                        <TableHeaderColumn dataField='user' dataFormat={ this.imageFormatter }
                                            isKey={ true }>
                             Logo
                         </TableHeaderColumn>
-                        <TableHeaderColumn dataField='institution' dataFormat={ this.nameFormatter }>
+                        <TableHeaderColumn dataField='user' dataFormat={ this.nameFormatter }>
                             Name
                         </TableHeaderColumn>
                         <TableHeaderColumn dataFormat={ this.locationDateFormatter }>
@@ -71,6 +71,7 @@ export default class VolunteerProposals extends React.Component {
         this.setState({
             data: VolunteeringStore.getAll()
         });
+        console.log(this.state.data);
     };
 
     handleClick () {
@@ -94,10 +95,10 @@ export default class VolunteerProposals extends React.Component {
             <div className='text-center'>
                 <p> { row.location } </p>
                 <i className='fa fa-calendar'/><span
-                className='volunteering-table-text-margin'>Starting: { row.dateStart }</span>
+                className='volunteering-table-text-margin'>Starting: { row.startDate }</span>
                 <br />
                 <i className='fa fa-calendar'/><span
-                className='volunteering-table-text-margin'>Ending: { row.dateEnd }</span>
+                className='volunteering-table-text-margin'>Ending: { row.endDate }</span>
             </div>
         );
     }

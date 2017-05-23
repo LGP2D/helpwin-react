@@ -23,12 +23,12 @@ export default class ListInstitution extends React.Component {
     };
 
     componentWillMount () {
-        VolunteeringStore.on('update', this.updateTable);
+        VolunteeringStore.on('UPDATE_VOLUNTEERING', this.updateTable);
         VolunteeringActions.fetchData()
     }
 
     componentWillUnmount () {
-        VolunteeringStore.removeListener('update', this.updateTable)
+        VolunteeringStore.removeListener('UPDATE_VOLUNTEERING', this.updateTable)
     }
 
     render () {

@@ -23,7 +23,7 @@ export default class ListInstitutionProposals extends React.Component {
         console.log('USER: ');
         console.log('DATA' + this.state.data);
         console.log(UserStore.getJwt);
-        InstitutionActions.getProposals(UserStore.getJwt);
+        InstitutionActions.getProposals();
     }
 
     componentWillUnmount () {
@@ -73,6 +73,7 @@ export default class ListInstitutionProposals extends React.Component {
         this.setState({
             data: InstitutionStore.getAll()
         });
+        console.log(this.state.data);
     };
 
     handleClick () {

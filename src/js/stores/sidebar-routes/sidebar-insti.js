@@ -8,9 +8,9 @@ const routes = [
         name: 'Home'
     },
     {
-        href: '/dashboard/list-volunteers/:id',
+        href: '/dashboard/institutionProps',
         icon: 'ti ti-crown',
-        name: 'Volunteers'
+        name: 'Proposals'
     },
     {
         href: '/dashboard/proposals-volunteer/:id',

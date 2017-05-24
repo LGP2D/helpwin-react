@@ -50,11 +50,7 @@ export default class ListInstitutionProposals extends React.Component {
                 </div>
                 <div class='panel-body'>
                     <BootstrapTable data={ this.state.data } striped={ true } hover={ true }>
-                        <TableHeaderColumn dataField='institution' dataFormat={ this.imageFormatter }
-                                           isKey={ true }>
-                            Logo
-                        </TableHeaderColumn>
-                        <TableHeaderColumn dataField='institution' dataFormat={ this.nameFormatter }>
+                        <TableHeaderColumn dataField='institution' dataFormat={ this.nameFormatter } isKey={ true }>
                             Type
                         </TableHeaderColumn>
                         <TableHeaderColumn dataFormat={ this.locationDateFormatter }>

@@ -56,11 +56,11 @@ export default class ListInstitutionProposals extends React.Component {
                         <TableHeaderColumn dataFormat={ this.locationDateFormatter }>
                             Location & Date
                         </TableHeaderColumn>
-                        <TableHeaderColumn dataField='description'>
+                        <TableHeaderColumn dataFormat={ this.creditsFormatter }>
                             Description
                         </TableHeaderColumn>
-                        <TableHeaderColumn dataFormat={ this.helpFormatter }>
-                            Help
+                        <TableHeaderColumn dataFormat={ this.vacanciesFormatter }>
+                            Vacancies
                         </TableHeaderColumn>
                     </BootstrapTable>
                 </div>
@@ -78,12 +78,6 @@ export default class ListInstitutionProposals extends React.Component {
 
     handleClick () {
 
-    }
-
-    imageFormatter (cell, row) {
-        return (
-            <img height='50' src={ row.user.imageUrl } />
-        );
     }
 
     nameFormatter (cell, row) {
@@ -115,6 +109,25 @@ export default class ListInstitutionProposals extends React.Component {
                         name={ row.id }>
                     Help
                 </button>
+            </div>
+        );
+    }
+
+    creditsFormatter (cell, row) {
+        return (
+            <div className='volunteering-coins'>
+                <span
+                    className='volunteering-table-text-margin'>{ row.description }</span>
+                <br /><i className='fa fa-database coin'/><span
+                className='volunteering-table-text-margin'>{ row.credits }</span>
+            </div>
+        );
+    }
+
+    vacanciesFormatter (cell, row) {
+        return (
+            <div className='volunteering-coins'>
+                <span className='volunteering-table-text-margin'>{ row.availablePosition }</span>
             </div>
         );
     }

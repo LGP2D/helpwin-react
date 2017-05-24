@@ -38,7 +38,7 @@ export default class ListInstitutionProposals extends React.Component {
             <div class='panel panel-headline'>
                 <div class='panel-heading'>
                     <h3 class='panel-title'>Volunteering Proposals</h3>
-                    <p class='panel-subtitle'>A list with all registered institutions</p>
+                    <p class='panel-subtitle'>A list with all your registered volunteering proposals</p>
                     <div class='right'>
                         <button type='button' class='btn-toggle-collapse'>
                             <i class='ti ti-angle-up' />

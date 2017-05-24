@@ -55,7 +55,7 @@ export default class ListInstitutionProposals extends React.Component {
                             Logo
                         </TableHeaderColumn>
                         <TableHeaderColumn dataField='institution' dataFormat={ this.nameFormatter }>
-                            Name
+                            Type
                         </TableHeaderColumn>
                         <TableHeaderColumn dataFormat={ this.locationDateFormatter }>
                             Location & Date
@@ -91,7 +91,7 @@ export default class ListInstitutionProposals extends React.Component {
 
     nameFormatter (cell, row) {
         return (
-            row.name
+            row.type
         );
     }
 
@@ -100,10 +100,10 @@ export default class ListInstitutionProposals extends React.Component {
             <div className='text-center'>
                 <p> { row.location } </p>
                 <i className='fa fa-calendar'/><span
-                className='volunteering-table-text-margin'>Starting: { row.dateStart }</span>
+                className='volunteering-table-text-margin'>Starting: { row.startDate }</span>
                 <br />
                 <i className='fa fa-calendar'/><span
-                className='volunteering-table-text-margin'>Ending: { row.dateEnd }</span>
+                className='volunteering-table-text-margin'>Ending: { row.endDate }</span>
             </div>
         );
     }

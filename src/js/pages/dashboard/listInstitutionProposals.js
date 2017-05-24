@@ -4,7 +4,7 @@ import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import * as InstitutionActions from 'app/actions/institutionActions';
 import InstitutionStore from 'app/stores/institutionStore';
 import UserStore from 'app/stores/userStore';
-
+import ViewProposalCandidates from './viewProposalCandidates';
 
 import 'react-bootstrap-table/dist/react-bootstrap-table.min.css';
 
@@ -33,6 +33,15 @@ export default class ListInstitutionProposals extends React.Component {
     render () {
         const { location } = this.props;
 
+        // TODO: Routing to view Proposal's Candidates
+        let options = {
+            onRowClick: function(row){
+                return (
+                    <ViewProposalCandidates/>
+                );
+            }
+        }
+
         return (
 
             <div class='panel panel-headline'>
@@ -49,7 +58,7 @@ export default class ListInstitutionProposals extends React.Component {
                     </div>
                 </div>
                 <div class='panel-body'>
-                    <BootstrapTable data={ this.state.data } striped={ true } hover={ true }>
+                    <BootstrapTable data={ this.state.data } striped={ true } hover={ true } options={ options }>
                         <TableHeaderColumn dataField='institution' dataFormat={ this.nameFormatter } isKey={ true }>
                             Type
                         </TableHeaderColumn>

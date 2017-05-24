@@ -8,18 +8,22 @@ class InstitutionStore extends EventEmitter {
     constructor (){
         super();
 
-        this.data = []
+        this.data = [];
+        this.proposalCandidates = [];
     }
 
     getAll (){
         return this.data;
     }
 
+    getCandidates (){
+        return this.proposalCandidates;
+    }
+
     handleActions (action) {
         switch (action.type) {
             case 'GET_PROPOSALS': {
-                console.log("GET");
-                console.log('GET ENTRA PUTA');
+                console.log("POST");
                 axios({
                     method: 'post',
                     url: config.API_URL + 'actions/institutionActions',
@@ -30,12 +34,31 @@ class InstitutionStore extends EventEmitter {
                     }
                 }).then(response => {
                     this.data = response.data;
-                    console.log('ENTRA PUTA');
                     console.log('data -> ' + this.data);
                     this.emit('update-get-proposals-institution');
                 }).catch(error => {
                     console.log(error);
                 });
+                break;
+            }
+            case 'GET_PROPOSAL_CANDIDATES': {
+                console.log("POST");
+                axios({
+                    method: 'post',
+                    url: config.API_URL + 'actions/userProfiles',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    data:action.volunteeringProposal
+                }).then(response => {
+                    this.data = response.data;
+                    console.log('data -> ' + this.data);
+                    this.emit('update-get-proposals-institution');
+                }).catch(error => {
+                    console.log(error);
+                });
+                break;
             }
         }
     }

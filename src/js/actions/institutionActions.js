@@ -1,7 +1,16 @@
 import dispatcher from 'app/dispatcher/dispatcher';
 
-export function getProposals (){
-    dispatcher.dispatch({
-        type: 'GET_PROPOSALS'
-    })
+export default {
+    getProposals: () => {
+        dispatcher.dispatch({
+            type: 'GET_PROPOSALS'
+        });
+    },
+
+    getCandidates: (volunteeringProposal) => {
+        dispatcher.dispatch({
+            type: 'EDIT_USER',
+            volunteeringProposal: volunteeringProposal
+        });
+    }
 }

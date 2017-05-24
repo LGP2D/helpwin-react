@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router';
 
+import { UserActions } from 'app/actions';
+import { UserStore } from 'app/stores';
+
 export default class Header extends React.Component {
     render () {
 
@@ -42,37 +45,26 @@ export default class Header extends React.Component {
                                         <i class='icon-submenu ti fa fa-caret-down' />
                                     </a>
                                     <ul class='dropdown-menu'>
-                                        <li><a href='#'>Basic Use</a></li>
-                                        <li><a href='#'>Working With Data</a></li>
-                                        <li><a href='#'>Security</a></li>
-                                        <li><a href='#'>Troubleshooting</a></li>
+                                        <li><Link to='/'>Basic Use</Link></li>
                                     </ul>
                                 </li>
                                 <li class='dropdown'>
                                     <a href='#' class='dropdown-toggle' data-toggle='dropdown'>
                                         <i class='img-circle ti ti-user' alt='Avatar' />
-                                        <span> Samuel</span>
+                                        <span id='user-name'> { UserStore.getUserName !== null ?
+                                            UserStore.getUserName : 'User' }</span>
                                         <i class='icon-submenu lnr lnr-chevron-down' />
                                     </a>
                                     <ul class='dropdown-menu'>
                                         <li>
-                                            <a href='/dashboard/volunteerProfile'><i class='lnr lnr-user' />
+                                            <Link to='/dashboard/volunteerProfile'><i class='lnr lnr-user' />
                                                 <span> My Profile</span>
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li>
-                                            <a href='#'><i class='lnr lnr-envelope' />
-                                                <span> Message</span>
+                                            <a href='#' onClick={ this.handleLogout }><i class='lnr lnr-exit' />
+                                                <span> Logout</span>
                                             </a>
-                                        </li>
-                                        <li>
-                                            <a href='#'><i class='lnr lnr-cog' />
-                                                <span> Settings</span>
-                                            </a>
-                                        </li>
-                                        <li><a href='#'><i class='lnr lnr-exit' />
-                                            <span> Logout</span>
-                                        </a>
                                         </li>
                                     </ul>
                                 </li>
@@ -84,4 +76,9 @@ export default class Header extends React.Component {
             </header>
         );
     }
+
+    handleLogout = () => {
+        UserActions.logout();
+        this.context.router.push('/');
+    };
 }

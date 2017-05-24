@@ -2,9 +2,10 @@ import React from 'react';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import 'assets/scss/volunteeringtable.scss';
+import config from 'app/stores/config';
 
 import { VolunteeringActions } from 'app/actions';
-import VolunteeringStore from 'app/stores/volunteeringListStore';
+import { VolunteeringStore } from 'app/stores';
 
 export default class VolunteeringList extends React.Component {
     constructor () {
@@ -19,7 +20,7 @@ export default class VolunteeringList extends React.Component {
                 maxWidth: 110,
                 render: row => (
                     <div className='image-col text-center'>
-                        <img src={ row.row.institution.imageUrl }/>
+                        <img src={ config.API_STATIC_URL + row.row.user.imageUrl }/>
                     </div>
                 )
             },
@@ -28,7 +29,7 @@ export default class VolunteeringList extends React.Component {
                 render: row => (
                     <div>
                         <i className='fa fa-building' aria-hidden='true'/><span
-                        className='volunteering-table-text-margin'>{ row.row.institution.name }</span>
+                        className='volunteering-table-text-margin'>{ row.row.user.name }</span>
                         <br />
                         <i className='fa fa-book' aria-hidden='true'/><span
                         className='volunteering-table-text-margin'>{ row.row.type }</span>
@@ -45,10 +46,10 @@ export default class VolunteeringList extends React.Component {
                     <div className='text-center'>
                         <p> { row.row.location } </p>
                         <i className='fa fa-calendar'/><span
-                        className='volunteering-table-text-margin'>Starting: { row.row.dateStart }</span>
+                        className='volunteering-table-text-margin'>Starting: { row.row.startDate }</span>
                         <br />
                         <i className='fa fa-calendar'/><span
-                        className='volunteering-table-text-margin'>Ending: { row.row.dateEnd }</span>
+                        className='volunteering-table-text-margin'>Ending: { row.row.endDate }</span>
                     </div>
                 )
             },
@@ -71,7 +72,7 @@ export default class VolunteeringList extends React.Component {
 
     updateTable = () => {
         this.setState({
-            data: VolunteeringStore.getAll()
+            data: VolunteeringStore.getActions()
         });
     };
 
@@ -80,12 +81,12 @@ export default class VolunteeringList extends React.Component {
     };
 
     componentWillMount () {
-        VolunteeringStore.on('update', this.updateTable);
+        VolunteeringStore.on('UPDATE_VOLUNTEERING', this.updateTable);
         VolunteeringActions.fetchData();
     }
 
     componentWillUnmount () {
-        VolunteeringStore.removeListener('update', this.updateTable);
+        VolunteeringStore.removeListener('UPDATE_VOLUNTEERING', this.updateTable);
     }
 
     render () {

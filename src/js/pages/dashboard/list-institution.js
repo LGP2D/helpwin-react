@@ -1,8 +1,8 @@
 import React from 'react';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
-import * as VolunteeringActions from 'app/actions/volunteeringListActions';
-import VolunteeringStore from 'app/stores/volunteeringListStore';
+import { VolunteeringActions } from 'app/actions';
+import { VolunteeringStore } from 'app/stores';
 
 import 'react-bootstrap-table/dist/react-bootstrap-table.min.css';
 
@@ -14,7 +14,7 @@ export default class ListInstitution extends React.Component {
 
     updateTable = () => {
         this.setState({
-            data: VolunteeringStore.getAll()
+            data: VolunteeringStore.getActions()
         })
     };
 
@@ -23,12 +23,12 @@ export default class ListInstitution extends React.Component {
     };
 
     componentWillMount () {
-        VolunteeringStore.on('update', this.updateTable);
+        VolunteeringStore.on('UPDATE_VOLUNTEERING', this.updateTable);
         VolunteeringActions.fetchData()
     }
 
     componentWillUnmount () {
-        VolunteeringStore.removeListener('update', this.updateTable)
+        VolunteeringStore.removeListener('UPDATE_VOLUNTEERING', this.updateTable)
     }
 
     render () {

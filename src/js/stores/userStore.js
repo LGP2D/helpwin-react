@@ -8,23 +8,23 @@ class UserStore extends EventEmitter {
     constructor () {
         super();
 
-        this.user = null;
-        this.jwt = null;
-        this.name = null;
-        this.userData = null;
-        this.imageUrl = null;
+        this.userData = JSON.parse(localStorage.getItem('userData'));
+        this.jwt = this.userData !== null ? this.userData.token : null;
+        this.user = this.jwt !== null ? jwt_decode(this.jwt) : null;
+        this.name = this.userData !== null ? this.userData.name : null;
+        this.imageUrl = this.userData !== null ? this.userData.imageUrl : null;
 
         this.autoLogin();
     }
 
     autoLogin () {
-        let jwt = localStorage.getItem('jwt');
-        if (jwt) {
-            this.jwt = jwt;
-            this.user = jwt_decode(jwt);
-            this.name = localStorage.getItem('name');
+        let userData = JSON.parse(localStorage.getItem('userData'));
+        if (userData) {
+            this.jwt = userData.token;
+            this.user = jwt_decode(this.jwt);
+            this.name = userData !== null ? userData.name : null;
 
-            this.handleLoginToken(jwt);
+            this.handleLoginToken(this.jwt);
         }
     }
 
@@ -79,13 +79,12 @@ class UserStore extends EventEmitter {
                     data: { email, password }
                 }).then(response => {
                     //Save token to local storage
-                    localStorage.setItem('jwt', response.data.token);
-                    localStorage.setItem('name', response.data.name);
+                    localStorage.setItem('userData', JSON.stringify(response.data));
 
+                    this.userData = response.data;
                     this.jwt = response.data.token;
                     this.user = jwt_decode(this.jwt);
                     this.name = response.data.name;
-                    this.userData = response.data;
                     this.userData.imageUrl = config.API_STATIC_URL + response.data.imageUrl;
                     console.log(this.userData);
                     this.emit('LOGIN_SUCCESS');
@@ -100,8 +99,7 @@ class UserStore extends EventEmitter {
                 this.user = null;
                 this.name = null;
                 this.userData = null;
-                localStorage.setItem('jwt', '');
-                localStorage.setItem('name', '');
+                localStorage.removeItem('userData');
                 this.emit('LOGOUT_USER');
                 break;
             }
@@ -140,9 +138,6 @@ class UserStore extends EventEmitter {
                 });
                 break;
             }
-            default:
-                console.log('Action not found in userStore');
-                break;
         }
     }
 

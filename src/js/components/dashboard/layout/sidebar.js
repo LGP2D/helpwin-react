@@ -6,22 +6,22 @@ import VolunteerRoutes from 'app/stores/sidebar-routes/sidebar-volun'
 import InstitutionRoutes from 'app/stores/sidebar-routes/sidebar-insti'
 import CompanyRoutes from 'app/stores/sidebar-routes/sidebar-compa'
 
+import { UserStore } from 'app/stores';
+
 export default class Sidebar extends React.Component {
 
     render () {
 
         const { location } = this.props;
-        const role = 0;
+        const role = UserStore.getUserRole;
         const paths = this.getSidebar(location, role);
 
         return (
             <div id='sidebar-nav' class='sidebar'>
                 <div class='brand'>
-                    HelpWin
-                    { /*<a href='index.html'>
-                     <img src='http://image.prntscr.com/image/e1343e51b8834758bf5c00bf0fcd22e0.png'
-                     alt='logo' class='img-responsive logo'/>
-                     </a>*/ }
+                    <Link to='/'>
+                        HelpWin
+                    </Link>
                 </div>
                 <div class='sidebar-scroll'>
                     <nav>
@@ -57,11 +57,11 @@ export default class Sidebar extends React.Component {
         );
     }
 
-    getSidebar(location, role) {
+    getSidebar (location, role) {
         switch (role) {
-            case 3:
-                return InstitutionRoutes;
             case 2:
+                return InstitutionRoutes;
+            case 4:
                 return CompanyRoutes;
             case 1:
                 return CollaboratorRoutes;

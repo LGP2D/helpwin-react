@@ -5,7 +5,7 @@ import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import Layout from 'app/components/frontpage/layout/layout-onepage';
 import LayoutBlank from 'app/components/frontpage/layout/layout-blank';
 
-import UserStore from 'app/stores/userStore';
+import { UserStore } from 'app/stores';
 
 import FrontHome from 'app/pages/frontpage/home';
 import Register from 'app/pages/frontpage/register';
@@ -19,10 +19,7 @@ import InstProp from 'app/pages/dashboard/listInstitutionProposals';
 import DashLayout from 'app/components/dashboard/layout/layout';
 import Sidebar from 'app/components/dashboard/layout/sidebar';
 
-import CollaboratorHome from 'app/pages/dashboard/collaborator';
-import VolunteerHome from 'app/pages/dashboard/volunteer';
-import InstitutionHome from 'app/pages/dashboard/institution';
-import CompanyHome from 'app/pages/dashboard/company';
+import DashboardIndex from 'app/pages/dashboard';
 import ListInstitution from 'app/pages/dashboard/list-institution';
 import ListVouchers from 'app/pages/dashboard/list-vouchers';
 import VolunteerProfile from 'app/pages/dashboard/volunteerProfile';
@@ -30,28 +27,21 @@ import VolunteerProposals from 'app/pages/dashboard/volunteerProposals';
 
 const app = document.getElementById('app');
 
-export default function requireAuth (role) {
-    return(nextState, replace) => {
-        let loggedIn = UserStore.isLoggedIn();
-        let user = UserStore.getUser;
-        if (!loggedIn) {
-            replace({
-                pathname: '/login',
-                state: { nextPathname: nextState.location.pathname }
-            });
-        }
-        else if(1 <= role) { // should be user.role instead of 1
-            replace({
-                pathname: '/login',
-                state: { nextPathname: nextState.location.pathname } // return UNAUTHORIZED
-            });
-        }
-    }
-};
 /**
- * Auth guard is not on any of the pages as of right now.
- * If you wish to use it, just type onEnter on the route and direct it to { requireAuth }
- * E.g <IndexRoute component={ VolunteeringList } onEnter={ requireAuth }
+ * How to add authentication?
+ * Make your component's class extend AuthorizedComponent
+ * Add to the imports: import AuthorizedComponent from 'app/components/dashboard/authorization';
+ * In the constructor add:
+ *
+ * constructor () {
+ *      super();
+ *      this.authorize = [3]; // list of roles allowed
+ *  }
+ *
+ *  If you are using the function componentWillMount make sure it HAS AT THE TOP:
+ *  super.componentWillMount();
+ *
+ *  Ty!
  */
 ReactDOM.render(
 
@@ -62,10 +52,7 @@ ReactDOM.render(
 
         <Route path='/dashboard' component={ DashLayout } >
             /* Home pages */
-            <IndexRoute components={ { main: VolunteerHome, sidebar: Sidebar } } />
-            <Route path='collaborator' components={ { main: CollaboratorHome, sidebar: Sidebar } } onEnter={ requireAuth(4) } />
-            <Route path='institution' components={ { main: InstitutionHome, sidebar: Sidebar } } />
-            <Route path='company' components={ { main: CompanyHome, sidebar: Sidebar } } />
+            <IndexRoute components={ { main: DashboardIndex, sidebar: Sidebar } } />
             /* Content pages */
             <Route path='list-institutions' components={ { main: ListInstitution, sidebar: Sidebar } } />
             <Route path='volunteerProfile' components={ { main: VolunteerProfile, sidebar: Sidebar } } />

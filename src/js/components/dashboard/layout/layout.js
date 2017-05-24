@@ -8,8 +8,17 @@ require('./layout.scss');
 
 export default class Layout extends React.Component {
 
+    componentWillMount () {
+        this.setState({
+            mounted: true
+        });
+        this.loadJS();
+    }
+
     componentDidUpdate () {
-        this.loadJS('./helper.js');
+        if(!this.state.mounted) {
+            this.loadJS();
+        }
     }
 
     render () {
@@ -38,10 +47,16 @@ export default class Layout extends React.Component {
         if(document.getElementById("helper-script")) {
             this.removeElement(document.getElementById("helper-script"));
         }
-        document.body.appendChild(script);
+        document.head.appendChild(script);
     }
 
     removeElement (element) {
         element && element.parentNode && element.parentNode.removeChild(element);
+    }
+
+    componentWillUnmount () {
+        this.setState({
+            mounted: false
+        });
     }
 }

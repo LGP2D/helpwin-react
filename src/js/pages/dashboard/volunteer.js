@@ -1,13 +1,17 @@
 import React from 'react';
 
+import AuthorizedComponent from 'app/components/dashboard/authorization';
 import { VolunteeringActions, VoucherActions } from 'app/actions';
-import VolunteeringStore from 'app/stores/volunteeringListStore';
-import VoucherStore from 'app/stores/voucherStore';
+import { VolunteeringStore, VoucherStore } from 'app/stores';
 
-export default class Volunteer extends React.Component {
+export default class Volunteer extends AuthorizedComponent {
 
     constructor () {
         super();
+
+        this.authorize = [3];
+        this.onUpdate = this.updateVolun.bind(this, 'proposals', VolunteeringStore);
+        this.onUpdateVouchers = this.updateVouchers.bind(this, 'vouchers', VoucherStore);
 
         this.state = {
             proposals: [],
@@ -17,19 +21,26 @@ export default class Volunteer extends React.Component {
     }
 
     componentWillMount () {
-        VolunteeringStore.on('update', this.update.bind(null, 'proposals', VolunteeringStore));
-        VoucherStore.on('CHANGE_VOUCHERS', this.update.bind(null, 'vouchers', VoucherStore));
+        super.componentWillMount();
+
+        VolunteeringStore.on('UPDATE_VOLUNTEERING', this.onUpdate);
+        VoucherStore.on('CHANGE_VOUCHERS', this.onUpdateVouchers);
         VolunteeringActions.fetchData();
         VoucherActions.fetchData();
     }
 
     componentWillUnmount () {
-        VolunteeringStore.removeListener('update', this.update);
-        VoucherStore.removeListener('CHANGE_VOUCHERS', this.update);
+        VolunteeringStore.removeListener('UPDATE_VOLUNTEERING', this.onUpdate);
+        VoucherStore.removeListener('CHANGE_VOUCHERS', this.onUpdateVouchers);
     }
 
-    update = (key, store) => {
-        this.state[key] = store.getAll();
+    updateVouchers = (key, store) => {
+        this.state[key] = store.getVouchers();
+        this.setState(this.state);
+    };
+
+    updateVolun = (key, store) => {
+        this.state[key] = store.getActions();
         this.setState(this.state);
     };
 

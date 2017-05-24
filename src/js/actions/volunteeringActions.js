@@ -3,13 +3,13 @@ import dispatcher from 'app/dispatcher/dispatcher';
 export default {
     fetchData: () => {
         dispatcher.dispatch({
-            type: 'GET_VOUCHERS'
+            type: 'FETCH_DATA'
         });
     },
-
-    fetchCompany: () => {
+    applyToAction: (id) => {
         dispatcher.dispatch({
-            type: 'FETCH_COMPANY_VOUCHER'
+            type: 'APPLY_TO_ACTION',
+            actionId: id
         });
     }
 }

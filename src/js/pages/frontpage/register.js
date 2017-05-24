@@ -1,7 +1,7 @@
 import React from 'react';
 import LabelForm from 'app/components/frontpage/forms/FormLabel';
-import UserStore from 'app/stores/userStore';
-import UserActions from 'app/actions/userActions';
+import { UserStore } from 'app/stores';
+import { UserActions } from 'app/actions';
 import Combobox from 'react-widgets/lib/Combobox';
 import 'react-widgets/lib/less/react-widgets.less';
 
@@ -162,10 +162,7 @@ export default class Register extends React.Component {
 
         if (this.state.data_uri === undefined || this.state.data_uri === null) {
             this.onUploadSuccess();
-            console.log('sem imagem');
         } else {
-            console.log('nao devo aparecer');
-
             let file = {
                 data_uri: this.state.data_uri,
                 filename: this.state.filename,

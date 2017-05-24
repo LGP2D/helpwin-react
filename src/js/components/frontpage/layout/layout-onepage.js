@@ -72,9 +72,8 @@ export default class Layout extends React.Component {
     render () {
         const { location } = this.props;
         const layoutStyles = {
-            position: 'absolute',
             width: '100%',
-            height: '100%'
+            minHeight: '100%'
         };
 
         return (

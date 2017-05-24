@@ -62,8 +62,12 @@ export default class LayoutBlank extends React.Component {
     };
 
     render () {
+        const layoutStyles = {
+            minHeight: '100%'
+        };
+
         return (
-            <div>
+            <div style={ layoutStyles }>
                 { /* Navigation */ }
                 <nav className='navbar navbar-custom navbar-fixed-top top-nav-collapse' role='navigation'>
                     <div className='container'>

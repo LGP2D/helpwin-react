@@ -5,5 +5,11 @@ export default {
         dispatcher.dispatch({
             type: 'FETCH_DATA'
         });
+    },
+    applyToAction: (id) => {
+        dispatcher.dispatch({
+            type: 'APPLY_TO_ACTION',
+            actionId: id
+        });
     }
 }

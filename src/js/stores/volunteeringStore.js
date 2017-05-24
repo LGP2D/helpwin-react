@@ -3,6 +3,8 @@ import dispatcher from 'app/dispatcher/dispatcher';
 import axios from 'axios';
 import config from './config';
 
+import { UserStore } from 'app/stores';
+
 class VolunteeringStore extends EventEmitter {
 
     constructor () {
@@ -32,7 +34,26 @@ class VolunteeringStore extends EventEmitter {
                 }).catch(error => {
                     console.log(error);
                 });
-                this.emit('UPDATE_VOLUNTEERING');
+                break;
+            }
+            case 'APPLY_TO_ACTION': {
+                console.log(UserStore.getJwt);
+                axios({
+                    method: 'post',
+                    url: config.API_URL + 'actions/submit/' + action.actionId,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'Authorization': UserStore.getJwt
+                    }
+                }).then(response => {
+                    this.data = response.data;
+                    console.log(this.data);
+                    this.emit('APPLY_TO_ACTION_SUCCESS');
+                }).catch(error => {
+                    console.log(error);
+                });
+                break;
             }
         }
     }

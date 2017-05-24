@@ -26,7 +26,6 @@ export default class VolunteerProposals extends React.Component {
     }
 
     render () {
-        const { location } = this.props;
 
         return (
 
@@ -72,6 +71,7 @@ export default class VolunteerProposals extends React.Component {
         this.setState({
             data: VolunteeringStore.getActions()
         });
+        console.log(this.state.data);
     };
 
     imageFormatter (cell, row) {
@@ -105,15 +105,15 @@ export default class VolunteerProposals extends React.Component {
                 <i className='fa fa-database coin'/><span
                 className='volunteering-table-text-margin'>{ row.credits }</span>
                 <br />
-                <button className='btn btn-default' onClick={ helpButton } type='button'
+                <button className='btn btn-default' onClick={ helpButton.bind(null, event, row.id) } type='button'
                         name={ row.id }>
                     Help
                 </button>
             </div>
         );
 
-        function helpButton () {
-            console.log("WHY U CLICK ME");
+        function helpButton (event, id) {
+            VolunteeringActions.applyToAction(id);
         }
     }
 }

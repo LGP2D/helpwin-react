@@ -5,8 +5,20 @@ import InstitutionActions from 'app/actions/institutionActions';
 import InstitutionStore from 'app/stores/institutionStore';
 import UserStore from 'app/stores/userStore';
 import ViewProposalCandidates from './viewProposalCandidates';
+import Modal from 'react-modal';
 
 import 'react-bootstrap-table/dist/react-bootstrap-table.min.css';
+
+const customStyles = {
+    content : {
+        top                   : '50%',
+        left                  : '50%',
+        right                 : 'auto',
+        bottom                : 'auto',
+        marginRight           : '-50%',
+        transform             : 'translate(-50%, -50%)'
+    }
+};
 
 export default class ListInstitutionProposals extends React.Component {
     constructor () {
@@ -14,14 +26,32 @@ export default class ListInstitutionProposals extends React.Component {
 
         this.state = {
             data: [],
-            institution: UserStore.getUser
+            modalIsOpen: false
         };
     }
 
+    openModal = (event, row) => {
+        console.log('MODAL OPEN');
+        this.setState({ modalIsOpen: true });
+    };
+
+    afterOpenModal = () => {
+        // references are now sync'd and can be accessed.
+        this.subtitle.style.color = '#f00';
+    };
+
+    closeModal = (cell, row) => {
+        this.setState({
+            modalIsOpen: false
+        });
+    };
+
     componentWillMount () {
         InstitutionStore.on('UPDATE_INSTITUTION_PROPOSALS', this.updateTable);
+        InstitutionStore.on('GET_PROPOSAL_CANDIDATES', this.updateTable);
         InstitutionActions.getProposals();
     }
+
 
     componentWillUnmount () {
         InstitutionStore.removeListener('UPDATE_INSTITUTION_PROPOSALS', this.updateTable);
@@ -68,7 +98,14 @@ export default class ListInstitutionProposals extends React.Component {
                         <TableHeaderColumn dataFormat={ this.vacanciesFormatter }>
                             Vacancies
                         </TableHeaderColumn>
+                        <TableHeaderColumn dataFormat={ this.buttonFormatter }>
+                            Choose candidates
+                        </TableHeaderColumn>
                     </BootstrapTable>
+                    <Modal isOpen={ this.state.modalIsOpen } style={ customStyles }  contentLabel='Example Modal'>
+                        <button onClick={ this.closeModal }>close</button>
+                        <div>I am a modal</div>
+                    </Modal>
                 </div>
             </div>
 
@@ -79,7 +116,6 @@ export default class ListInstitutionProposals extends React.Component {
         this.setState({
             data: InstitutionStore.getAll()
         });
-        console.log(this.state.data);
     };
 
     nameFormatter (cell, row) {
@@ -120,4 +156,14 @@ export default class ListInstitutionProposals extends React.Component {
             </div>
         );
     }
+    buttonFormatter = (cell, row) => {
+        return (
+            <button className='btn btn-default' onClick={ this.openModal } type='button'
+                    name={ row }>
+                Candidates
+            </button>
+        );
+    };
+
+
 }

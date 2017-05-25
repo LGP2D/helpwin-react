@@ -7,12 +7,12 @@ import { VolunteeringStore } from 'app/stores';
 import 'react-bootstrap-table/dist/react-bootstrap-table.min.css';
 import config from 'app/stores/config';
 
-export default class VolunteerProposals extends React.Component {
-    constructor () {
+export default class MyVolunteerProposals extends React.Component{
+    constructor(){
         super();
 
-        this.state = {
-            data: []
+        this.state={
+            data:[]
         };
     }
 
@@ -32,7 +32,7 @@ export default class VolunteerProposals extends React.Component {
             <div class='panel panel-headline'>
                 <div class='panel-heading'>
                     <h3 class='panel-title'>Volunteering Proposals</h3>
-                    <p class='panel-subtitle'>A list with all active Volunteering proposals from registered Institutions</p>
+                    <p class='panel-subtitle'>A list with all registered institutions</p>
                     <div class='right'>
                         <button type='button' class='btn-toggle-collapse'>
                             <i class='ti ti-angle-up' />

@@ -9,8 +9,8 @@ import config from 'app/stores/config';
 import 'react-bootstrap-table/dist/react-bootstrap-table.min.css';
 
 export default class viewProposalCandidates extends React.Component {
-    constructor () {
-        super();
+    constructor (props) {
+        super(props);
 
         this.state = {
             data: [],

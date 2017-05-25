@@ -36,6 +36,23 @@ class VolunteeringStore extends EventEmitter {
                 });
                 break;
             }
+            case 'FETCH_VALID_PROPOSALS': {
+                axios({
+                    method: 'get',
+                    url: config.API_URL + 'actions/verifiedValid',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    }
+                }).then(response => {
+                    this.data = response.data;
+                    console.log(this.data);
+                    this.emit('UPDATE_VOLUNTEERING');
+                }).catch(error => {
+                    console.log(error);
+                });
+                break;
+            }
             case 'APPLY_TO_ACTION': {
                 console.log(UserStore.getJwt);
                 axios({

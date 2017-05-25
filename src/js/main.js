@@ -14,6 +14,7 @@ import GetVouchers from 'app/pages/frontpage/vouchersList';
 import Login from 'app/pages/frontpage/login';
 import CompanyVoucher from 'app/pages/frontpage/company-voucher';
 import InstProp from 'app/pages/dashboard/listInstitutionProposals';
+import Candidates from 'app/pages/dashboard/viewProposalCandidates';
 
 
 import DashLayout from 'app/components/dashboard/layout/layout';
@@ -64,6 +65,8 @@ ReactDOM.render(
             <Route path='vouchers' components={ { main: ListVouchers, sidebar: Sidebar } } />
             <Route path='institutionProps' components={ { main: InstProp, sidebar: Sidebar } } />
             <Route path='list-institutions1' components={ { main: ListInstitution1, sidebar: Sidebar } } />
+            <Route path='candidates/:id' components={ { main: Candidates, sidebar: Sidebar } } />
+
 
         </Route>
 

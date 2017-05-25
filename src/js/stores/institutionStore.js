@@ -48,7 +48,7 @@ class InstitutionStore extends EventEmitter {
                 break;
             }
             case 'GET_PROPOSAL_CANDIDATES': {
-                console.log("POST");
+                console.log('GET_PROPOSAL_CANDIDATES');
                 axios({
                     method: 'post',
                     url: config.API_URL + 'actions/userProfiles',
@@ -56,10 +56,12 @@ class InstitutionStore extends EventEmitter {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json'
                     },
-                    data:action.volunteeringProposal
+                    data: {
+                      uniqueId: action.volunteeringProposal
+                    }
                 }).then(response => {
-                    this.data = response.data;
-                    console.log('data -> ' + this.data);
+                    this.proposalCandidates = response.data;
+                    console.log(this.proposalCandidates);
                     this.emit('UPDATE_PROPOSAL_CANDIDATES');
                 }).catch(error => {
                     console.log(error);

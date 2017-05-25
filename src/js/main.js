@@ -25,6 +25,8 @@ import ListVouchers from 'app/pages/dashboard/list-vouchers';
 import VolunteerProfile from 'app/pages/dashboard/volunteerProfile';
 import VolunteerProposals from 'app/pages/dashboard/volunteerProposals';
 
+import ListInstitution1 from 'app/pages/dashboard/list-institution1';
+
 const app = document.getElementById('app');
 
 /**
@@ -59,6 +61,7 @@ ReactDOM.render(
             <Route path='proposals-volunteer' components={ { main: VolunteerProposals, sidebar: Sidebar } } />
             <Route path='vouchers' components={ { main: ListVouchers, sidebar: Sidebar } } />
             <Route path='institutionProps' components={ { main: InstProp, sidebar: Sidebar } } />
+            <Route path='list-institutions1' components={ { main: ListInstitution1, sidebar: Sidebar } } />
 
         </Route>
 

@@ -68,10 +68,10 @@ export default class InstitutionList1 extends AuthorizedComponent {
 
     static buttonDeactivateFormat = (cell, row) => {
         return(
-            <button onClick={ activate.bind(null, event, row.uniqueId) } name={ row.uniqueId }>Deactivate</button>
+            <button onClick={ deactivate.bind(null, event, row.uniqueId) } name={ row.uniqueId }>Deactivate</button>
         );
 
-        function activate (event, id) {
+        function deactivate (event, id) {
             InstitutionActions.deactivate(id);
         }
     };

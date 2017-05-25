@@ -17,7 +17,7 @@ const routes = [
         name: 'Volunteers'
     },
     {
-        href: '/dashboard/list-companies1',
+        href: '/dashboard/list-companies',
         icon: 'ti ti-bolt-alt',
         name: 'Companies'
     },

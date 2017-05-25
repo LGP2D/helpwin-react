@@ -44,11 +44,10 @@ export default class VolunteerProposals extends React.Component {
                 </div>
                 <div class='panel-body'>
                     <BootstrapTable data={ this.state.data } striped={ true } hover={ true }>
-                        <TableHeaderColumn dataField='user' dataFormat={ this.imageFormatter }
-                                           isKey={ true }>
+                        <TableHeaderColumn dataField='user' dataFormat={ this.imageFormatter }>
                             Logo
                         </TableHeaderColumn>
-                        <TableHeaderColumn dataField='user' dataFormat={ this.nameFormatter }>
+                        <TableHeaderColumn dataField='user' dataFormat={ this.nameFormatter } isKey={ true }>
                             Name
                         </TableHeaderColumn>
                         <TableHeaderColumn dataFormat={ this.locationDateFormatter }>

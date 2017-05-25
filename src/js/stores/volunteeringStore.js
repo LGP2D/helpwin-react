@@ -36,6 +36,23 @@ class VolunteeringStore extends EventEmitter {
                 });
                 break;
             }
+            case 'FETCH_USER_PROPOSALS': {
+                axios({
+                    method: 'get',
+                    url: config.API_URL + 'user/volunteerActions',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'Authorization': UserStore.getJwt
+                    }
+                }).then(response => {
+                    this.data = response.data;
+                    this.emit('UPDATE_USER_PROPOSALS');
+                }).catch(error => {
+                    console.log(error);
+                });
+                break;
+            }
             case 'FETCH_VALID_PROPOSALS': {
                 axios({
                     method: 'get',
@@ -54,7 +71,6 @@ class VolunteeringStore extends EventEmitter {
                 break;
             }
             case 'APPLY_TO_ACTION': {
-                console.log(UserStore.getJwt);
                 axios({
                     method: 'post',
                     url: config.API_URL + 'actions/submit/' + action.actionId,

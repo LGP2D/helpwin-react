@@ -13,12 +13,12 @@ const routes = [
     },
     {
         href: '/dashboard/proposals-volunteer',
-        icon: 'ti ti-user',
+        icon: 'ti ti-files',
         name: 'Volunteering Proposals'
     },
     {
         href: '/dashboard/my-proposals-volunteer',
-        icon: 'ti ti-user',
+        icon: 'ti ti-bookmark',
         name: ' My Proposals'
     },
     {

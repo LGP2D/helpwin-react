@@ -3,6 +3,7 @@ import dispatcher from 'app/dispatcher/dispatcher';
 import axios from 'axios';
 import config from './config';
 import jwt_decode from 'jwt-decode';
+import bcrypt from 'bcryptjs';
 
 class UserStore extends EventEmitter {
     constructor () {
@@ -49,6 +50,8 @@ class UserStore extends EventEmitter {
     handleActions (action) {
         switch (action.type) {
             case 'REGISTER_USER': {
+                let hash = bcrypt.hashSync(action.user.password, '$2a$10$w2Avr1TOt5f00mKZvvHot.');
+                action.user.password = hash;
                 axios({
                     method: 'post',
                     url: config.API_URL + 'user',
@@ -67,8 +70,9 @@ class UserStore extends EventEmitter {
                 break;
             }
             case 'LOGIN_USER': {
+                let hash = bcrypt.hashSync(action.password, '$2a$10$w2Avr1TOt5f00mKZvvHot.');
                 let email = action.email;
-                let password = action.password;
+                let password = hash;
                 axios({
                     method: 'post',
                     url: config.API_URL + 'user/login',
@@ -122,6 +126,8 @@ class UserStore extends EventEmitter {
                 break;
             }
             case 'EDIT_USER': {
+                let hash = bcrypt.hashSync(action.user.password, '$2a$10$w2Avr1TOt5f00mKZvvHot.');
+                action.user.password = hash;
                 axios({
                     method: 'put',
                     url: config.API_URL + 'user' + '/editProfile',

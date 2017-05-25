@@ -11,5 +11,19 @@ export default {
         dispatcher.dispatch({
             type: 'FETCH_COMPANY_VOUCHER'
         });
+    },
+
+    activate: (uniqueId) => {
+        dispatcher.dispatch({
+            type: 'ACTIVATE_VOUCHER',
+            uniqueId: uniqueId
+        });
+    },
+
+    deactivate: (uniqueId) => {
+        dispatcher.dispatch({
+            type: 'DEACTIVATE_VOUCHER',
+            uniqueId: uniqueId
+        });
     }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
-import * as InstitutionActions from 'app/actions/institutionActions';
+import InstitutionActions from 'app/actions/institutionActions';
 import InstitutionStore from 'app/stores/institutionStore';
 import config from 'app/stores/config';
 
@@ -11,17 +11,20 @@ import 'react-bootstrap-table/dist/react-bootstrap-table.min.css';
 export default class viewProposalCandidates extends React.Component {
     constructor (props) {
         super(props);
-
+        console.log(props);
         this.state = {
             data: [],
-            action: null
+            action: this.props.params.id
         };
     }
 
     componentWillMount () {
+        InstitutionStore.on('UPDATE_PROPOSAL_CANDIDATES', this.updateTable);
+        InstitutionActions.getCandidates(this.state.action);
     }
 
     componentWillUnmount () {
+        InstitutionStore.removeListener('UPDATE_PROPOSAL_CANDIDATES', this.updateTable);
     }
 
     render () {
@@ -32,7 +35,6 @@ export default class viewProposalCandidates extends React.Component {
             <div class='panel panel-headline'>
                 <div class='panel-heading'>
                     <h3 class='panel-title'>Proposal Candidates</h3>
-                    <p class='panel-subtitle'>{ row.description }</p>
                     <div class='right'>
                         <button type='button' class='btn-toggle-collapse'>
                             <i class='ti ti-angle-up' />
@@ -68,20 +70,22 @@ export default class viewProposalCandidates extends React.Component {
         this.setState({
             data: InstitutionStore.getCandidates()
         });
-        console.log(this.state.data);
+        console.log('CANDIDATES');
     };
 
     handleClick () {
 
     }
 
-    imageFormatter (cell, row) {
+    imageFormatter = (cell, row) =>{
         return (
-            <img height='50' src={ config.API_STATIC_URL + cell.imageUrl } />
+            <img height='50' src={ config.API_STATIC_URL + row.imageUrl } />
         );
     }
 
-    nameFormatter (cell, row) {
+    nameFormatter = (cell, row) =>{
+        console.log('NAME');
+        console.log(row);
         return (
             <div className='text-center'>
                 <span className='volunteering-table-text-margin'>{ row.name }</span>
@@ -89,7 +93,7 @@ export default class viewProposalCandidates extends React.Component {
         );
     }
 
-    emailFormatter (cell, row) {
+    emailFormatter = (cell, row) =>{
         return (
             <div className='text-center'>
                 <span className='volunteering-table-text-margin'>{ row.email }</span>
@@ -97,15 +101,15 @@ export default class viewProposalCandidates extends React.Component {
         );
     }
 
-    birthdateFormatter (cell, row) {
+    birthdateFormatter = (cell, row) =>{
         return (
             <div className='text-center'>
-                <span className='volunteering-table-text-margin'>{ row.birthdate }</span>
+                <span className='volunteering-table-text-margin'>{ row.birthDate }</span>
             </div>
         );
     }
 
-    professionFormatter (cell, row) {
+    professionFormatter = (cell, row) =>{
         return (
             <div className='text-center'>
                 <span className='volunteering-table-text-margin'>{ row.profession }</span>

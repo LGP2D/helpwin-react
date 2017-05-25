@@ -3,7 +3,6 @@ import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
 import InstitutionActions from 'app/actions/institutionActions';
 import InstitutionStore from 'app/stores/institutionStore';
-import UserStore from 'app/stores/userStore';
 import ViewProposalCandidates from './viewProposalCandidates';
 import Modal from 'react-modal';
 
@@ -26,13 +25,19 @@ export default class ListInstitutionProposals extends React.Component {
 
         this.state = {
             data: [],
+            candidates: [],
             modalIsOpen: false
         };
     }
 
-    openModal = (event, row) => {
-        console.log('MODAL OPEN');
-        this.setState({ modalIsOpen: true });
+    static contextTypes = {
+        router: React.PropTypes.object.isRequired
+    };
+
+    openModal = (cell, row) => {
+        //InstitutionActions.getCandidates(row);
+        //this.setState({ modalIsOpen: true });
+        this.context.router.push('/dashboard/candidates/' + row.uniqueId);
     };
 
     afterOpenModal = () => {
@@ -47,14 +52,17 @@ export default class ListInstitutionProposals extends React.Component {
     };
 
     componentWillMount () {
+        const{ router } = this.context;
         InstitutionStore.on('UPDATE_INSTITUTION_PROPOSALS', this.updateTable);
-        InstitutionStore.on('GET_PROPOSAL_CANDIDATES', this.updateTable);
+        InstitutionStore.on('GET_PROPOSAL_CANDIDATES', this.updateTableCandidates);
         InstitutionActions.getProposals();
     }
 
 
     componentWillUnmount () {
         InstitutionStore.removeListener('UPDATE_INSTITUTION_PROPOSALS', this.updateTable);
+        InstitutionStore.removeListener('GET_PROPOSAL_CANDIDATES', this.updateTableCandidates);
+
     }
 
     render () {
@@ -102,9 +110,38 @@ export default class ListInstitutionProposals extends React.Component {
                             Choose candidates
                         </TableHeaderColumn>
                     </BootstrapTable>
-                    <Modal isOpen={ this.state.modalIsOpen } style={ customStyles }  contentLabel='Example Modal'>
+                    <Modal isOpen={ this.state.modalIsOpen } style={ customStyles } contentLabel='Example Modal'>
+                        <table class='table table-condensed'>
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>BirthDate</th>
+                                <th>Profession</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            { this.state.candidates.map(function (result) {
+                                return(
+                                <tr>
+                                    <td>
+                                        result.name
+                                    </td>
+                                    <td>
+                                        result.email
+                                    </td>
+                                    <td>
+                                        result.birthDate
+                                    </td>
+                                    <td>
+                                        result.profession
+                                    </td>
+                                </tr>
+                                )
+                            }) }
+                            </tbody>
+                        </table>
                         <button onClick={ this.closeModal }>close</button>
-                        <div>I am a modal</div>
                     </Modal>
                 </div>
             </div>
@@ -116,6 +153,13 @@ export default class ListInstitutionProposals extends React.Component {
         this.setState({
             data: InstitutionStore.getAll()
         });
+    };
+
+    updateTableCandidates = () => {
+        this.setState({
+            candidates: InstitutionStore.getCandidates()
+        });
+
     };
 
     nameFormatter (cell, row) {
@@ -158,7 +202,7 @@ export default class ListInstitutionProposals extends React.Component {
     }
     buttonFormatter = (cell, row) => {
         return (
-            <button className='btn btn-default' onClick={ this.openModal } type='button'
+            <button className='btn btn-default' onClick={ () => this.openModal(cell,row) } type='button'
                     name={ row }>
                 Candidates
             </button>

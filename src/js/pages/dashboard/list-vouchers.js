@@ -39,20 +39,20 @@ export default class ListVouchers extends React.Component {
 
         return (
 
-            <div class='panel panel-headline'>
-                <div class='panel-heading'>
-                    <h3 class='panel-title'>Vouchers</h3>
-                    <p class='panel-subtitle'>A list with existing vouchers</p>
-                    <div class='right'>
-                        <button type='button' class='btn-toggle-collapse'>
-                            <i class='ti ti-angle-up' />
+            <div className='panel panel-headline'>
+                <div className='panel-heading'>
+                    <h3 className='panel-title'>Vouchers</h3>
+                    <p className='panel-subtitle'>A list with existing vouchers</p>
+                    <div className='right'>
+                        <button type='button' className='btn-toggle-collapse'>
+                            <i className='ti ti-angle-up' />
                         </button>
-                        <button type='button' class='btn-remove'>
-                            <i class='ti ti-close' />
+                        <button type='button' className='btn-remove'>
+                            <i className='ti ti-close' />
                         </button>
                     </div>
                 </div>
-                <div class='panel-body'>
+                <div className='panel-body'>
                     <ImgGrid>
                         { this.state.vouchers.map(function (result) {
                             return <ImgOnGrid key={ result.imagePath } imagePath={ result.imagePath } />;

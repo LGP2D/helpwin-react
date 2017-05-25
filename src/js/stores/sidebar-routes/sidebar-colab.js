@@ -7,7 +7,7 @@ const routes = [
         name: 'Home'
     },
     {
-        href: '/dashboard/list-institutions1',
+        href: '/dashboard/list-institutions',
         icon: 'ti ti-hand-open',
         name: 'Institutions'
     },
@@ -27,7 +27,7 @@ const routes = [
         name: 'Volunteering Proposals'
     },
     {
-        href: '/dashboard/vouchers1',
+        href: '/dashboard/list-vouchers-collab',
         icon: 'ti ti-medall',
         name: 'Vouchers'
     }

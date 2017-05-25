@@ -5,8 +5,20 @@ import InstitutionActions from 'app/actions/institutionActions';
 import InstitutionStore from 'app/stores/institutionStore';
 import UserStore from 'app/stores/userStore';
 import ViewProposalCandidates from './viewProposalCandidates';
+import Modal from 'react-modal';
 
 import 'react-bootstrap-table/dist/react-bootstrap-table.min.css';
+
+const customStyles = {
+    content : {
+        top                   : '50%',
+        left                  : '50%',
+        right                 : 'auto',
+        bottom                : 'auto',
+        marginRight           : '-50%',
+        transform             : 'translate(-50%, -50%)'
+    }
+};
 
 export default class ListInstitutionProposals extends React.Component {
     constructor () {
@@ -14,14 +26,36 @@ export default class ListInstitutionProposals extends React.Component {
 
         this.state = {
             data: [],
-            institution: UserStore.getUser
+            modalIsOpen: false
         };
+
+        this.openModal = this.openModal.bind(this);
+        this.afterOpenModal = this.afterOpenModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
+    }
+
+
+
+    openModal(event, row) {
+        console.log('MODAL OPEN');
+        this.setState({ modalIsOpen: true });
+    }
+
+    afterOpenModal() {
+        // references are now sync'd and can be accessed.
+        this.subtitle.style.color = '#f00';
+    }
+
+    closeModal() {
+        this.setState({ modalIsOpen: false });
     }
 
     componentWillMount () {
         InstitutionStore.on('UPDATE_INSTITUTION_PROPOSALS', this.updateTable);
+        InstitutionStore.on('GET_PROPOSAL_CANDIDATES', this.updateTable);
         InstitutionActions.getProposals();
     }
+
 
     componentWillUnmount () {
         InstitutionStore.removeListener('UPDATE_INSTITUTION_PROPOSALS', this.updateTable);
@@ -68,6 +102,10 @@ export default class ListInstitutionProposals extends React.Component {
                         <TableHeaderColumn dataFormat={ this.vacanciesFormatter }>
                             Vacancies
                         </TableHeaderColumn>
+                        <TableHeaderColumn dataFormat={ this.buttonFormatter }>
+                            Choose candidates
+                        </TableHeaderColumn>
+
                     </BootstrapTable>
                 </div>
             </div>
@@ -79,7 +117,6 @@ export default class ListInstitutionProposals extends React.Component {
         this.setState({
             data: InstitutionStore.getAll()
         });
-        console.log(this.state.data);
     };
 
     nameFormatter (cell, row) {
@@ -113,6 +150,29 @@ export default class ListInstitutionProposals extends React.Component {
         );
     }
 
+    helpButton  = (event, id) => {
+        console.log('GET_CANDIDATES');
+        return (
+            <Modal
+                isOpen={ this.state.modalIsOpen }
+                onAfterOpen={ this.afterOpenModal }
+                onRequestClose={ this.closeModal }
+                style={ customStyles }
+                contentLabel='Example Modal'>
+
+                <button onClick={ this.closeModal }>close</button>
+                <div>I am a modal</div>
+                <form>
+                    <input />
+                    <button>tab navigation</button>
+                    <button>stays</button>
+                    <button>inside</button>
+                    <button>the modal</button>
+                </form>
+            </Modal>
+        );
+    }
+
     vacanciesFormatter (cell, row) {
         return (
             <div className='volunteering-coins'>
@@ -120,4 +180,21 @@ export default class ListInstitutionProposals extends React.Component {
             </div>
         );
     }
+
+    onclickBtn (cell, row){
+        console.log('FUCK');
+    }
+
+    buttonFormatter(cell, row){
+        return (
+            <button className='btn btn-default' onClick={
+                this.helpButton.bind(null, event, row)
+            } type='button'
+                    name={ row }>
+                Help
+            </button>
+        );
+    }
+
+
 }

@@ -11,6 +11,11 @@ export default {
             type: 'FETCH_VALID_PROPOSALS'
         });
     },
+    fetchUserProposals: () => {
+        dispatcher.dispatch({
+            type: 'FETCH_USER_PROPOSALS'
+        });
+    },
     applyToAction: (id) => {
         dispatcher.dispatch({
             type: 'APPLY_TO_ACTION',

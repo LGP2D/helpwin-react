@@ -42,3 +42,24 @@
 .navbar-header {
     margin-top: 10px;
 }
+
+span .badge-primary {
+    background-color: #337ab7;
+    color: #fff;
+}
+span .badge-success {
+    background-color: #5cb85c;
+    color: #fff;
+}
+span .badge-info {
+    background-color: #5bc0de;
+    color: #fff;
+}
+span .badge-warning {
+    background-color: #f0ad4e;
+    color: #fff;
+}
+span .badge-danger {
+    background-color: #d9534f;
+    color: #fff;
+}

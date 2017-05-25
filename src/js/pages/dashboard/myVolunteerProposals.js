@@ -7,22 +7,30 @@ import { VolunteeringStore } from 'app/stores';
 import 'react-bootstrap-table/dist/react-bootstrap-table.min.css';
 import config from 'app/stores/config';
 
-export default class MyVolunteerProposals extends React.Component{
-    constructor(){
+export default class MyVolunteerProposals extends React.Component {
+
+    constructor () {
         super();
 
-        this.state={
-            data:[]
+        this.onUpdateProposals = this.update.bind(this, 'actions');
+        this.onUpdateUserProposals = this.update.bind(this, 'data');
+
+        this.state = {
+            data: [],
+            actions: []
         };
     }
 
     componentWillMount () {
-        VolunteeringStore.on('UPDATE_VOLUNTEERING', this.updateTable);
+        VolunteeringStore.on('UPDATE_VOLUNTEERING', this.onUpdateProposals);
+        VolunteeringStore.on('UPDATE_USER_PROPOSALS', this.onUpdateUserProposals);
+        VolunteeringActions.fetchUserProposals();
         VolunteeringActions.fetchValidProposals();
     }
 
     componentWillUnmount () {
-        VolunteeringStore.removeListener('UPDATE_VOLUNTEERING', this.updateTable);
+        VolunteeringStore.removeListener('UPDATE_VOLUNTEERING', this.onUpdateProposals);
+        VolunteeringStore.removeListener('UPDATE_USER_PROPOSALS', this.onUpdateUserProposals);
     }
 
     render () {
@@ -31,8 +39,8 @@ export default class MyVolunteerProposals extends React.Component{
 
             <div class='panel panel-headline'>
                 <div class='panel-heading'>
-                    <h3 class='panel-title'>Volunteering Proposals</h3>
-                    <p class='panel-subtitle'>A list with all registered institutions</p>
+                    <h3 class='panel-title'>My Volunteering Proposals</h3>
+                    <p class='panel-subtitle'>A list with the proposals you are involved in</p>
                     <div class='right'>
                         <button type='button' class='btn-toggle-collapse'>
                             <i class='ti ti-angle-up' />
@@ -43,22 +51,33 @@ export default class MyVolunteerProposals extends React.Component{
                     </div>
                 </div>
                 <div class='panel-body'>
-                    <BootstrapTable data={ this.state.data } striped={ true } hover={ true }>
-                        <TableHeaderColumn dataField='user' dataFormat={ this.imageFormatter }
-                                           isKey={ true }>
+                    <BootstrapTable data={ this.state.data } striped = { true } bordered = { false }  hover={ true }>
+                        <TableHeaderColumn dataField='action'
+                                           dataFormat={ this.imageFormatter.bind(this) }>
                             Logo
                         </TableHeaderColumn>
-                        <TableHeaderColumn dataField='user' dataFormat={ this.nameFormatter }>
+                        <TableHeaderColumn dataField='action' dataFormat={ this.nameFormatter.bind(this) }
+                                           isKey={ true } dataSort={ true }>
                             Name
                         </TableHeaderColumn>
-                        <TableHeaderColumn dataFormat={ this.locationDateFormatter }>
-                            Location & Date
+                        <TableHeaderColumn dataField='action' dataFormat={ this.fieldFormatter }
+                                           formatExtraData={ 'location' }>
+                            Location
                         </TableHeaderColumn>
-                        <TableHeaderColumn dataField='description'>
+                        <TableHeaderColumn dataField='action' dataFormat={ this.dateFormatter }
+                                           formatExtraData={ 'startDate' }>
+                            Starting
+                        </TableHeaderColumn>
+                        <TableHeaderColumn dataField='action' dataFormat={ this.fieldFormatter }
+                                           formatExtraData={ 'endDate' }>
+                            Ending
+                        </TableHeaderColumn>
+                        <TableHeaderColumn dataField='action' dataFormat={ this.fieldFormatter }
+                                           formatExtraData={ 'description' }>
                             Description
                         </TableHeaderColumn>
-                        <TableHeaderColumn dataFormat={ this.helpFormatter }>
-                            Help
+                        <TableHeaderColumn dataFormat={ this.stateFormatter }>
+                            State
                         </TableHeaderColumn>
                     </BootstrapTable>
                 </div>
@@ -67,53 +86,69 @@ export default class MyVolunteerProposals extends React.Component{
         );
     }
 
-    updateTable = () => {
-        this.setState({
-            data: VolunteeringStore.getActions()
-        });
-        console.log(this.state.data);
+    update = (key) => {
+        this.state[key] = VolunteeringStore.getActions();
+        this.setState(this.state);
     };
+
+    getActionById (id) {
+        for (let actionId in this.state.actions) {
+            let action = this.state.actions[actionId];
+            if(action.id === id) {
+                return action;
+            }
+        }
+    }
 
     imageFormatter (cell, row) {
         return (
-            <img height='50' src={ config.API_STATIC_URL + cell.imageUrl } />
+            <img height='50' src={ config.API_STATIC_URL + this.getActionById(cell.id).user.imageUrl } />
         );
     }
 
     nameFormatter (cell, row) {
         return (
-            cell.name
+            this.getActionById(cell.id).user.name
         );
     }
 
-    locationDateFormatter (cell, row) {
+    dateFormatter (cell, row, extra) {
+        let date = new Date(cell[extra]);
+        let diff = Math.round((date - new Date()) / (1000*60*60*24));
         return (
-            <div className='text-center'>
-                <p> { row.location } </p>
-                <i className='fa fa-calendar'/><span
-                className='volunteering-table-text-margin'>Starting: { row.startDate }</span>
-                <br />
-                <i className='fa fa-calendar'/><span
-                className='volunteering-table-text-margin'>Ending: { row.endDate }</span>
-            </div>
+            <span> { cell[extra] } { diff > 0 ? <span class='badge badge-info'>{ diff } days to go</span> :
+                <span class='badge badge-success'>ONGOING</span> }</span>
         );
     }
 
-    helpFormatter (cell, row) {
+    fieldFormatter (cell, row, extra) {
         return (
-            <div className='volunteering-coins'>
-                <i className='fa fa-database coin'/><span
-                className='volunteering-table-text-margin'>{ row.credits }</span>
-                <br />
-                <button className='btn btn-default' onClick={ helpButton.bind(null, event, row.id) } type='button'
-                        name={ row.id }>
-                    Help
-                </button>
-            </div>
+            cell[extra]
         );
+    }
 
-        function helpButton (event, id) {
-            VolunteeringActions.applyToAction(id);
+    stateFormatter (cell, row) {
+        let state = 'default';
+        let description = 'FAILED';
+        switch(row.evaluationStatus.description) {
+            case 'PENDING':
+                state =  row.elected ? 'success' : 'warning';
+                description = row.elected ? 'ACCEPTED' : 'PENDING APPROVAL';
+                break;
+            case 'FAILED':
+                state = 'danger';
+                description = 'FAILED';
+                break;
+            case 'REJECTED':
+                state = 'danger';
+                description = 'REJECTED';
+            case 'SUCCEED':
+                state = 'success';
+                description = '';
+                break;
         }
+        return (
+            <span class={ 'label label-' + state }>{ description }</span>
+        );
     }
 }

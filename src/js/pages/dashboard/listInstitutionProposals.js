@@ -28,27 +28,23 @@ export default class ListInstitutionProposals extends React.Component {
             data: [],
             modalIsOpen: false
         };
-
-        this.openModal = this.openModal.bind(this);
-        this.afterOpenModal = this.afterOpenModal.bind(this);
-        this.closeModal = this.closeModal.bind(this);
     }
 
-
-
-    openModal(event, row) {
+    openModal = (event, row) => {
         console.log('MODAL OPEN');
         this.setState({ modalIsOpen: true });
-    }
+    };
 
-    afterOpenModal() {
+    afterOpenModal = () => {
         // references are now sync'd and can be accessed.
         this.subtitle.style.color = '#f00';
-    }
+    };
 
-    closeModal() {
-        this.setState({ modalIsOpen: false });
-    }
+    closeModal = (cell, row) => {
+        this.setState({
+            modalIsOpen: false
+        });
+    };
 
     componentWillMount () {
         InstitutionStore.on('UPDATE_INSTITUTION_PROPOSALS', this.updateTable);
@@ -105,8 +101,11 @@ export default class ListInstitutionProposals extends React.Component {
                         <TableHeaderColumn dataFormat={ this.buttonFormatter }>
                             Choose candidates
                         </TableHeaderColumn>
-
                     </BootstrapTable>
+                    <Modal isOpen={ this.state.modalIsOpen } style={ customStyles }  contentLabel='Example Modal'>
+                        <button onClick={ this.closeModal }>close</button>
+                        <div>I am a modal</div>
+                    </Modal>
                 </div>
             </div>
 
@@ -150,29 +149,6 @@ export default class ListInstitutionProposals extends React.Component {
         );
     }
 
-    helpButton  = (event, id) => {
-        console.log('GET_CANDIDATES');
-        return (
-            <Modal
-                isOpen={ this.state.modalIsOpen }
-                onAfterOpen={ this.afterOpenModal }
-                onRequestClose={ this.closeModal }
-                style={ customStyles }
-                contentLabel='Example Modal'>
-
-                <button onClick={ this.closeModal }>close</button>
-                <div>I am a modal</div>
-                <form>
-                    <input />
-                    <button>tab navigation</button>
-                    <button>stays</button>
-                    <button>inside</button>
-                    <button>the modal</button>
-                </form>
-            </Modal>
-        );
-    }
-
     vacanciesFormatter (cell, row) {
         return (
             <div className='volunteering-coins'>
@@ -180,21 +156,14 @@ export default class ListInstitutionProposals extends React.Component {
             </div>
         );
     }
-
-    onclickBtn (cell, row){
-        console.log('FUCK');
-    }
-
-    buttonFormatter(cell, row){
+    buttonFormatter = (cell, row) => {
         return (
-            <button className='btn btn-default' onClick={
-                this.helpButton.bind(null, event, row)
-            } type='button'
+            <button className='btn btn-default' onClick={ this.openModal } type='button'
                     name={ row }>
-                Help
+                Candidates
             </button>
         );
-    }
+    };
 
 
 }

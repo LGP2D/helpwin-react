@@ -1,7 +1,7 @@
 import React from 'react';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
-import * as InstitutionActions from 'app/actions/institutionActions';
+import InstitutionActions from 'app/actions/institutionActions';
 import InstitutionStore from 'app/stores/institutionStore';
 import UserStore from 'app/stores/userStore';
 import ViewProposalCandidates from './viewProposalCandidates';
@@ -19,15 +19,12 @@ export default class ListInstitutionProposals extends React.Component {
     }
 
     componentWillMount () {
-        InstitutionStore.on('update-get-proposals-institution', this.updateTable);
-        console.log('USER: ');
-        console.log('DATA' + this.state.data);
-        console.log(UserStore.getJwt);
+        InstitutionStore.on('UPDATE_INSTITUTION_PROPOSALS', this.updateTable);
         InstitutionActions.getProposals();
     }
 
     componentWillUnmount () {
-        InstitutionStore.removeListener('update-get-proposals-institution', this.updateTable);
+        InstitutionStore.removeListener('UPDATE_INSTITUTION_PROPOSALS', this.updateTable);
     }
 
     render () {
@@ -85,10 +82,6 @@ export default class ListInstitutionProposals extends React.Component {
         console.log(this.state.data);
     };
 
-    handleClick () {
-
-    }
-
     nameFormatter (cell, row) {
         return (
             row.type
@@ -108,23 +101,10 @@ export default class ListInstitutionProposals extends React.Component {
         );
     }
 
-    helpFormatter (cell, row) {
-        return (
-            <div className='volunteering-coins'>
-                <i className='fa fa-database coin'/><span
-                className='volunteering-table-text-margin'>{ row.credits }</span>
-                <br />
-                <button className='btn btn-default' onClick={ this.handleClick } type='button'
-                        name={ row.id }>
-                    Help
-                </button>
-            </div>
-        );
-    }
-
     creditsFormatter (cell, row) {
+
         return (
-            <div className='volunteering-coins'>
+            <div className='volunteering-coins'>s
                 <span
                     className='volunteering-table-text-margin'>{ row.description }</span>
                 <br /><i className='fa fa-database coin'/><span

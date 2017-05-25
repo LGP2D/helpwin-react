@@ -13,6 +13,7 @@ class InstitutionStore extends EventEmitter {
     }
 
     getAll (){
+        console.log('Get all Proposals');
         return this.data;
     }
 
@@ -22,8 +23,8 @@ class InstitutionStore extends EventEmitter {
 
     handleActions (action) {
         switch (action.type) {
-            case 'GET_PROPOSALS': {
-                console.log("POST");
+            case 'GET_INSTITUTION_PROPOSALS': {
+                console.log("GET_INSTITUTION_PROPOSALS");
                 axios({
                     method: 'post',
                     url: config.API_URL + 'actions/institutionActions',
@@ -34,8 +35,8 @@ class InstitutionStore extends EventEmitter {
                     }
                 }).then(response => {
                     this.data = response.data;
-                    console.log('data -> ' + this.data);
-                    this.emit('update-get-proposals-institution');
+                    console.log('UPDATED PROPOSALS');
+                    this.emit('UPDATE_INSTITUTION_PROPOSALS');
                 }).catch(error => {
                     console.log(error);
                 });
@@ -54,7 +55,7 @@ class InstitutionStore extends EventEmitter {
                 }).then(response => {
                     this.data = response.data;
                     console.log('data -> ' + this.data);
-                    this.emit('update-get-proposals-institution');
+                    this.emit('UPDATE_PROPOSAL_CANDIDATES');
                 }).catch(error => {
                     console.log(error);
                 });

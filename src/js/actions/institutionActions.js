@@ -12,5 +12,25 @@ export default {
             type: 'GET_PROPOSAL_CANDIDATES',
             volunteeringProposal: volunteeringProposal
         });
+    },
+
+    getInstitutions: () => {
+        dispatcher.dispatch({
+            type: 'GET_INSTITUTIONS'
+        });
+    },
+
+    activate: (uniqueId) => {
+        dispatcher.dispatch({
+            type: 'ACTIVATE_INSTITUTION',
+            uniqueId: uniqueId
+        });
+    },
+
+    deactivate: (uniqueId) => {
+        dispatcher.dispatch({
+            type: 'DEACTIVATE_INSTITUTION',
+            uniqueId: uniqueId
+        });
     }
 }

@@ -25,5 +25,11 @@ export default {
             type: 'DEACTIVATE_VOUCHER',
             uniqueId: uniqueId
         });
+    },
+
+    companyVouchers: () => {
+        dispatcher.dispatch({
+            type: 'GET_VOUCHERS_COMPANY'
+        });
     }
 }

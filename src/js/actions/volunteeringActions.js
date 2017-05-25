@@ -21,5 +21,18 @@ export default {
             type: 'APPLY_TO_ACTION',
             actionId: id
         });
+    },
+    //TODO create activate/deactivate actions
+    activate: (id) => {
+        dispatcher.dispatch({
+            type: 'ACTIVATE_PROPOSAL_SUCCESSFUL',
+            actionId: id
+        });
+    },
+    deactivate: (id) => {
+        dispatcher.dispatch({
+            type: 'DEACTIVATE_PROPOSAL_SUCCESSFUL',
+            actionId: id
+        });
     }
 }

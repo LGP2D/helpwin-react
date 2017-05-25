@@ -104,7 +104,26 @@ class VoucherStore extends EventEmitter {
                 }).then(response => {
                     this.companyVouchers = response.data;
                     this.emit('CHANGE_VOUCHERS_COMPANY');
-                    console.log('GET_VOUCHERS_COMPANY SAIU');
+                }).catch(error => {
+                    console.log(error);
+                });
+                break;
+            }
+            case 'DELETE_VOUCHER' : {
+                console.log('DELETE_VOUCHER')
+                axios({
+                    method: 'post',
+                    url: config.API_URL + 'voucher/deleteCompanyVouchers/',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    data: {
+                        uniqueId: action.uniqueId
+                    }
+                }).then(response => {
+                    this.emit('VOUCHER_DELETED');
+                    console.log('DELETE_VOUCHER DONE')
                 }).catch(error => {
                     console.log(error);
                 });

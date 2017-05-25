@@ -36,6 +36,22 @@ class VolunteeringStore extends EventEmitter {
                 });
                 break;
             }
+            case 'FETCH_PROPOSAL': {
+                axios({
+                    method: 'get',
+                    url: config.API_URL + 'actions/' + action.actionId,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    }
+                }).then(response => {
+                    this.data = response.data;
+                    this.emit('UPDATE_PROPOSAL');
+                }).catch(error => {
+                    console.log(error);
+                });
+                break;
+            }
             case 'FETCH_USER_PROPOSALS': {
                 axios({
                     method: 'get',

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
 import { VolunteeringActions } from 'app/actions';
@@ -79,6 +80,7 @@ export default class MyVolunteerProposals extends React.Component {
                         <TableHeaderColumn dataFormat={ this.stateFormatter }>
                             State
                         </TableHeaderColumn>
+                        <TableHeaderColumn dataFormat={ this.helpFormatter } />
                     </BootstrapTable>
                 </div>
             </div>
@@ -113,10 +115,11 @@ export default class MyVolunteerProposals extends React.Component {
     }
 
     dateFormatter (cell, row, extra) {
-        let date = new Date(cell[extra]);
+        let input = extra ? cell[extra] : cell;
+        let date = new Date(input);
         let diff = Math.round((date - new Date()) / (1000*60*60*24));
         return (
-            <span> { cell[extra] } { diff > 0 ? <span class='badge badge-info'>{ diff } days to go</span> :
+            <span> { input } { diff > 0 ? <span class='badge badge-info'>{ diff } days to go</span> :
                 <span class='badge badge-success'>ONGOING</span> }</span>
         );
     }
@@ -149,6 +152,16 @@ export default class MyVolunteerProposals extends React.Component {
         }
         return (
             <span class={ 'label label-' + state }>{ description }</span>
+        );
+    }
+
+    helpFormatter (cell, row) {
+        return (
+            <Link to={ '/dashboard/proposals/' + row.action.id }>
+                <button className='btn btn-primary' type='button'>
+                    Details
+                </button>
+            </Link>
         );
     }
 }

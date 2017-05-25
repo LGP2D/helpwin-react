@@ -57,7 +57,9 @@ export default class ListVouchers extends React.Component {
                         { this.state.vouchers.map(function (result) {
                             return <ImgOnGrid key={ result.imagePath } imagePath={ result.imagePath } />;
                         }) }
+
                     </ImgGrid>
+
                 </div>
             </div>
 

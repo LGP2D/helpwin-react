@@ -2,6 +2,7 @@ import { EventEmitter } from 'events';
 import dispatcher from 'app/dispatcher/dispatcher';
 import axios from 'axios';
 import config from './config'
+import UserStore from 'app/stores/userStore';
 
 class VoucherStore extends EventEmitter {
 
@@ -90,6 +91,47 @@ class VoucherStore extends EventEmitter {
                 }).catch(error => {
                     console.log(error);
                 });
+                break;
+            }
+            case 'ACTIVATE_VOUCHER': {
+                axios({
+                    method: 'put',
+                    url: config.API_URL + 'voucher/validate',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'Authorization': UserStore.getJwt
+                    },
+                    data: {
+                        uniqueId: action.uniqueId
+                    }
+                }).then(response => {
+                    this.emit('ACTIVATE_VOUCHER_SUCCESSFUL');
+                }).catch(error => {
+                    console.log(error);
+                });
+                break;
+            }
+            case 'DEACTIVATE_VOUCHER' : {
+                axios({
+                    method: 'put',
+                    url: config.API_URL + 'voucher/invalidate',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'Authorization': UserStore.getJwt
+                    },
+                    data: {
+                        uniqueId: action.uniqueId
+                    }
+                }).then(response => {
+                    this.emit('DEACTIVATE_VOUCHER_SUCCESSFUL');
+                }).catch(error => {
+                    console.log(error);
+                });
+                break;
+            }
+            default: {
                 break;
             }
         }

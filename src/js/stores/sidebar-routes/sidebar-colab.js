@@ -27,7 +27,7 @@ const routes = [
         name: 'Volunteering Proposals'
     },
     {
-        href: '/dashboard/vouchers1',
+        href: '/dashboard/list-vouchers-collab',
         icon: 'ti ti-medall',
         name: 'Vouchers'
     }

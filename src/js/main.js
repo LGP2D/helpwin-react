@@ -28,15 +28,15 @@ import Register from 'app/pages/frontpage/register';
 import VolunteeringList from 'app/pages/frontpage/volunteering-list';
 import GetVouchers from 'app/pages/frontpage/vouchersList';
 import Login from 'app/pages/frontpage/login';
-import CompanyVoucher from 'app/pages/frontpage/company-voucher';
 import InstProp from 'app/pages/dashboard/listInstitutionProposals';
 import Candidates from 'app/pages/dashboard/viewProposalCandidates';
+import ViewProposalDetails from 'app/pages/dashboard/view-proposal-details';
 
 import DashLayout from 'app/components/dashboard/layout/layout';
 import Sidebar from 'app/components/dashboard/layout/sidebar';
 
 import DashboardIndex from 'app/pages/dashboard';
-import ListVouchers from 'app/pages/dashboard/list-vouchers';
+import ListVouchers from 'app/pages/dashboard/companyVoucher';
 import VolunteerProfile from 'app/pages/dashboard/volunteerProfile';
 import VolunteerProposals from 'app/pages/dashboard/volunteerProposals';
 import ListInstitution from 'app/pages/dashboard/list-institution';
@@ -65,9 +65,11 @@ ReactDOM.render(
             <Route path='vouchers' components={ { main: ListVouchers, sidebar: Sidebar } } />
             <Route path='institutionProps' components={ { main: InstProp, sidebar: Sidebar } } />
             <Route path='candidates/:id' components={ { main: Candidates, sidebar: Sidebar } } />
+            <Route path='proposals/:id' components={ { main: ViewProposalDetails, sidebar: Sidebar } } />
             <Route path='list-vouchers-collab' components={ { main: ListVoucherCollaborator, sidebar: Sidebar } } />
             <Route path='list-companies' components={ { main: ListCompanies, sidebar: Sidebar } } />
             <Route path='list-proposals-collab' components={ { main: ListProposalsCollab, sidebar: Sidebar } } />
+
 
         </Route>
 
@@ -81,10 +83,6 @@ ReactDOM.render(
 
         <Route path='/login' component={ LayoutBlank }>
             <IndexRoute component={ Login }/>
-        </Route>
-
-        <Route path='/companyvoucher' component={ LayoutBlank }>
-            <IndexRoute component={ CompanyVoucher }/>
         </Route>
 
         <Route path='/voluntlist' component={ LayoutBlank }>

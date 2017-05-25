@@ -16,18 +16,16 @@ import CompanyVoucher from 'app/pages/frontpage/company-voucher';
 import InstProp from 'app/pages/dashboard/listInstitutionProposals';
 import Candidates from 'app/pages/dashboard/viewProposalCandidates';
 
-
 import DashLayout from 'app/components/dashboard/layout/layout';
 import Sidebar from 'app/components/dashboard/layout/sidebar';
 
 import DashboardIndex from 'app/pages/dashboard';
-import ListInstitution from 'app/pages/dashboard/list-institution';
 import ListVouchers from 'app/pages/dashboard/list-vouchers';
 import VolunteerProfile from 'app/pages/dashboard/volunteerProfile';
 import VolunteerProposals from 'app/pages/dashboard/volunteerProposals';
+import ListInstitution from 'app/pages/dashboard/list-institution';
 import MyVolunteerProposals from 'app/pages/dashboard/myVolunteerProposals';
 
-import ListInstitution1 from 'app/pages/dashboard/list-institution1';
 
 const app = document.getElementById('app');
 
@@ -64,7 +62,6 @@ ReactDOM.render(
             <Route path='my-proposals-volunteer' components={ { main: MyVolunteerProposals, sidebar: Sidebar } } />
             <Route path='vouchers' components={ { main: ListVouchers, sidebar: Sidebar } } />
             <Route path='institutionProps' components={ { main: InstProp, sidebar: Sidebar } } />
-            <Route path='list-institutions1' components={ { main: ListInstitution1, sidebar: Sidebar } } />
             <Route path='candidates/:id' components={ { main: Candidates, sidebar: Sidebar } } />
 
 

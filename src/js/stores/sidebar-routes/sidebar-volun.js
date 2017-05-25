@@ -17,6 +17,11 @@ const routes = [
         name: 'Volunteering Proposals'
     },
     {
+        href: '/dashboard/my-proposals-volunteer',
+        icon: 'ti ti-user',
+        name: ' My Proposals'
+    },
+    {
         href: '/dashboard/vouchers',
         icon: 'ti ti-medall',
         name: 'Vouchers'

@@ -62,7 +62,6 @@ export default class InstitutionList1 extends AuthorizedComponent {
         );
 
         function activate (event, id) {
-            console.log(event, id);
             InstitutionActions.activate(id);
         }
     };
@@ -73,7 +72,6 @@ export default class InstitutionList1 extends AuthorizedComponent {
         );
 
         function activate (event, id) {
-            console.log(event, id);
             InstitutionActions.deactivate(id);
         }
     };

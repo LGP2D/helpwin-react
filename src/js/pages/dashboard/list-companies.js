@@ -1,15 +1,15 @@
 import React from 'react';
 import AuthorizedComponent from 'app/components/dashboard/authorization';
 
-import VoucherStore from 'app/stores/voucherStore';
-import VoucherActions from 'app/actions/voucherActions';
+import CompanyStore from 'app/stores/companyStore';
+import CompanyActions from 'app/actions/companyActions';
 
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import 'react-bootstrap-table/dist/react-bootstrap-table.min.css';
 
 import config from 'app/stores/config';
 
-export default class ListVouchersCollaborator extends AuthorizedComponent {
+export default class ListCompanies extends AuthorizedComponent {
     constructor () {
         super();
 
@@ -21,14 +21,16 @@ export default class ListVouchersCollaborator extends AuthorizedComponent {
 
     componentWillMount () {
         super.componentWillMount();
-        VoucherStore.on('CHANGE_VOUCHERS', this.handleVouchers);
-        VoucherStore.on('ACTIVATE_VOUCHER_SUCCESSFUL', this.handleActivate);
-        VoucherStore.on('DEACTIVATE_VOUCHER_SUCCESSFUL', this.handleDeactivate);
-        VoucherActions.fetchData();
+        CompanyStore.on('GET_COMPANIES_SUCCESSFUL', this.handleCompanies);
+        CompanyStore.on('ACTIVATE_COMPANY_SUCCESSFUL', this.handleActivate);
+        CompanyStore.on('DEACTIVATE_COMPANY_SUCCESSFUL', this.handleDeactivate);
+        CompanyActions.getCompanies();
     }
 
     componentWillUnmount () {
-        VoucherStore.removeListener('CHANGE_VOUCHERS', this.handleVouchers);
+        CompanyStore.removeListener('GET_COMPANIES_SUCCESSFUL', this.handleCompanies);
+        CompanyStore.removeListener('ACTIVATE_COMPANY_SUCCESSFUL', this.handleActivate);
+        CompanyStore.removeListener('DEACTIVATE_COMPANY_SUCCESSFUL', this.handleDeactivate);
     }
 
     handleActivate = () => {
@@ -39,15 +41,15 @@ export default class ListVouchersCollaborator extends AuthorizedComponent {
         window.location.reload();
     };
 
-    handleVouchers = () => {
+    handleCompanies = () => {
         this.setState({
-           data: VoucherStore.getVouchers()
+            data: CompanyStore.getCompanies
         });
     };
 
     imageFormatter = (cell, row) => {
         return (
-            <img height='50' width='100%' src={ /*config.API_STATIC_URL + */row.imagePath } />
+            <img height='50' src={ config.API_STATIC_URL + row.imageUrl } />
         );
     };
 
@@ -57,7 +59,7 @@ export default class ListVouchersCollaborator extends AuthorizedComponent {
         );
 
         function activate (event, id) {
-            VoucherActions.activate(id);
+            CompanyActions.activate(id);
         }
     };
 
@@ -67,16 +69,17 @@ export default class ListVouchersCollaborator extends AuthorizedComponent {
         );
 
         function deactivate (event, id) {
-            VoucherActions.deactivate(id);
+            CompanyActions.deactivate(id);
         }
     };
 
     render () {
+        const { location } = this.props;
         return (
             <div className='panel panel-headline'>
                 <div className='panel-heading'>
-                    <h3 className='panel-title'>Voucher List</h3>
-                    <p className='panel-subtitle'>A list with all the vouchers</p>
+                    <h3 className='panel-title'>Companies List</h3>
+                    <p className='panel-subtitle'>A list with all registered companies</p>
                     <div className='right'>
                         <button type='button' className='btn-toggle-collapse'>
                             <i className='ti ti-angle-up' />
@@ -89,23 +92,17 @@ export default class ListVouchersCollaborator extends AuthorizedComponent {
                 <div className='panel-body'>
                     <BootstrapTable data={ this.state.data } striped={ true } hover={ true }>
                         <TableHeaderColumn dataFormat={ this.imageFormatter } width='130px' />
-                        <TableHeaderColumn isKey={ true } dataField='id'>
-                            ID
+                        <TableHeaderColumn isKey={ true } dataField='uniqueId'>
+                            UniqueID
                         </TableHeaderColumn>
-                        <TableHeaderColumn dataField='company'>
-                            Company
+                        <TableHeaderColumn dataField='name'>
+                            Name
                         </TableHeaderColumn>
-                        <TableHeaderColumn dataField='quantity'>
-                            Quantity
+                        <TableHeaderColumn dataField='email'>
+                            Email
                         </TableHeaderColumn>
-                        <TableHeaderColumn dataField='type'>
-                            Type
-                        </TableHeaderColumn>
-                        <TableHeaderColumn dataField='description'>
-                            Description
-                        </TableHeaderColumn>
-                        <TableHeaderColumn dataField='valid'>
-                            Valid
+                        <TableHeaderColumn dataField='active'>
+                            Active
                         </TableHeaderColumn>
                         <TableHeaderColumn dataFormat={ this.buttonActivateFormat }/>
                         <TableHeaderColumn dataFormat={ this.buttonDeactivateFormat }/>

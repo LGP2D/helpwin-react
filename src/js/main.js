@@ -1,3 +1,19 @@
+/**
+ * How to add authentication?
+ * Make your component's class extend AuthorizedComponent
+ * Add to the imports: import AuthorizedComponent from 'app/components/dashboard/authorization';
+ * In the constructor add:
+ *
+ * constructor () {
+ *      super();
+ *      this.authorize = [3]; // list of roles allowed
+ *  }
+ *
+ *  If you are using the function componentWillMount make sure it HAS AT THE TOP:
+ *  super.componentWillMount();
+ *
+ *  Ty!
+ */
 import React from "react";
 import ReactDOM from "react-dom";
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
@@ -26,26 +42,11 @@ import VolunteerProposals from 'app/pages/dashboard/volunteerProposals';
 import ListInstitution from 'app/pages/dashboard/list-institution';
 import MyVolunteerProposals from 'app/pages/dashboard/myVolunteerProposals';
 import ListVoucherCollaborator from 'app/pages/dashboard/list-vouchers-collab';
+import ListCompanies from './pages/dashboard/list-companies';
 
 
 const app = document.getElementById('app');
 
-/**
- * How to add authentication?
- * Make your component's class extend AuthorizedComponent
- * Add to the imports: import AuthorizedComponent from 'app/components/dashboard/authorization';
- * In the constructor add:
- *
- * constructor () {
- *      super();
- *      this.authorize = [3]; // list of roles allowed
- *  }
- *
- *  If you are using the function componentWillMount make sure it HAS AT THE TOP:
- *  super.componentWillMount();
- *
- *  Ty!
- */
 ReactDOM.render(
 
     <Router history={ hashHistory }>
@@ -65,6 +66,7 @@ ReactDOM.render(
             <Route path='institutionProps' components={ { main: InstProp, sidebar: Sidebar } } />
             <Route path='candidates/:id' components={ { main: Candidates, sidebar: Sidebar } } />
             <Route path='list-vouchers-collab' components={ { main: ListVoucherCollaborator, sidebar: Sidebar } } />
+            <Route path='list-companies' components={ { main: ListCompanies, sidebar: Sidebar } } />
 
         </Route>
 

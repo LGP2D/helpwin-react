@@ -50,10 +50,18 @@ export default class ListVouchersCollaborator extends AuthorizedComponent {
 
     buttonFormat = (cell, row) => {
         return(
-            <span>
-                <button onClick={ activate.bind(null, event, row.uniqueId) } name={ row.uniqueId }>Activate</button>
-                <button onClick={ deactivate.bind(null, event, row.uniqueId) } name={ row.uniqueId }>Deactivate</button>
-            </span>
+        <div>
+            <td>
+                <span>
+                    <button className='btn btn-success' onClick={ activate.bind(null, event, row.uniqueId) } name={ row.uniqueId }>Activate</button>
+                </span>
+            </td>
+            <td>
+                <span>
+                    <button className='btn btn-danger' onClick={ deactivate.bind(null, event, row.uniqueId) } name={ row.uniqueId }>Deactivate</button>
+                </span>
+            </td>
+        </div>
         );
 
         function activate (event, id) {

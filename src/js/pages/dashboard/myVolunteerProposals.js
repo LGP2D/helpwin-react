@@ -38,20 +38,20 @@ export default class MyVolunteerProposals extends React.Component {
 
         return (
 
-            <div class='panel panel-headline'>
-                <div class='panel-heading'>
-                    <h3 class='panel-title'>My Volunteering Proposals</h3>
-                    <p class='panel-subtitle'>A list with the proposals you are involved in</p>
-                    <div class='right'>
-                        <button type='button' class='btn-toggle-collapse'>
-                            <i class='ti ti-angle-up' />
+            <div className='panel panel-headline'>
+                <div className='panel-heading'>
+                    <h3 className='panel-title'>My Volunteering Proposals</h3>
+                    <p className='panel-subtitle'>A list with the proposals you are involved in</p>
+                    <div className='right'>
+                        <button type='button' className='btn-toggle-collapse'>
+                            <i className='ti ti-angle-up' />
                         </button>
-                        <button type='button' class='btn-remove'>
-                            <i class='ti ti-close' />
+                        <button type='button' className='btn-remove'>
+                            <i className='ti ti-close' />
                         </button>
                     </div>
                 </div>
-                <div class='panel-body'>
+                <div className='panel-body'>
                     <BootstrapTable data={ this.state.data } striped = { true } bordered = { false }  hover={ true } search>
                         <TableHeaderColumn dataField='action'
                                            dataFormat={ this.imageFormatter.bind(this) }>
@@ -104,13 +104,13 @@ export default class MyVolunteerProposals extends React.Component {
 
     imageFormatter (cell, row) {
         return (
-            <img height='50' src={ config.API_STATIC_URL + this.getActionById(cell.id).user.imageUrl } />
+            <img height='50' src={ config.API_STATIC_URL + cell.user.imageUrl } />
         );
     }
 
     nameFormatter (cell, row) {
         return (
-            this.getActionById(cell.id).user.name
+            cell.user.name
         );
     }
 
@@ -119,8 +119,8 @@ export default class MyVolunteerProposals extends React.Component {
         let date = new Date(input);
         let diff = Math.round((date - new Date()) / (1000*60*60*24));
         return (
-            <span> { input } { diff > 0 ? <span class='badge badge-info'>{ diff } days to go</span> :
-                <span class='badge badge-success'>ONGOING</span> }</span>
+            <span> { input } { diff > 0 ? <span className='badge badge-info'>{ diff } days to go</span> :
+                <span className='badge badge-success'>ONGOING</span> }</span>
         );
     }
 
@@ -151,7 +151,7 @@ export default class MyVolunteerProposals extends React.Component {
                 break;
         }
         return (
-            <span class={ 'label label-' + state }>{ description }</span>
+            <span className={ 'label label-' + state }>{ description }</span>
         );
     }
 

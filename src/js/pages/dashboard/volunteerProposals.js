@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+import {BootstrapTable, SearchField, TableHeaderColumn} from 'react-bootstrap-table';
 
 import { VolunteeringActions } from 'app/actions';
 import { VolunteeringStore } from 'app/stores';
@@ -51,27 +51,29 @@ export default class VolunteerProposals extends React.Component {
                     </div>
                 </div>
                 <div class='panel-body'>
-                    <BootstrapTable data={ this.state.data } striped = { true } bordered = { false }  hover={ true }>
-                        <TableHeaderColumn dataField='user' dataFormat={ this.imageFormatter }>
+                    <BootstrapTable data={ this.state.data } striped = { true } bordered = { false }  hover={ true } search>
+                        <TableHeaderColumn dataField='user' dataFormat={ this.imageFormatter } isKey={ true }>
                             Logo
                         </TableHeaderColumn>
-                        <TableHeaderColumn dataField='user' dataFormat={ this.fieldFormatter } isKey={ true }
+                        <TableHeaderColumn dataField='user' filterFormatted dataFormat={ this.fieldFormatter }
                                            dataSort={ true } formatExtraData={ 'name' }>
                             Name
                         </TableHeaderColumn>
                         <TableHeaderColumn dataField='location'>
                             Location
                         </TableHeaderColumn>
-                        <TableHeaderColumn dataField='startDate' dataFormat={ this.dateFormatter }>
+                        <TableHeaderColumn dataSort={ true } filter={ { type: 'DateFilter' } }
+                                           dataField='startDate' dataFormat={ this.dateFormatter }>
                             Starting
                         </TableHeaderColumn>
-                        <TableHeaderColumn dataField='endDate'>
+                        <TableHeaderColumn dataSort={ true } filter={ { type: 'DateFilter' } }
+                                           dataField='endDate'>
                             Ending
                         </TableHeaderColumn>
                         <TableHeaderColumn dataField='description'>
                             Description
                         </TableHeaderColumn>
-                        <TableHeaderColumn dataField='credits' dataFormat={ this.rewardFormatter }>
+                        <TableHeaderColumn dataSort={ true } dataField='credits' dataFormat={ this.rewardFormatter }>
                             Rewards
                         </TableHeaderColumn>
                         <TableHeaderColumn dataFormat={ this.helpFormatter } />
@@ -85,13 +87,11 @@ export default class VolunteerProposals extends React.Component {
     updateUserProposals = (key) => {
         this.state[key] = VolunteeringStore.getActions();
         this.setState(this.state);
-        console.log("hi");
         VolunteeringActions.fetchValidProposals();
     };
 
     updateProposals = (key) => {
         let data = VolunteeringStore.getActions();
-        console.log(data);
         for(let pId in data) {
             let proposal = data[pId];
             for (let pUId in this.state.actions) {

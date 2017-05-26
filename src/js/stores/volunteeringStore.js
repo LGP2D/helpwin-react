@@ -79,8 +79,7 @@ class VolunteeringStore extends EventEmitter {
                     }
                 }).then(response => {
                     this.data = response.data;
-                    console.log(this.data);
-                    this.emit('UPDATE_VOLUNTEERING');
+                    this.emit('UPDATE_VALID_PROPOSALS');
                 }).catch(error => {
                     console.log(error);
                 });

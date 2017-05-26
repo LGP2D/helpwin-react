@@ -24,12 +24,12 @@ export default class VolunteerProposals extends React.Component {
 
     componentWillMount () {
         VolunteeringStore.on('UPDATE_USER_PROPOSALS', this.onUpdateUserProposals);
-        VolunteeringStore.on('UPDATE_VOLUNTEERING', this.onUpdateProposals);
+        VolunteeringStore.on('UPDATE_VALID_PROPOSALS', this.onUpdateProposals);
         VolunteeringActions.fetchUserProposals();
     }
 
     componentWillUnmount () {
-        VolunteeringStore.removeListener('UPDATE_VOLUNTEERING', this.onUpdateProposals);
+        VolunteeringStore.removeListener('UPDATE_VALID_PROPOSALS', this.onUpdateProposals);
         VolunteeringStore.removeListener('UPDATE_USER_PROPOSALS', this.onUpdateUserProposals);
     }
 
@@ -51,7 +51,7 @@ export default class VolunteerProposals extends React.Component {
                     </div>
                 </div>
                 <div class='panel-body'>
-                    <BootstrapTable data={ this.state.data } striped = { true } bordered = { false }  hover={ true } search>
+                    <BootstrapTable data={ this.state.data } striped = { true } bordered = { false }  hover={ true }>
                         <TableHeaderColumn dataField='user' dataFormat={ this.imageFormatter }>
                             Logo
                         </TableHeaderColumn>
@@ -85,11 +85,13 @@ export default class VolunteerProposals extends React.Component {
     updateUserProposals = (key) => {
         this.state[key] = VolunteeringStore.getActions();
         this.setState(this.state);
+        console.log("hi");
         VolunteeringActions.fetchValidProposals();
     };
 
     updateProposals = (key) => {
         let data = VolunteeringStore.getActions();
+        console.log(data);
         for(let pId in data) {
             let proposal = data[pId];
             for (let pUId in this.state.actions) {

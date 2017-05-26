@@ -23,14 +23,14 @@ export default class Volunteer extends AuthorizedComponent {
     componentWillMount () {
         super.componentWillMount();
 
-        VolunteeringStore.on('UPDATE_VOLUNTEERING', this.onUpdate);
+        VolunteeringStore.on('UPDATE_VALID_PROPOSALS', this.onUpdate);
         VoucherStore.on('CHANGE_VOUCHERS', this.onUpdateVouchers);
-        VolunteeringActions.fetchData();
+        VolunteeringActions.fetchUserProposals();
         VoucherActions.fetchData();
     }
 
     componentWillUnmount () {
-        VolunteeringStore.removeListener('UPDATE_VOLUNTEERING', this.onUpdate);
+        VolunteeringStore.removeListener('UPDATE_VALID_PROPOSALS', this.onUpdate);
         VoucherStore.removeListener('CHANGE_VOUCHERS', this.onUpdateVouchers);
     }
 

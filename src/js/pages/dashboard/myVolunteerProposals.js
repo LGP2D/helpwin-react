@@ -23,14 +23,14 @@ export default class MyVolunteerProposals extends React.Component {
     }
 
     componentWillMount () {
-        VolunteeringStore.on('UPDATE_VOLUNTEERING', this.onUpdateProposals);
+        VolunteeringStore.on('FETCH_VALID_PROPOSALS', this.onUpdateProposals);
         VolunteeringStore.on('UPDATE_USER_PROPOSALS', this.onUpdateUserProposals);
         VolunteeringActions.fetchUserProposals();
         VolunteeringActions.fetchValidProposals();
     }
 
     componentWillUnmount () {
-        VolunteeringStore.removeListener('UPDATE_VOLUNTEERING', this.onUpdateProposals);
+        VolunteeringStore.removeListener('FETCH_VALID_PROPOSALS', this.onUpdateProposals);
         VolunteeringStore.removeListener('UPDATE_USER_PROPOSALS', this.onUpdateUserProposals);
     }
 

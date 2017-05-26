@@ -42,6 +42,7 @@ import ListInstitution from 'app/pages/dashboard/list-institution';
 import MyVolunteerProposals from 'app/pages/dashboard/myVolunteerProposals';
 import ListVoucherCollaborator from 'app/pages/dashboard/list-vouchers-collab';
 import ListCompanies from './pages/dashboard/list-companies';
+import InsertAction from './pages/dashboard/insert-action';
 
 
 const app = document.getElementById('app');
@@ -66,7 +67,7 @@ ReactDOM.render(
             <Route path='candidates/:id' components={ { main: Candidates, sidebar: Sidebar } } />
             <Route path='list-vouchers-collab' components={ { main: ListVoucherCollaborator, sidebar: Sidebar } } />
             <Route path='list-companies' components={ { main: ListCompanies, sidebar: Sidebar } } />
-
+            <Route path='insert-action' components={ { main: InsertAction, sidebar: Sidebar } } />
 
         </Route>
 

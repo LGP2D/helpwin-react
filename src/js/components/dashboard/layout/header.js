@@ -26,16 +26,16 @@ export default class Header extends React.Component {
                         <div id='navbar-menu' class='navbar-collapse collapse' aria-expanded='false'>
                             <form class='navbar-form navbar-left hidden-xs'>
                                 <div class='input-group'>
-                                    <input type='text' class='form-control' placeholder='Search dashboard...' />
-                                    <span class='input-group-btn'>
-                                        <button type='button' class='btn btn-primary disabled'>Go</button>
-                                    </span>
+                                    { /*<input type='text' class='form-control' placeholder='Search dashboard...' />
+                                     <span class='input-group-btn'>
+                                         <button type='button' class='btn btn-primary disabled'>Go</button>
+                                     </span>*/ }
                                 </div>
                             </form>
                             <ul class='nav navbar-nav navbar-right'>
                                 <li>
                                     <Link to='/' class='dropdown-toggle icon-menu'>
-                                        <i class='ti ti-announcement' /> <span>Back to Home</span>
+                                        <i class='ti ti-announcement' /> <span>Home Page</span>
                                         { /* <span class='badge bg-danger'>5</span> */ }
                                     </Link>
                                 </li>

@@ -52,7 +52,7 @@ export default class MyVolunteerProposals extends React.Component {
                     </div>
                 </div>
                 <div class='panel-body'>
-                    <BootstrapTable data={ this.state.data } striped = { true } bordered = { false }  hover={ true }>
+                    <BootstrapTable data={ this.state.data } striped = { true } bordered = { false }  hover={ true } search>
                         <TableHeaderColumn dataField='action'
                                            dataFormat={ this.imageFormatter.bind(this) }>
                             Logo

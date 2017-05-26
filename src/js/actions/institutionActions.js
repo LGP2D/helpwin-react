@@ -32,5 +32,21 @@ export default {
             type: 'DEACTIVATE_INSTITUTION',
             uniqueId: uniqueId
         });
+    },
+
+    acceptVolunteer: (uniqueId, userUniqueId) => {
+        dispatcher.dispatch({
+            type: 'ACCEPT_VOLUNTEER',
+            uniqueId: uniqueId,
+            userUniqueId: userUniqueId
+        });
+    },
+
+    rejectVolunteer: (uniqueId, userUniqueId) => {
+        dispatcher.dispatch({
+            type: 'REJECT_VOLUNTEER',
+            uniqueId: uniqueId,
+            userUniqueId: userUniqueId
+        });
     }
 }

@@ -11,7 +11,6 @@ import 'react-bootstrap-table/dist/react-bootstrap-table.min.css';
 export default class viewProposalCandidates extends React.Component {
     constructor (props) {
         super(props);
-        console.log(props);
         this.state = {
             data: [],
             action: this.props.params.id
@@ -20,31 +19,45 @@ export default class viewProposalCandidates extends React.Component {
 
     componentWillMount () {
         InstitutionStore.on('UPDATE_PROPOSAL_CANDIDATES', this.updateTable);
+        InstitutionStore.on('ACCEPT_VOLUNTEER_SUCCESSFUL', this.acceptSuccess);
+        InstitutionStore.on('REJECT_VOLUNTEER_SUCCESSFUL', this.rejectSuccess);
         InstitutionActions.getCandidates(this.state.action);
     }
 
     componentWillUnmount () {
         InstitutionStore.removeListener('UPDATE_PROPOSAL_CANDIDATES', this.updateTable);
+        InstitutionStore.removeListener('ACCEPT_VOLUNTEER_SUCCESSFUL', this.acceptSuccess);
+        InstitutionStore.removeListener('REJECT_VOLUNTEER_SUCCESSFUL', this.rejectSuccess);
     }
+
+    acceptSuccess = () => {
+        alert('Accepted');
+        window.location.reload();
+    };
+
+    rejectSuccess = () => {
+        alert('Rejected');
+        window.location.reload();
+    };
 
     render () {
         const { location } = this.props;
 
         return (
 
-            <div class='panel panel-headline'>
-                <div class='panel-heading'>
-                    <h3 class='panel-title'>Proposal Candidates</h3>
-                    <div class='right'>
-                        <button type='button' class='btn-toggle-collapse'>
-                            <i class='ti ti-angle-up' />
+            <div className='panel panel-headline'>
+                <div className='panel-heading'>
+                    <h3 className='panel-title'>Proposal Candidates</h3>
+                    <div className='right'>
+                        <button type='button' className='btn-toggle-collapse'>
+                            <i className='ti ti-angle-up' />
                         </button>
-                        <button type='button' class='btn-remove'>
-                            <i class='ti ti-close' />
+                        <button type='button' className='btn-remove'>
+                            <i className='ti ti-close' />
                         </button>
                     </div>
                 </div>
-                <div class='panel-body'>
+                <div className='panel-body'>
                     <BootstrapTable data={ this.state.data } striped={ true } hover={ true }>
                         <TableHeaderColumn dataField='institution' dataFormat={ this.imageFormatter } isKey={ true } />
                         <TableHeaderColumn dataFormat={ this.nameFormatter }>
@@ -59,12 +72,34 @@ export default class viewProposalCandidates extends React.Component {
                         <TableHeaderColumn dataFormat={ this.professionFormatter }>
                             Profession
                         </TableHeaderColumn>
-                    </BootstrapTable>
+                        <TableHeaderColumn dataFormat={ (cell, row, id) => this.acceptButtonFormatter(cell, row, this.state.action) } />
+                        <TableHeaderColumn dataFormat={ (cell, row, id) => this.denyButtonFormatter(cell, row, this.state.action) } />
+                </BootstrapTable>
                 </div>
             </div>
 
         );
     }
+
+    acceptButtonFormatter = (cell, row, id) => {
+        return(
+            <button onClick={ accept.bind(null, cell, row.uniqueId, id) } name={ row.uniqueId }>Accept</button>
+        );
+
+        function accept (cell, row, id) {
+            InstitutionActions.acceptVolunteer(id, row);
+        }
+    };
+
+    denyButtonFormatter = (cell, row, id) => {
+        return(
+            <button onClick={ deny.bind(null, cell, row.uniqueId, id) } name={ row.uniqueId }>Reject</button>
+        );
+
+        function deny (cell, row, id) {
+            InstitutionActions.rejectVolunteer(id, row);
+        }
+    };
 
     updateTable = () => {
         this.setState({
@@ -73,15 +108,12 @@ export default class viewProposalCandidates extends React.Component {
         console.log('CANDIDATES');
     };
 
-    handleClick () {
-
-    }
 
     imageFormatter = (cell, row) =>{
         return (
             <img height='50' src={ config.API_STATIC_URL + row.imageUrl } />
         );
-    }
+    };
 
     nameFormatter = (cell, row) =>{
         console.log('NAME');

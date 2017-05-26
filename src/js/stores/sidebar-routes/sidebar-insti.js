@@ -12,11 +12,11 @@ const routes = [
         icon: 'ti ti-crown',
         name: 'Proposals'
     },
-    {
+    /*{
         href: '/dashboard/proposals-volunteer/:id',
         icon: 'ti ti-bolt-alt',
         name: 'Candidates'
-    },
+    },*/
     {
         href: '/dashboard/insert-action',
         icon: 'ti ti-bolt-alt',

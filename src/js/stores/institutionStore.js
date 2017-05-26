@@ -126,6 +126,46 @@ class InstitutionStore extends EventEmitter {
                 });
                 break;
             }
+            case 'ACCEPT_VOLUNTEER': {
+                axios({
+                    method: 'POST',
+                    url: config.API_URL + 'actions/acceptUser/' + action.userUniqueId,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'Authorization': UserStore.getJwt
+                    },
+                    data: {
+                        uniqueId: action.uniqueId
+                    }
+                }).then(response => {
+                    console.log(response.data);
+                    this.emit('ACCEPT_VOLUNTEER_SUCCESSFUL');
+                }).catch(error => {
+                    console.log(error);
+                });
+                break;
+            }
+            case 'REJECT_VOLUNTEER': {
+                axios({
+                    method: 'POST',
+                    url: config.API_URL + 'actions/declineUser/' + action.userUniqueId,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'Authorization': UserStore.getJwt
+                    },
+                    data: {
+                        uniqueId: action.uniqueId
+                    }
+                }).then(response => {
+                    console.log(response.data);
+                    this.emit('REJECT_VOLUNTEER_SUCCESSFUL');
+                }).catch(error => {
+                    console.log(error);
+                });
+                break;
+            }
             default: { }
         }
     }

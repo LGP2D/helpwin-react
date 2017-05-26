@@ -133,6 +133,11 @@ export default class Register extends React.Component {
         );
     }
 
+    validateEmail = (email) => {
+        let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    };
+
     handleChangeImage = (event) => {
         event.preventDefault();
 
@@ -164,6 +169,11 @@ export default class Register extends React.Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
+
+        if (!this.validateEmail(this.state.email)){
+            alert('Wrong email format.');
+            return;
+        }
 
         if (this.state.data_uri === undefined || this.state.data_uri === null) {
             this.onUploadSuccess();

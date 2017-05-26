@@ -74,8 +74,19 @@ export default class Login extends React.Component {
         );
     }
 
+    validateEmail = (email) => {
+        let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    };
+
     handleSubmit = (event) => {
         event.preventDefault();
+
+        if (!this.validateEmail(this.state.email)) {
+            alert('Email wrong format.');
+            return;
+        }
+
         UserActions.loginUser(this.state.email, this.state.password);
     };
 

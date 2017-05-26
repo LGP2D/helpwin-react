@@ -11,11 +11,11 @@ const routes = [
         icon: 'ti ti-hand-open',
         name: 'Institutions'
     },
-    {
+    /*{
         href: '/dashboard/list-volunteers1',
         icon: 'ti ti-crown',
         name: 'Volunteers'
-    },
+    },*/
     {
         href: '/dashboard/list-companies',
         icon: 'ti ti-bolt-alt',

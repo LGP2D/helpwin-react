@@ -17,6 +17,11 @@ const routes = [
         icon: 'ti ti-bolt-alt',
         name: 'Candidates'
     },
+    {
+        href: '/dashboard/insert-action',
+        icon: 'ti ti-bolt-alt',
+        name: 'Insert Actions'
+    }
 ];
 
 export default routes;

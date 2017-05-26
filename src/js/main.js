@@ -44,6 +44,7 @@ import MyVolunteerProposals from 'app/pages/dashboard/myVolunteerProposals';
 import ListVoucherCollaborator from 'app/pages/dashboard/list-vouchers-collab';
 import ListCompanies from './pages/dashboard/list-companies';
 import ListProposalsCollab from './pages/dashboard/list-proposals-collab';
+import InsertAction from './pages/dashboard/insert-action';
 
 const app = document.getElementById('app');
 
@@ -70,6 +71,7 @@ ReactDOM.render(
             <Route path='list-companies' components={ { main: ListCompanies, sidebar: Sidebar } } />
             <Route path='list-proposals-collab' components={ { main: ListProposalsCollab, sidebar: Sidebar } } />
 
+            <Route path='insert-action' components={ { main: InsertAction, sidebar: Sidebar } } />
 
         </Route>
 

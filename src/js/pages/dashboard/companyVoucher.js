@@ -19,14 +19,16 @@ export default class CompanyVoucher extends React.Component {
     }
 
     componentWillMount () {
-        console.log('VOUCHERS COMPANY');
         VoucherStore.on('CHANGE_VOUCHERS_COMPANY', this.updateTable);
+        VoucherStore.on('VOUCHER_DELETED', this.updateDeletedTable);
         VoucherActions.companyVouchers();
     }
 
 
     componentWillUnmount () {
         VoucherStore.removeListener('CHANGE_VOUCHERS_COMPANY', this.updateTable);
+        VoucherStore.removeListener('VOUCHER_DELETED', this.updateDeletedTable);
+
     }
 
     render () {
@@ -59,6 +61,7 @@ export default class CompanyVoucher extends React.Component {
                         <TableHeaderColumn dataFormat={ this.datesFormatter }>
                             Dates
                         </TableHeaderColumn>
+                        <TableHeaderColumn dataFormat={ this.buttonDelete }/>
                     </BootstrapTable>
                 </div>
             </div>
@@ -67,10 +70,13 @@ export default class CompanyVoucher extends React.Component {
     }
 
     updateTable = () => {
-        console.log('UPDATE NIGAH!');
         this.setState({
             data: VoucherStore.getCompanyVouchers()
         });
+    };
+
+    updateDeletedTable = () => {
+        window.location.reload();
     };
 
     imageFormatter (cell, row) {
@@ -105,5 +111,15 @@ export default class CompanyVoucher extends React.Component {
             </div>
         );
     }
+
+    buttonDelete = (cell, row) => {
+        return(
+            <button onClick={ deleteV.bind(null, event, row.uniqueId) } name={ row.uniqueId }>Delete</button>
+        );
+
+        function deleteV (event, id) {
+            VoucherActions.deleteVoucher(id)
+        }
+    };
 
 }

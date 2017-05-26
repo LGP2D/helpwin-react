@@ -48,29 +48,26 @@ export default class ListVouchersCollaborator extends AuthorizedComponent {
         });
     };
 
-    buttonFormat = (cell, row) => {
+    buttonActivateFormat = (cell, row) => {
         return(
-        <div>
-            <td>
-                <span>
-                    <button className='btn btn-success' onClick={ activate.bind(null, event, row.uniqueId) } name={ row.uniqueId }>Activate</button>
-                </span>
-            </td>
-            <td>
-                <span>
-                    <button className='btn btn-danger' onClick={ deactivate.bind(null, event, row.uniqueId) } name={ row.uniqueId }>Deactivate</button>
-                </span>
-            </td>
-        </div>
+            <button className='btn btn-success' onClick={ activate.bind(null, event, row.uniqueId) } name={ row.uniqueId }>Activate</button>
         );
 
         function activate (event, id) {
             VolunteeringActions.activate(id);
         }
+    };
+
+    buttonDeactivateFormat = (cell, row) => {
+        return(
+            <button className='btn btn-danger' onClick={ deactivate.bind(null, event, row.uniqueId) } name={ row.uniqueId }>Deactivate</button>
+        );
+
         function deactivate (event, id) {
             VolunteeringActions.deactivate(id);
         }
     };
+
 
     render () {
         console.log(this.state.data);
@@ -113,7 +110,8 @@ export default class ListVouchersCollaborator extends AuthorizedComponent {
                             Verified
                         </TableHeaderColumn>
                         <TableHeaderColumn dataFormat={ this.helpFormatter } />
-                        <TableHeaderColumn dataFormat={ this.buttonFormat }/>
+                        <TableHeaderColumn dataFormat={ this.buttonActivateFormat }/>
+                        <TableHeaderColumn dataFormat={ this.buttonDeactivateFormat }/>
                     </BootstrapTable>
                 </div>
             </div>
@@ -140,12 +138,6 @@ export default class ListVouchersCollaborator extends AuthorizedComponent {
     fieldFormatter (cell, row, extra) {
         return (
             cell[extra]
-        );
-    }
-
-    rewardFormatter (cell, row) {
-        return (
-            <span><i className='fa fa-database coin'/> { cell }</span>
         );
     }
 

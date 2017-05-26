@@ -27,5 +27,17 @@ export default {
             type: 'APPLY_TO_ACTION',
             actionId: id
         });
+    },
+    activate: (id) => {
+        dispatcher.dispatch({
+            type: 'ACTIVATE_PROPOSAL',
+            actionId: id
+        });
+    },
+    deactivate: (id) => {
+        dispatcher.dispatch({
+            type: 'DEACTIVATE_PROPOSAL',
+            actionId: id
+        });
     }
 }

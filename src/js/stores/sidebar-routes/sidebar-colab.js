@@ -22,7 +22,7 @@ const routes = [
         name: 'Companies'
     },
     {
-        href: '/dashboard/proposals-volunteer1',
+        href: '/dashboard/list-proposals-collab',
         icon: 'ti ti-write',
         name: 'Volunteering Proposals'
     },

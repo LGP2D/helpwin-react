@@ -58,7 +58,7 @@ export default class InstitutionList1 extends AuthorizedComponent {
 
     static buttonActivateFormat = (cell, row) => {
         return(
-            <button onClick={ activate.bind(null, event, row.uniqueId) } name={ row.uniqueId }>Activate</button>
+            <button className='btn btn-success' onClick={ activate.bind(null, event, row.uniqueId) } name={ row.uniqueId }>Activate</button>
         );
 
         function activate (event, id) {
@@ -68,7 +68,7 @@ export default class InstitutionList1 extends AuthorizedComponent {
 
     static buttonDeactivateFormat = (cell, row) => {
         return(
-            <button onClick={ deactivate.bind(null, event, row.uniqueId) } name={ row.uniqueId }>Deactivate</button>
+            <button className='btn btn-danger' onClick={ deactivate.bind(null, event, row.uniqueId) } name={ row.uniqueId }>Deactivate</button>
         );
 
         function deactivate (event, id) {

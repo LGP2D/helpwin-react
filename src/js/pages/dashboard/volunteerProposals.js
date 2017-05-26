@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import {BootstrapTable, SearchField, TableHeaderColumn} from 'react-bootstrap-table';
+import { BootstrapTable, SearchField, TableHeaderColumn} from 'react-bootstrap-table';
 
 import { VolunteeringActions } from 'app/actions';
 import { VolunteeringStore } from 'app/stores';
@@ -25,7 +25,7 @@ export default class VolunteerProposals extends React.Component {
     componentWillMount () {
         VolunteeringStore.on('UPDATE_USER_PROPOSALS', this.onUpdateUserProposals);
         VolunteeringStore.on('UPDATE_VALID_PROPOSALS', this.onUpdateProposals);
-        VolunteeringActions.fetchUserProposals();
+        VolunteeringActions.fetchValidProposals();
     }
 
     componentWillUnmount () {

@@ -20,12 +20,25 @@ export default class viewProposalCandidates extends React.Component {
 
     componentWillMount () {
         InstitutionStore.on('UPDATE_PROPOSAL_CANDIDATES', this.updateTable);
+        InstitutionStore.on('APPROVE_ACTION_SUCCESSFUL', this.handleActivate);
+        InstitutionStore.on('REJECT_REJECT_SUCCESSFUL', this.handleDeactivate);
         InstitutionActions.getCandidates(this.state.action);
     }
 
     componentWillUnmount () {
         InstitutionStore.removeListener('UPDATE_PROPOSAL_CANDIDATES', this.updateTable);
+        InstitutionStore.on('APPROVE_ACTION_SUCCESSFUL', this.handleActivate);
+        InstitutionStore.on('REJECT_REJECT_SUCCESSFUL', this.handleDeactivate);
     }
+
+    handleActivate = () => {
+        window.location.reload();
+    };
+
+    handleDeactivate = () => {
+        window.location.reload();
+    };
+
 
     render () {
         const { location } = this.props;
@@ -59,6 +72,11 @@ export default class viewProposalCandidates extends React.Component {
                         <TableHeaderColumn dataFormat={ this.professionFormatter }>
                             Profession
                         </TableHeaderColumn>
+                        <TableHeaderColumn dataFormat={ this.nameFormatter }>
+                            Status
+                        </TableHeaderColumn>
+                        <TableHeaderColumn dataFormat={ this.buttonApproveFormat }/>
+                        <TableHeaderColumn dataFormat={ this.buttonRejectFormat }/>
                     </BootstrapTable>
                 </div>
             </div>
@@ -116,4 +134,25 @@ export default class viewProposalCandidates extends React.Component {
             </div>
         );
     }
+
+    buttonApproveFormat = (cell, row) => {
+        return(
+            <button className='btn btn-success' onClick={ approve.bind(null, event, row.uniqueId) } name={ row.uniqueId }>Approve</button>
+        );
+
+        function approve (event, id) {
+            InstitutionActions.approve(id);
+        }
+    };
+
+    buttonRejectFormat = (cell, row) => {
+        return(
+            <button className='btn btn-danger' onClick={ reject.bind(null, event, row.uniqueId) } name={ row.uniqueId }>Reject</button>
+        );
+
+        function reject (event, id) {
+            InstitutionActions.reject(id);
+        }
+    };
+
 }

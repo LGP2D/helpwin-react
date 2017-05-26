@@ -68,7 +68,6 @@ export default class ListVouchersCollaborator extends AuthorizedComponent {
         }
     };
 
-
     render () {
         console.log(this.state.data);
         return (

@@ -28,16 +28,15 @@ export default {
             actionId: id
         });
     },
-    //TODO create activate/deactivate actions
     activate: (id) => {
         dispatcher.dispatch({
-            type: 'ACTIVATE_PROPOSAL_SUCCESSFUL',
+            type: 'ACTIVATE_PROPOSAL',
             actionId: id
         });
     },
     deactivate: (id) => {
         dispatcher.dispatch({
-            type: 'DEACTIVATE_PROPOSAL_SUCCESSFUL',
+            type: 'DEACTIVATE_PROPOSAL',
             actionId: id
         });
     }

@@ -104,8 +104,9 @@ class VolunteeringStore extends EventEmitter {
                 });
                 break;
             }
-            //TODO case event from action -> axios -> success ? emit event : console.log() -> register events on component
             case 'ACTIVATE_PROPOSAL': {
+                console.log('ACTIVATE_PROPOSAL');
+                console.log(action);
                 axios({
                     method: 'put',
                     url: config.API_URL + 'actions/validate',
@@ -115,10 +116,13 @@ class VolunteeringStore extends EventEmitter {
                         'Authorization': UserStore.getJwt
                     },
                     data: {
-                        uniqueId: action.uniqueId
+                        uniqueId: action.actionId
                     }
                 }).then(response => {
                     this.emit('ACTIVATE_PROPOSAL_SUCCESSFUL');
+                    console.log('ACTIVATE_PROPOSAL_SUCCESSFUL');
+                    console.log(response);
+
                 }).catch(error => {
                     console.log(error);
                 });
@@ -134,7 +138,7 @@ class VolunteeringStore extends EventEmitter {
                         'Authorization': UserStore.getJwt
                     },
                     data: {
-                        uniqueId: action.uniqueId
+                        uniqueId: action.actionId
                     }
                 }).then(response => {
                     this.emit('DEACTIVATE_PROPOSAL_SUCCESSFUL');

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
 import { VolunteeringActions } from 'app/actions';
@@ -8,21 +9,28 @@ import 'react-bootstrap-table/dist/react-bootstrap-table.min.css';
 import config from 'app/stores/config';
 
 export default class VolunteerProposals extends React.Component {
+
     constructor () {
         super();
 
+        this.onUpdateProposals = this.updateProposals.bind(this, 'data');
+        this.onUpdateUserProposals = this.updateUserProposals.bind(this, 'actions');
+
         this.state = {
-            data: []
+            data: [],
+            actions: []
         };
     }
 
     componentWillMount () {
-        VolunteeringStore.on('UPDATE_VOLUNTEERING', this.updateTable);
-        VolunteeringActions.fetchValidProposals();
+        VolunteeringStore.on('UPDATE_USER_PROPOSALS', this.onUpdateUserProposals);
+        VolunteeringStore.on('UPDATE_VALID_PROPOSALS', this.onUpdateProposals);
+        VolunteeringActions.fetchUserProposals();
     }
 
     componentWillUnmount () {
-        VolunteeringStore.removeListener('UPDATE_VOLUNTEERING', this.updateTable);
+        VolunteeringStore.removeListener('UPDATE_VALID_PROPOSALS', this.onUpdateProposals);
+        VolunteeringStore.removeListener('UPDATE_USER_PROPOSALS', this.onUpdateUserProposals);
     }
 
     render () {
@@ -43,22 +51,30 @@ export default class VolunteerProposals extends React.Component {
                     </div>
                 </div>
                 <div class='panel-body'>
-                    <BootstrapTable data={ this.state.data } striped={ true } hover={ true }>
+                    <BootstrapTable data={ this.state.data } striped = { true } bordered = { false }  hover={ true }>
                         <TableHeaderColumn dataField='user' dataFormat={ this.imageFormatter }>
                             Logo
                         </TableHeaderColumn>
-                        <TableHeaderColumn dataField='user' dataFormat={ this.nameFormatter } isKey={ true }>
+                        <TableHeaderColumn dataField='user' dataFormat={ this.fieldFormatter } isKey={ true }
+                                           dataSort={ true } formatExtraData={ 'name' }>
                             Name
                         </TableHeaderColumn>
-                        <TableHeaderColumn dataFormat={ this.locationDateFormatter }>
-                            Location & Date
+                        <TableHeaderColumn dataField='location'>
+                            Location
+                        </TableHeaderColumn>
+                        <TableHeaderColumn dataField='startDate' dataFormat={ this.dateFormatter }>
+                            Starting
+                        </TableHeaderColumn>
+                        <TableHeaderColumn dataField='endDate'>
+                            Ending
                         </TableHeaderColumn>
                         <TableHeaderColumn dataField='description'>
                             Description
                         </TableHeaderColumn>
-                        <TableHeaderColumn dataFormat={ this.helpFormatter }>
-                            Help
+                        <TableHeaderColumn dataField='credits' dataFormat={ this.rewardFormatter }>
+                            Rewards
                         </TableHeaderColumn>
+                        <TableHeaderColumn dataFormat={ this.helpFormatter } />
                     </BootstrapTable>
                 </div>
             </div>
@@ -66,11 +82,27 @@ export default class VolunteerProposals extends React.Component {
         );
     }
 
-    updateTable = () => {
-        this.setState({
-            data: VolunteeringStore.getActions()
-        });
-        console.log(this.state.data);
+    updateUserProposals = (key) => {
+        this.state[key] = VolunteeringStore.getActions();
+        this.setState(this.state);
+        console.log("hi");
+        VolunteeringActions.fetchValidProposals();
+    };
+
+    updateProposals = (key) => {
+        let data = VolunteeringStore.getActions();
+        console.log(data);
+        for(let pId in data) {
+            let proposal = data[pId];
+            for (let pUId in this.state.actions) {
+                let userProposal = this.state.actions[pUId];
+                if(userProposal.id = proposal.id) {
+                    data.splice(pId, 1);
+                }
+            }
+        }
+        this.state[key] = data;
+        this.setState(this.state);
     };
 
     imageFormatter (cell, row) {
@@ -79,40 +111,35 @@ export default class VolunteerProposals extends React.Component {
         );
     }
 
-    nameFormatter (cell, row) {
+    dateFormatter (cell, row, extra) {
+        let input = extra ? cell[extra] : cell;
+        let date = new Date(input);
+        let diff = Math.round((date - new Date()) / (1000*60*60*24));
         return (
-            cell.name
+            <span> { input } { diff > 0 ? <span class='badge badge-info'>{ diff } days to go</span> :
+                <span class='badge badge-success'>ONGOING</span> }</span>
         );
     }
 
-    locationDateFormatter (cell, row) {
+    fieldFormatter (cell, row, extra) {
         return (
-            <div className='text-center'>
-                <p> { row.location } </p>
-                <i className='fa fa-calendar'/><span
-                className='volunteering-table-text-margin'>Starting: { row.startDate }</span>
-                <br />
-                <i className='fa fa-calendar'/><span
-                className='volunteering-table-text-margin'>Ending: { row.endDate }</span>
-            </div>
+            cell[extra]
+        );
+    }
+
+    rewardFormatter (cell, row) {
+        return (
+            <span><i className='fa fa-database coin'/> { cell }</span>
         );
     }
 
     helpFormatter (cell, row) {
         return (
-            <div className='volunteering-coins'>
-                <i className='fa fa-database coin'/><span
-                className='volunteering-table-text-margin'>{ row.credits }</span>
-                <br />
-                <button className='btn btn-default' onClick={ helpButton.bind(null, event, row.id) } type='button'
-                        name={ row.id }>
-                    Help
+            <Link to={ '/dashboard/proposals/' + row.id }>
+                <button className='btn btn-primary' type='button'>
+                    Details
                 </button>
-            </div>
+            </Link>
         );
-
-        function helpButton (event, id) {
-            VolunteeringActions.applyToAction(id);
-        }
     }
 }

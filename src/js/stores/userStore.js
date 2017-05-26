@@ -43,6 +43,7 @@ class UserStore extends EventEmitter {
             this.userData.imageUrl = config.API_STATIC_URL + response.data.imageUrl;
             this.emit('AUTO_LOGIN');
         }).catch(error => {
+            localStorage.removeItem('userData');
             console.log(error);
         });
     }

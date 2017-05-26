@@ -891,6 +891,10 @@ ul.activity-list > li .timestamp {
     text-overflow: ellipsis;
 }
 
+tr.tr-green {
+    background-color: rgba(60, 165, 18, 0.05) !important;
+}
+
 /********************
  * BUTTONS
  ********************/

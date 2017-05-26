@@ -30,6 +30,7 @@ import GetVouchers from 'app/pages/frontpage/vouchersList';
 import Login from 'app/pages/frontpage/login';
 import InstProp from 'app/pages/dashboard/listInstitutionProposals';
 import Candidates from 'app/pages/dashboard/viewProposalCandidates';
+import ViewProposalDetails from 'app/pages/dashboard/view-proposal-details';
 
 import DashLayout from 'app/components/dashboard/layout/layout';
 import Sidebar from 'app/components/dashboard/layout/sidebar';
@@ -43,7 +44,6 @@ import MyVolunteerProposals from 'app/pages/dashboard/myVolunteerProposals';
 import ListVoucherCollaborator from 'app/pages/dashboard/list-vouchers-collab';
 import ListCompanies from './pages/dashboard/list-companies';
 import InsertAction from './pages/dashboard/insert-action';
-
 
 const app = document.getElementById('app');
 
@@ -65,6 +65,7 @@ ReactDOM.render(
             <Route path='vouchers' components={ { main: ListVouchers, sidebar: Sidebar } } />
             <Route path='institutionProps' components={ { main: InstProp, sidebar: Sidebar } } />
             <Route path='candidates/:id' components={ { main: Candidates, sidebar: Sidebar } } />
+            <Route path='proposals/:id' components={ { main: ViewProposalDetails, sidebar: Sidebar } } />
             <Route path='list-vouchers-collab' components={ { main: ListVoucherCollaborator, sidebar: Sidebar } } />
             <Route path='list-companies' components={ { main: ListCompanies, sidebar: Sidebar } } />
             <Route path='insert-action' components={ { main: InsertAction, sidebar: Sidebar } } />

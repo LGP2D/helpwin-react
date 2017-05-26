@@ -36,6 +36,22 @@ class VolunteeringStore extends EventEmitter {
                 });
                 break;
             }
+            case 'FETCH_PROPOSAL': {
+                axios({
+                    method: 'get',
+                    url: config.API_URL + 'actions/' + action.actionId,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    }
+                }).then(response => {
+                    this.data = response.data;
+                    this.emit('UPDATE_PROPOSAL');
+                }).catch(error => {
+                    console.log(error);
+                });
+                break;
+            }
             case 'FETCH_USER_PROPOSALS': {
                 axios({
                     method: 'get',
@@ -83,6 +99,49 @@ class VolunteeringStore extends EventEmitter {
                     this.data = response.data;
                     console.log(this.data);
                     this.emit('APPLY_TO_ACTION_SUCCESS');
+                }).catch(error => {
+                    console.log(error);
+                });
+                break;
+            }
+            case 'ACTIVATE_PROPOSAL': {
+                console.log('ACTIVATE_PROPOSAL');
+                console.log(action);
+                axios({
+                    method: 'put',
+                    url: config.API_URL + 'actions/validate',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'Authorization': UserStore.getJwt
+                    },
+                    data: {
+                        uniqueId: action.actionId
+                    }
+                }).then(response => {
+                    this.emit('ACTIVATE_PROPOSAL_SUCCESSFUL');
+                    console.log('ACTIVATE_PROPOSAL_SUCCESSFUL');
+                    console.log(response);
+
+                }).catch(error => {
+                    console.log(error);
+                });
+                break;
+            }
+            case 'DEACTIVATE_PROPOSAL' : {
+                axios({
+                    method: 'put',
+                    url: config.API_URL + 'actions/invalidate',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'Authorization': UserStore.getJwt
+                    },
+                    data: {
+                        uniqueId: action.actionId
+                    }
+                }).then(response => {
+                    this.emit('DEACTIVATE_PROPOSAL_SUCCESSFUL');
                 }).catch(error => {
                     console.log(error);
                 });

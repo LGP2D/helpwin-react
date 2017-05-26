@@ -33,6 +33,11 @@ export default class Register extends React.Component {
     };
 
     onRegisterSuccess = () => {
+        this.setState({
+            data_uri: null,
+            filename: null,
+            filetype: null
+        });
         this.context.router.push('/login');
     };
 

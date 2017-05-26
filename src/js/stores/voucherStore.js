@@ -10,45 +10,6 @@ class VoucherStore extends EventEmitter {
         super();
         this.vouchers = [];
         this.companyVouchers = [];
-
-        this.companyVouchers = [
-            {
-                id: 1,
-                description: 'Lorem ipsum dolor sit amet, vis no dicit noluisse suscipit, ea quo regione convenire facilisis, ad mea affert mentitum.',
-                dateStart: '2016-01-01',
-                dateEnd : '2017-01-01',
-                quantity: 5,
-                credits: 100,
-                type: '5% Electronic discount'
-            },
-            {
-                id: 2,
-                description: 'Lorem ipsum dolor sit amet, vis no dicit noluisse suscipit, ea quo regione convenire facilisis, ad mea affert mentitum.',
-                dateStart: '2016-01-01',
-                dateEnd : '2017-01-01',
-                quantity: 4,
-                credits: 200,
-                type: '10 Euros discount'
-            },
-            {
-                id: 3,
-                description: 'Lorem ipsum dolor sit amet, vis no dicit noluisse suscipit, ea quo regione convenire facilisis, ad mea affert mentitum.',
-                dateStart: '2016-01-01',
-                dateEnd : '2017-01-01',
-                quantity: 8,
-                credits: 150,
-                type: '2 for the price of one'
-            },
-            {
-                id: 4,
-                description: 'Lorem ipsum dolor sit amet, vis no dicit noluisse suscipit, ea quo regione convenire facilisis, ad mea affert mentitum.',
-                dateStart: '2016-01-01',
-                dateEnd : '2017-01-01',
-                quantity: 7,
-                credits: 50,
-                type: '10% off on puchase'
-            }
-        ]
     }
 
     getVouchers () {
@@ -126,6 +87,24 @@ class VoucherStore extends EventEmitter {
                     }
                 }).then(response => {
                     this.emit('DEACTIVATE_VOUCHER_SUCCESSFUL');
+                }).catch(error => {
+                    console.log(error);
+                });
+                break;
+            }
+            case 'GET_VOUCHERS_COMPANY' : {
+                axios({
+                    method: 'get',
+                    url: config.API_URL + 'voucher/companyVouchers',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'Authorization': UserStore.getJwt
+                    }
+                }).then(response => {
+                    this.companyVouchers = response.data;
+                    this.emit('CHANGE_VOUCHERS_COMPANY');
+                    console.log('GET_VOUCHERS_COMPANY SAIU');
                 }).catch(error => {
                     console.log(error);
                 });

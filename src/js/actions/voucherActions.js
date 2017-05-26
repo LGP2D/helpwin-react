@@ -31,5 +31,13 @@ export default {
         dispatcher.dispatch({
             type: 'GET_VOUCHERS_COMPANY'
         });
+    },
+
+    deleteVoucher: (uniqueId) => {
+        dispatcher.dispatch({
+            type: 'DELETE_VOUCHER',
+            uniqueId: uniqueId
+
+        });
     }
 }

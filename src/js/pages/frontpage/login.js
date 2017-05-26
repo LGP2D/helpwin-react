@@ -51,7 +51,7 @@ export default class Login extends React.Component {
                         <div className='col-sm-6'>
                             <input id='formEmail' className='form-control' name='email' type='text'
                                    required onChange={ this.handleChange } value={ this.state.email }
-                                   placeholder='Type your name...'/>
+                                   placeholder='Type your email...'/>
                         </div>
                     </div>
                     <div className='form-group'>
@@ -60,7 +60,7 @@ export default class Login extends React.Component {
                         <div className='col-sm-6'>
                             <input id='formPassword' className='form-control' name='password' type='password'
                                    required onChange={ this.handleChange } value={ this.state.password }
-                                   placeholder='Type your email...'/>
+                                   placeholder='Type your password...'/>
                         </div>
                     </div>
                     <div className='form-group'>

@@ -38,8 +38,8 @@ export default class CompanyVoucher extends React.Component {
 
             <div class='panel panel-headline'>
                 <div class='panel-heading'>
-                    <h3 class='panel-title'>Volunteering Proposals</h3>
-                    <p class='panel-subtitle'>A list with all your registered volunteering proposals</p>
+                    <h3 class='panel-title'>Vouchers</h3>
+                    <p class='panel-subtitle'>A list with all the vouchers available for redeeming</p>
                     <div class='right'>
                         <button type='button' class='btn-toggle-collapse'>
                             <i class='ti ti-angle-up' />
@@ -50,12 +50,13 @@ export default class CompanyVoucher extends React.Component {
                     </div>
                 </div>
                 <div class='panel-body'>
-                    <BootstrapTable data={ this.state.data } striped={ true } hover={ true }>
-                        <TableHeaderColumn dataField='institution' dataFormat={ this.imageFormatter } isKey={ true }/>
-                        <TableHeaderColumn dataFormat={ this.descriptionFormatter }>
+                    <BootstrapTable data={ this.state.data } striped={ true } hover={ true } search>
+                        <TableHeaderColumn dataField='institution' dataFormat={ this.imageFormatter }
+                                           isKey={ true } filterFormatted/>
+                        <TableHeaderColumn dataFormat={ this.descriptionFormatter } filterFormatted>
                             Description
                         </TableHeaderColumn>
-                        <TableHeaderColumn dataFormat={ this.typeFormatter }>
+                        <TableHeaderColumn dataFormat={ this.typeFormatter } filterFormatted>
                             Type
                         </TableHeaderColumn>
                         <TableHeaderColumn dataFormat={ this.datesFormatter }>

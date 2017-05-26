@@ -25,7 +25,7 @@ export default class Volunteer extends AuthorizedComponent {
 
         VolunteeringStore.on('UPDATE_VALID_PROPOSALS', this.onUpdate);
         VoucherStore.on('CHANGE_VOUCHERS', this.onUpdateVouchers);
-        VolunteeringActions.fetchUserProposals();
+        VolunteeringActions.fetchValidProposals();
         VoucherActions.fetchData();
     }
 

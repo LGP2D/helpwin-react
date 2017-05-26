@@ -34,7 +34,7 @@ export default class Header extends React.Component {
                             </form>
                             <ul className='nav navbar-nav navbar-right'>
                                 <li>
-                                    <Link to='/' className='dropdown-toggle icon-menu'>
+                                    <Link className='dropdown-toggle icon-menu'>
                                         <i className='fa fa-database coin' /> <span>{ UserStore.getUserData.credits }</span>
                                         { /* <span className='badge bg-danger'>5</span> */ }
                                     </Link>

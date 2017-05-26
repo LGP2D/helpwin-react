@@ -25,7 +25,7 @@ export default class VolunteerProposals extends React.Component {
     componentWillMount () {
         VolunteeringStore.on('UPDATE_USER_PROPOSALS', this.onUpdateUserProposals);
         VolunteeringStore.on('UPDATE_VALID_PROPOSALS', this.onUpdateProposals);
-        VolunteeringActions.fetchValidProposals();
+        VolunteeringActions.fetchUserProposals();
     }
 
     componentWillUnmount () {

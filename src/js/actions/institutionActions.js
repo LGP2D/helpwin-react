@@ -32,5 +32,19 @@ export default {
             type: 'DEACTIVATE_INSTITUTION',
             uniqueId: uniqueId
         });
+    },
+
+    evaluationApproved: (uniqueId) => {
+        dispatcher.dispatch({
+            type: 'APPROVE_EVALUATION',
+            uniqueId: uniqueId
+        });
+    },
+
+    evaluationRejected: (uniqueId) => {
+        dispatcher.dispatch({
+            type: 'REJECT_EVALUATION',
+            uniqueId: uniqueId
+        });
     }
 }

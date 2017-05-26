@@ -21,14 +21,14 @@ export default class viewProposalCandidates extends React.Component {
     componentWillMount () {
         InstitutionStore.on('UPDATE_PROPOSAL_CANDIDATES', this.updateTable);
         InstitutionStore.on('APPROVE_ACTION_SUCCESSFUL', this.handleActivate);
-        InstitutionStore.on('REJECT_REJECT_SUCCESSFUL', this.handleDeactivate);
+        InstitutionStore.on('REJECT_ACTION_SUCCESSFUL', this.handleDeactivate);
         InstitutionActions.getCandidates(this.state.action);
     }
 
     componentWillUnmount () {
         InstitutionStore.removeListener('UPDATE_PROPOSAL_CANDIDATES', this.updateTable);
         InstitutionStore.on('APPROVE_ACTION_SUCCESSFUL', this.handleActivate);
-        InstitutionStore.on('REJECT_REJECT_SUCCESSFUL', this.handleDeactivate);
+        InstitutionStore.on('REJECT_ACTION_SUCCESSFUL', this.handleDeactivate);
     }
 
     handleActivate = () => {
@@ -137,21 +137,21 @@ export default class viewProposalCandidates extends React.Component {
 
     buttonApproveFormat = (cell, row) => {
         return(
-            <button className='btn btn-success' onClick={ approve.bind(null, event, row.uniqueId) } name={ row.uniqueId }>Approve</button>
+            <button className='btn btn-success' onClick={ evaluationApproved.bind(null, event, row.uniqueId) } name={ row.uniqueId }>Approve</button>
         );
 
-        function approve (event, id) {
-            InstitutionActions.approve(id);
+        function evaluationApproved (event, id) {
+            InstitutionActions.evaluationApproved(id);
         }
     };
 
     buttonRejectFormat = (cell, row) => {
         return(
-            <button className='btn btn-danger' onClick={ reject.bind(null, event, row.uniqueId) } name={ row.uniqueId }>Reject</button>
+            <button className='btn btn-danger' onClick={ evaluationRejected.bind(null, event, row.uniqueId) } name={ row.uniqueId }>Reject</button>
         );
 
-        function reject (event, id) {
-            InstitutionActions.reject(id);
+        function evaluationRejected (event, id) {
+            InstitutionActions.evaluationRejected(id);
         }
     };
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import AuthorizedComponent from 'app/components/dashboard/authorization';
 
 import VolunteeringActions from 'app/actions/volunteeringActions';
@@ -47,33 +48,24 @@ export default class ListVouchersCollaborator extends AuthorizedComponent {
         });
     };
 
-    imageFormatter = (cell, row) => {
-        return (
-            <img height='50' width='100%' src={ /*config.API_STATIC_URL + */row.imagePath } />
-        );
-    };
-
-    buttonActivateFormat = (cell, row) => {
+    buttonFormat = (cell, row) => {
         return(
-            <button onClick={ activate.bind(null, event, row.uniqueId) } name={ row.uniqueId }>Activate</button>
+            <span>
+                <button onClick={ activate.bind(null, event, row.uniqueId) } name={ row.uniqueId }>Activate</button>
+                <button onClick={ deactivate.bind(null, event, row.uniqueId) } name={ row.uniqueId }>Deactivate</button>
+            </span>
         );
 
         function activate (event, id) {
             VolunteeringActions.activate(id);
         }
-    };
-
-    buttonDeactivateFormat = (cell, row) => {
-        return(
-            <button onClick={ deactivate.bind(null, event, row.uniqueId) } name={ row.uniqueId }>Deactivate</button>
-        );
-
         function deactivate (event, id) {
             VolunteeringActions.deactivate(id);
         }
     };
 
     render () {
+        console.log(this.state.data);
         return (
             <div className='panel panel-headline'>
                 <div className='panel-heading'>
@@ -90,35 +82,30 @@ export default class ListVouchersCollaborator extends AuthorizedComponent {
                 </div>
                 <div className='panel-body'>
                     <BootstrapTable data={ this.state.data } striped = { true } bordered = { false }  hover={ true }>
-                        <TableHeaderColumn dataField='action'
-                                           dataFormat={ this.imageFormatter.bind(this) }>
+                        <TableHeaderColumn dataField='user' dataFormat={ this.imageFormatter }>
                             Logo
                         </TableHeaderColumn>
-                        <TableHeaderColumn dataField='action' dataFormat={ this.nameFormatter.bind(this) }
-                                           isKey={ true } dataSort={ true }>
+                        <TableHeaderColumn dataField='user' dataFormat={ this.fieldFormatter } isKey={ true }
+                                           dataSort={ true } formatExtraData={ 'name' }>
                             Name
                         </TableHeaderColumn>
-                        <TableHeaderColumn dataField='action' dataFormat={ this.fieldFormatter }
-                                           formatExtraData={ 'location' }>
+                        <TableHeaderColumn dataField='location'>
                             Location
                         </TableHeaderColumn>
-                        <TableHeaderColumn dataField='action' dataFormat={ this.dateFormatter }
-                                           formatExtraData={ 'startDate' }>
+                        <TableHeaderColumn dataField='startDate' dataFormat={ this.dateFormatter }>
                             Starting
                         </TableHeaderColumn>
-                        <TableHeaderColumn dataField='action' dataFormat={ this.fieldFormatter }
-                                           formatExtraData={ 'endDate' }>
+                        <TableHeaderColumn dataField='endDate'>
                             Ending
                         </TableHeaderColumn>
-                        <TableHeaderColumn dataField='action' dataFormat={ this.fieldFormatter }
-                                           formatExtraData={ 'description' }>
+                        <TableHeaderColumn dataField='description'>
                             Description
                         </TableHeaderColumn>
-                        <TableHeaderColumn dataFormat={ this.stateFormatter }>
+                        <TableHeaderColumn dataField='verified'>
                             Verified
                         </TableHeaderColumn>
-                        <TableHeaderColumn dataFormat={ this.buttonActivateFormat }/>
-                        <TableHeaderColumn dataFormat={ this.buttonDeactivateFormat }/>
+                        <TableHeaderColumn dataFormat={ this.helpFormatter } />
+                        <TableHeaderColumn dataFormat={ this.buttonFormat }/>
                     </BootstrapTable>
                 </div>
             </div>
@@ -126,32 +113,18 @@ export default class ListVouchersCollaborator extends AuthorizedComponent {
         );
     }
 
-    getActionById (id) {
-        for (let actionId in this.state.actions) {
-            let action = this.state.actions[actionId];
-            if(action.id === id) {
-                return action;
-            }
-        }
-    }
-
     imageFormatter (cell, row) {
         return (
-            <img height='50' src={ config.API_STATIC_URL + this.getActionById(cell.id).user.imageUrl } />
-        );
-    }
-
-    nameFormatter (cell, row) {
-        return (
-            this.getActionById(cell.id).user.name
+            <img height='50' src={ config.API_STATIC_URL + cell.imageUrl } />
         );
     }
 
     dateFormatter (cell, row, extra) {
-        let date = new Date(cell[extra]);
+        let input = extra ? cell[extra] : cell;
+        let date = new Date(input);
         let diff = Math.round((date - new Date()) / (1000*60*60*24));
         return (
-            <span> { cell[extra] } { diff > 0 ? <span class='badge badge-info'>{ diff } days to go</span> :
+            <span> { input } { diff > 0 ? <span class='badge badge-info'>{ diff } days to go</span> :
                 <span class='badge badge-success'>ONGOING</span> }</span>
         );
     }
@@ -162,20 +135,19 @@ export default class ListVouchersCollaborator extends AuthorizedComponent {
         );
     }
 
-    stateFormatter (cell, row) {
-        let state = 'default';
-        let description = 'FAILED';
-        switch(row.evaluationStatus.description) {
-            case false:
-                state = 'danger';
-                description = 'Not verified';
-            case true:
-                state = 'success';
-                description = 'Verified';
-                break;
-        }
+    rewardFormatter (cell, row) {
         return (
-            <span class={ 'label label-' + state }>{ description }</span>
+            <span><i className='fa fa-database coin'/> { cell }</span>
+        );
+    }
+
+    helpFormatter (cell, row) {
+        return (
+            <Link to={ '/dashboard/proposals/' + row.id }>
+                <button className='btn btn-primary' type='button'>
+                    Details
+                </button>
+            </Link>
         );
     }
 }

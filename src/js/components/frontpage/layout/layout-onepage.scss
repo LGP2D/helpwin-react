@@ -4,6 +4,7 @@ body, html {
     font-family: "Lato", sans-serif;
     width: 100%;
     min-height: 100%;
+    overflow-x: hidden;
 }
 
 /*
@@ -37,6 +38,7 @@ Related to One Page theme
 }
 .navbar-custom .navbar-brand {
     font-weight: 700;
+    margin-top: -10px;
 }
 .navbar-custom .navbar-brand:focus {
     outline: none;
@@ -131,7 +133,14 @@ Related to One Page theme
         font-size: 26px;
     }
 }
-
+.brand-home {
+    background-color: unset;
+    padding: unset;
+    display: inline !important;
+    margin-top: -5px;
+    margin-right: 10px;
+    max-height: 50px;
+}
 .intro-body .btn-circle {
     width: 70px;
     height: 70px;

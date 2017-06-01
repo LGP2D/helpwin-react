@@ -51,7 +51,7 @@ export default class ViewProposalDetails extends React.Component {
         let proposal = this.state.data;
 
         return (
-            <div class='row'>
+            <div>
                 <div class='panel panel-headline'>
                     <div class='panel-heading'>
                         <h3 class='panel-title'>{ proposal && proposal.user.name }</h3>

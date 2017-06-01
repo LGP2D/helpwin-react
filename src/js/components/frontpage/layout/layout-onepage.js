@@ -89,7 +89,8 @@ export default class Layout extends React.Component {
                                 Menu <i className='fa fa-bars'/>
                             </button>
                             <a className='navbar-brand page-scroll' href='#'>
-                                <i className='fa fa-play-circle'/> <span className='light'>HELP</span> WIN
+                                <img className='brand-home' src='assets/img/helpwin-logo-circle.png' />
+                                <span className='light'>HELP</span> WIN
                             </a>
                         </div>
                         <div className='collapse navbar-collapse navbar-right navbar-main-collapse'>

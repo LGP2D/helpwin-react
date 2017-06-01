@@ -20,7 +20,8 @@ export default class Sidebar extends React.Component {
             <div id='sidebar-nav' class='sidebar'>
                 <div class='brand'>
                     <Link to='/'>
-                        <span style={ { color: '#70BE95' } }>HelpWin</span>
+                        <img src='assets/img/helpwin-logo-circle.png' />
+                        <span style={ { color: 'white' } }>HelpWin</span> { /* #71bf96 */}
                     </Link>
                 </div>
                 <div class='sidebar-scroll'>

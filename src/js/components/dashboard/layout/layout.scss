@@ -333,6 +333,12 @@ ul.notifications>li>.more:focus, ul.notifications>li>.more:hover {
     max-height: 80px;
     text-align: center;
 }
+.brand img {
+    margin-top: -7px;
+    margin-left: -10px;
+    margin-right: 10px;
+    max-height: 40px;
+}
 .brand a {
     color: #fafafa;
 }

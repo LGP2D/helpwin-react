@@ -70,12 +70,12 @@ export default class ListInstitutionProposals extends React.Component {
 
         // TODO: Routing to view Proposal's Candidates
         let options = {
-            onRowClick: function(row){
+            onRowClick: function (row){
                 return (
                     <ViewProposalCandidates/>
                 );
             }
-        }
+        };
 
         return (
 
@@ -93,18 +93,26 @@ export default class ListInstitutionProposals extends React.Component {
                     </div>
                 </div>
                 <div class='panel-body'>
-                    <BootstrapTable data={ this.state.data } striped={ true } hover={ true } options={ options }>
+                    <BootstrapTable data={ this.state.data } striped = { true } bordered = { false } hover={ true } search options={ options }>
                         <TableHeaderColumn dataField='institution' dataFormat={ this.nameFormatter } isKey={ true }>
                             Type
                         </TableHeaderColumn>
-                        <TableHeaderColumn dataFormat={ this.locationDateFormatter }>
-                            Location & Date
+                        <TableHeaderColumn dataField='location'>
+                            Location
                         </TableHeaderColumn>
-                        <TableHeaderColumn dataFormat={ this.creditsFormatter }>
+                        <TableHeaderColumn dataSort={ true } filter={ { type: 'DateFilter' } }
+                                           dataField='startDate' dataFormat={ this.dateFormatter }>
+                            Starting
+                        </TableHeaderColumn>
+                        <TableHeaderColumn dataSort={ true } filter={ { type: 'DateFilter' } }
+                                           dataField='endDate'>
+                            Ending
+                        </TableHeaderColumn>
+                        <TableHeaderColumn dataField='description'>
                             Description
                         </TableHeaderColumn>
                         <TableHeaderColumn dataFormat={ this.vacanciesFormatter }>
-                            Vacancies
+                            Slots
                         </TableHeaderColumn>
                         <TableHeaderColumn dataFormat={ this.buttonFormatter }>
                             Choose candidates
@@ -168,23 +176,26 @@ export default class ListInstitutionProposals extends React.Component {
         );
     }
 
-    locationDateFormatter (cell, row) {
+    fieldFormatter (cell, row, extra) {
         return (
-            <div className='text-center'>
-                <p> { row.location } </p>
-                <i className='fa fa-calendar'/><span
-                className='volunteering-table-text-margin'>Starting: { row.startDate }</span>
-                <br />
-                <i className='fa fa-calendar'/><span
-                className='volunteering-table-text-margin'>Ending: { row.endDate }</span>
-            </div>
+            cell[extra]
+        );
+    }
+
+    dateFormatter (cell, row, extra) {
+        let input = extra ? cell[extra] : cell;
+        let date = new Date(input);
+        let diff = Math.round((date - new Date()) / (1000*60*60*24));
+        return (
+            <span> { input } { diff > 0 ? <span class='badge badge-info'>{ diff } days to go</span> :
+                <span class='badge badge-success'>ONGOING</span> }</span>
         );
     }
 
     creditsFormatter (cell, row) {
 
         return (
-            <div className='volunteering-coins'>s
+            <div className='volunteering-coins'>
                 <span
                     className='volunteering-table-text-margin'>{ row.description }</span>
                 <br /><i className='fa fa-database coin'/><span
@@ -202,12 +213,10 @@ export default class ListInstitutionProposals extends React.Component {
     }
     buttonFormatter = (cell, row) => {
         return (
-            <button className='btn btn-default' onClick={ () => this.openModal(cell,row) } type='button'
+            <button className='btn btn-info' onClick={ () => this.openModal(cell,row) } type='button'
                     name={ row }>
                 Candidates
             </button>
         );
     };
-
-
 }

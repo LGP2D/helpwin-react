@@ -95,7 +95,7 @@ class VoucherStore extends EventEmitter {
             case 'GET_VOUCHERS_COMPANY' : {
                 axios({
                     method: 'get',
-                    url: config.API_URL + 'voucher/companyVouchers',
+                    url: config.API_URL + 'voucher', // /companyVouchers
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',

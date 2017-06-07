@@ -31,9 +31,6 @@ export default class LayoutBlank extends React.Component {
                     <Link className='page-scroll' to='/voluntlist'>Volunteering List</Link>
                 </li>
                 <li>
-                    <Link className='page-scroll' to='/companyvoucher'>Company Voucher</Link>
-                </li>
-                <li>
                     <Link className='page-scroll' to='/vouchers'>Voucher</Link>
                 </li>
                 { !loggedIn &&

@@ -32,23 +32,24 @@ export default class Home extends React.Component {
                         <div class='col-lg-8 col-lg-offset-2 text-white'>
                             <h1>OUR TEAM</h1>
                             <h6 class='text-lightgray'></h6>
-                            <div class='col-md-3'>
-                                <div class='unhover_img'>
-                                    <img src='assets/img/flavia.png' alt=''/>
-                                </div>
-                                <span>Collaborator</span>
-                                <h4><span>Flávia </span> Daemon</h4>
-                            </div>
-                            <div class='col-md-3'>
-                                <div class='unhover_img'>
-                                    <img src='assets/img/bruno.png' alt=''/>
-                                </div>
-                                <span>Collaborator</span>
-                                <h4><span>Bruno </span> Moreira</h4>
+                            <div class='row'>
 
+                                <div class='col col-md-6'>
+                                    <div class='unhover_img'>
+                                        <img className='img-circle'  src='assets/img/flavia.png' alt=''/>
+                                    </div>
+                                    <span>Collaborator</span>
+                                    <h4><span>Flávia </span> Daemon</h4>
+                                </div>
+                                <div class='col col-md-6'>
+                                    <div class='unhover_img'>
+                                        <img className='img-circle' src='assets/img/bruno.png' alt=''/>
+                                    </div>
+                                    <span>Collaborator</span>
+                                    <h4><span>Bruno </span> Moreira</h4>
+                                </div>
                             </div>
                         </div>
-                        
                     </div>
                 </section>
             </div>

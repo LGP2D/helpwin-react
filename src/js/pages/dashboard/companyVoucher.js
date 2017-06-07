@@ -19,16 +19,13 @@ export default class CompanyVoucher extends React.Component {
     }
 
     componentWillMount () {
-        VoucherStore.on('CHANGE_VOUCHERS_COMPANY', this.updateTable);
-        VoucherStore.on('VOUCHER_DELETED', this.updateDeletedTable);
-        VoucherActions.companyVouchers();
+        VoucherStore.on('CHANGE_VOUCHERS', this.updateTable);
+        VoucherActions.fetchData();
     }
 
 
     componentWillUnmount () {
-        VoucherStore.removeListener('CHANGE_VOUCHERS_COMPANY', this.updateTable);
-        VoucherStore.removeListener('VOUCHER_DELETED', this.updateDeletedTable);
-
+        VoucherStore.removeListener('CHANGE_VOUCHERS', this.updateTable);
     }
 
     render () {
@@ -50,39 +47,50 @@ export default class CompanyVoucher extends React.Component {
                     </div>
                 </div>
                 <div class='panel-body'>
-                    <BootstrapTable data={ this.state.data } striped={ true } hover={ true } search>
-                        <TableHeaderColumn dataField='institution' dataFormat={ this.imageFormatter }
-                                           isKey={ true } filterFormatted/>
-                        <TableHeaderColumn dataFormat={ this.descriptionFormatter } filterFormatted>
-                            Description
+                    <BootstrapTable data={ this.state.data } striped = { true } bordered = { false }
+                                    hover={ true } search>
+                        <TableHeaderColumn dataField='company' dataFormat={ this.imageFormatter }
+                                           isKey={ true } filterFormatted />
+                        <TableHeaderColumn dataField='company' dataFormat={ this.fieldFormatter }
+                                           formatExtraData={ 'name' }>
+                            Company
                         </TableHeaderColumn>
-                        <TableHeaderColumn dataFormat={ this.typeFormatter } filterFormatted>
+                        <TableHeaderColumn dataField='type' dataFormat={ this.quantityFormatter }>
+                            Quantity
+                        </TableHeaderColumn>
+                        <TableHeaderColumn dataField='type'>
                             Type
                         </TableHeaderColumn>
-                        <TableHeaderColumn dataFormat={ this.datesFormatter }>
-                            Dates
+                        <TableHeaderColumn dataField='description'>
+                            Description
                         </TableHeaderColumn>
-                        <TableHeaderColumn dataFormat={ this.buttonDelete }/>
+                        <TableHeaderColumn dataField='credits' dataFormat={ this.coinsFormatter }>
+                            Coins
+                        </TableHeaderColumn>
+                        <TableHeaderColumn dataFormat={ this.redeemFormatter }>
+                            Redeem
+                        </TableHeaderColumn>
                     </BootstrapTable>
                 </div>
             </div>
-
         );
     }
 
     updateTable = () => {
         this.setState({
-            data: VoucherStore.getCompanyVouchers()
+            data: VoucherStore.getVouchers()
         });
     };
 
-    updateDeletedTable = () => {
-        window.location.reload();
-    };
+    fieldFormatter (cell, row, extra) {
+        return (
+            cell[extra]
+        );
+    }
 
     imageFormatter (cell, row) {
         return (
-            <img height='50' src={  row.imagePath } />
+            <img className='img img-responsive' height='50' src={ row.imagePath } />
         );
     }
 
@@ -94,13 +102,6 @@ export default class CompanyVoucher extends React.Component {
         );
     }
 
-    typeFormatter (cell, row) {
-        return (
-            <div className='text-center'>
-                <span className='volunteering-table-text-margin'>{ row.type }</span>
-            </div>
-        );
-    }
     datesFormatter (cell, row) {
         return (
             <div className='text-center'>
@@ -113,14 +114,37 @@ export default class CompanyVoucher extends React.Component {
         );
     }
 
-    buttonDelete = (cell, row) => {
-        return(
-            <button onClick={ deleteV.bind(null, event, row.uniqueId) } name={ row.uniqueId }>Delete</button>
-        );
-
-        function deleteV (event, id) {
-            VoucherActions.deleteVoucher(id)
+    quantityFormatter (cell, row) {
+        let quantity = row.quantity;
+        let label = 'label-default';
+        switch(true) {
+            case (quantity < 2):
+                label = 'label-danger';
+                break;
+            case (quantity < 10):
+                label = 'label-warning';
+                break;
+            case (quantity < 50):
+                label = 'label-success';
+                break;
+            default:
+                quantity = '50+';
+                label = 'label-success';
         }
-    };
+        return (
+            <span className={ 'label ' + label }>{ quantity } remaining</span>
+        );
+    }
 
+    coinsFormatter (cell, row) {
+        return (
+            <span><i className='fa fa-database coin'/> { cell }</span>
+        );
+    }
+
+    redeemFormatter (cell, row) {
+        return (
+            <button className='btn btn-info'>Redeem</button>
+        );
+    }
 }

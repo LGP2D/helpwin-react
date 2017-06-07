@@ -7,12 +7,6 @@ export default {
         });
     },
 
-    fetchCompany: () => {
-        dispatcher.dispatch({
-            type: 'FETCH_COMPANY_VOUCHER'
-        });
-    },
-
     activate: (uniqueId) => {
         dispatcher.dispatch({
             type: 'ACTIVATE_VOUCHER',

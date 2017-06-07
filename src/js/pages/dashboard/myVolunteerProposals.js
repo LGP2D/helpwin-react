@@ -115,12 +115,14 @@ export default class MyVolunteerProposals extends React.Component {
     }
 
     dateFormatter (cell, row, extra) {
-        let input = extra ? cell[extra] : cell;
-        let date = new Date(input);
-        let diff = Math.round((date - new Date()) / (1000*60*60*24));
+        let dateStart = new Date(row.action.startDate);
+        let dateEnd = new Date(row.action.endDate);
+        let diffStart = Math.round((dateStart - new Date()) / (1000*60*60*24));
+        let diffEnd = Math.round((dateEnd - new Date()) / (1000*60*60*24));
         return (
-            <span> { input } { diff > 0 ? <span className='badge badge-info'>{ diff } days to go</span> :
-                <span className='badge badge-success'>ONGOING</span> }</span>
+            <span> { row.action.startDate } { diffStart > 0 ? <span class='badge badge-info'>{ diffStart } days to go</span> :
+                (diffEnd > 0 ? <span class='badge badge-success'>ONGOING</span> :
+                    <span class='badge badge-danger'>EXPIRED</span>) } </span>
         );
     }
 
@@ -158,7 +160,7 @@ export default class MyVolunteerProposals extends React.Component {
     helpFormatter (cell, row) {
         return (
             <Link to={ '/dashboard/proposals/' + row.action.id }>
-                <button className='btn btn-primary' type='button'>
+                <button className='btn btn-info' type='button'>
                     Details
                 </button>
             </Link>

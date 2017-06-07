@@ -100,12 +100,10 @@ export default class ListInstitutionProposals extends React.Component {
                         <TableHeaderColumn dataField='location'>
                             Location
                         </TableHeaderColumn>
-                        <TableHeaderColumn dataSort={ true } filter={ { type: 'DateFilter' } }
-                                           dataField='startDate' dataFormat={ this.dateFormatter }>
+                        <TableHeaderColumn dataSort={ true } dataField='startDate' dataFormat={ this.dateFormatter }>
                             Starting
                         </TableHeaderColumn>
-                        <TableHeaderColumn dataSort={ true } filter={ { type: 'DateFilter' } }
-                                           dataField='endDate'>
+                        <TableHeaderColumn dataSort={ true } dataField='endDate'>
                             Ending
                         </TableHeaderColumn>
                         <TableHeaderColumn dataField='description'>
@@ -183,17 +181,18 @@ export default class ListInstitutionProposals extends React.Component {
     }
 
     dateFormatter (cell, row, extra) {
-        let input = extra ? cell[extra] : cell;
-        let date = new Date(input);
-        let diff = Math.round((date - new Date()) / (1000*60*60*24));
+        let dateStart = new Date(row.startDate);
+        let dateEnd = new Date(row.endDate);
+        let diffStart = Math.round((dateStart - new Date()) / (1000*60*60*24));
+        let diffEnd = Math.round((dateEnd - new Date()) / (1000*60*60*24));
         return (
-            <span> { input } { diff > 0 ? <span class='badge badge-info'>{ diff } days to go</span> :
-                <span class='badge badge-success'>ONGOING</span> }</span>
+            <span> { row.startDate } { diffStart > 0 ? <span class='badge badge-info'>{ diffStart } days to go</span> :
+                (diffEnd > 0 ? <span class='badge badge-success'>ONGOING</span> :
+                    <span class='badge badge-danger'>EXPIRED</span>) } </span>
         );
     }
 
     creditsFormatter (cell, row) {
-
         return (
             <div className='volunteering-coins'>
                 <span
@@ -211,6 +210,7 @@ export default class ListInstitutionProposals extends React.Component {
             </div>
         );
     }
+
     buttonFormatter = (cell, row) => {
         return (
             <button className='btn btn-info' onClick={ () => this.openModal(cell,row) } type='button'

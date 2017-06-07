@@ -9,15 +9,10 @@ class VoucherStore extends EventEmitter {
     constructor () {
         super();
         this.vouchers = [];
-        this.companyVouchers = [];
     }
 
     getVouchers () {
         return this.vouchers;
-    }
-
-    getCompanyVouchers () {
-        return this.companyVouchers;
     }
 
     handleActions (action) {
@@ -33,22 +28,6 @@ class VoucherStore extends EventEmitter {
                 }).then(response => {
                     this.vouchers = response.data;
                     this.emit('CHANGE_VOUCHERS');
-                }).catch(error => {
-                    console.log(error);
-                });
-                break;
-            }
-            case 'FETCH_COMPANY_VOUCHER': {
-                axios({
-                    method: 'get',
-                    url: config.API_URL + 'voucher',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    }
-                }).then(response => {
-                    //this.companyVouchers = response.data;
-                    this.emit('UPDATE_COMPANY_VOUCHER');
                 }).catch(error => {
                     console.log(error);
                 });
@@ -102,7 +81,7 @@ class VoucherStore extends EventEmitter {
                         'Authorization': UserStore.getJwt
                     }
                 }).then(response => {
-                    this.companyVouchers = response.data;
+                    this.vouchers = response.data;
                     this.emit('CHANGE_VOUCHERS_COMPANY');
                 }).catch(error => {
                     console.log(error);
@@ -110,7 +89,6 @@ class VoucherStore extends EventEmitter {
                 break;
             }
             case 'DELETE_VOUCHER' : {
-                console.log('DELETE_VOUCHER')
                 axios({
                     method: 'post',
                     url: config.API_URL + 'voucher/deleteCompanyVouchers/',

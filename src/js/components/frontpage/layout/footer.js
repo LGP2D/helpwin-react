@@ -2,12 +2,9 @@ import React from 'react';
 
 export default class Footer extends React.Component {
     render () {
-        const layoutStyles = {
-            marginTop: "50px"
-        };
 
         return (
-            <footer style={ layoutStyles }>
+            <footer>
                     <div className='row text-center'>
                         <div className='col-md-6 col-sm-6 col-xs-12'>
                             <ul className='list-inline'>

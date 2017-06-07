@@ -1,9 +1,8 @@
 import React from 'react';
-import {IndexLink, Link} from 'react-router';
 
 export default class Home extends React.Component {
-    render() {
-        const {location} = this.props;
+    render () {
+        const { location } = this.props;
         const layoutStyles = {
             textAlign: 'center'
         };
@@ -14,15 +13,14 @@ export default class Home extends React.Component {
                     <div class='row'>
                         <div class='col-lg-8 col-lg-offset-2'>
                             <h1>ABOUT US</h1>
-                            <h6 class='text-gray'></h6>
                             <div class='body text-gray'>
-                                <p>HelpWin main focus is to ease the access and offering of volunteering, by
+                                <p>Helpwin main focus is to ease the access and offering of volunteering, by
                                     centralizing and speeding up the cataloging and selection process.
-                                    <br/>An aditional important aspect is the rewarding system , where volunteers can
-                                    exchange HelWin credits for discount vouchers.</p>
-                                <p>Besides energizing volunteering, it will also be possible to optimize vonlunteer
+                                    <br/>An additional important aspect is the rewarding system, where volunteers can
+                                    exchange Helpwin credits for discount vouchers.</p>
+                                <p>Besides energizing volunteering, it will also be possible to optimize volunteer
                                     profiling and task matching based on volunteer skills via an innovative web
-                                    platform</p>
+                                    platform.</p>
                             </div>
                         </div>
                     </div>
@@ -31,7 +29,6 @@ export default class Home extends React.Component {
                     <div class='row'>
                         <div class='col-lg-8 col-lg-offset-2 text-white'>
                             <h1>OUR TEAM</h1>
-                            <h6 class='text-lightgray'></h6>
                             <div class='row'>
 
                                 <div class='col col-md-6'>

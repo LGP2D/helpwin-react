@@ -1,10 +1,10 @@
 import React from 'react';
-import { UserActions } from 'app/actions';
-import { UserStore } from 'app/stores';
+import {UserActions} from 'app/actions';
+import {UserStore} from 'app/stores';
 import LabelForm from 'app/components/frontpage/forms/FormLabel';
 
 export default class Login extends React.Component {
-    constructor () {
+    constructor() {
         super();
 
         this.state = {
@@ -18,12 +18,12 @@ export default class Login extends React.Component {
         router: React.PropTypes.object.isRequired
     };
 
-    componentWillMount () {
+    componentWillMount() {
         UserStore.on('LOGIN_SUCCESS', this.onLoginSuccessful);
         UserStore.on('LOGIN_ERROR', this.onLoginError);
     }
 
-    componentWillUnmount () {
+    componentWillUnmount() {
         UserStore.removeListener('LOGIN_SUCCESS', this.onLoginSuccessful);
         UserStore.removeListener('LOGIN_ERROR', this.onLoginError);
     }
@@ -42,34 +42,39 @@ export default class Login extends React.Component {
 
     render () {
         return (
-            <div>
-                <h1 className='col-sm-offset-5'>Login Form</h1>
-                <form className='form-horizontal' onSubmit={ this.handleSubmit }>
-                    <div className='form-group'>
-                        <LabelForm htmlFor='formName' title='Email'
-                                   className='control-label col-sm-2 col-sm-offset-1'/>
-                        <div className='col-sm-6'>
-                            <input id='formEmail' className='form-control' name='email' type='text'
-                                   required onChange={ this.handleChange } value={ this.state.email }
-                                   placeholder='Type your email...'/>
+            <div class='panel panel-headline'>
+                <div class='panel-heading'>
+                    <h3 class='panel-title'>Login form</h3>
+                    <p class='panel-subtitle'>Please use the register form if you are not yet a member of Helpwin</p>
+                </div>
+                <div class='panel-body'>
+                    <form className='form-horizontal' onSubmit={ this.handleSubmit }>
+                        <div className='form-group'>
+                            <LabelForm htmlFor='formName' title='Email'
+                                       className='control-label col-sm-2 col-sm-offset-1'/>
+                            <div className='col-sm-6'>
+                                <input id='formEmail' className='form-control' name='email' type='text'
+                                       required onChange={ this.handleChange } value={ this.state.email }
+                                       placeholder='Type your email...'/>
+                            </div>
                         </div>
-                    </div>
-                    <div className='form-group'>
-                        <LabelForm htmlFor='formPassword' title='Password'
-                                   className='control-label col-sm-2 col-sm-offset-1'/>
-                        <div className='col-sm-6'>
-                            <input id='formPassword' className='form-control' name='password' type='password'
-                                   required onChange={ this.handleChange } value={ this.state.password }
-                                   placeholder='Type your password...'/>
+                        <div className='form-group'>
+                            <LabelForm htmlFor='formPassword' title='Password'
+                                       className='control-label col-sm-2 col-sm-offset-1'/>
+                            <div className='col-sm-6'>
+                                <input id='formPassword' className='form-control' name='password' type='password'
+                                       required onChange={ this.handleChange } value={ this.state.password }
+                                       placeholder='Type your password...'/>
+                            </div>
                         </div>
-                    </div>
-                    <div className='form-group'>
-                        <div className='col-sm-offset-3 col-sm-6'>
-                            <button type='submit' value='Submit' className='btn btn-default'>Login</button>
+                        <div className='form-group'>
+                            <div className='col-sm-offset-3 col-sm-6'>
+                                <button type='submit' value='Submit' className='btn btn-info'>Login</button>
+                            </div>
                         </div>
-                    </div>
-                </form>
-                <h5 className='text-center' disabled={ !!this.state.error }>{ this.state.error }</h5>
+                    </form>
+                    <h5 className='text-center' disabled={ !!this.state.error }>{ this.state.error }</h5>
+                </div>
             </div>
         );
     }

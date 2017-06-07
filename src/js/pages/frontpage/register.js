@@ -1,19 +1,19 @@
 import React from 'react';
 import LabelForm from 'app/components/frontpage/forms/FormLabel';
-import { UserStore } from 'app/stores';
-import { UserActions } from 'app/actions';
+import {UserStore} from 'app/stores';
+import {UserActions} from 'app/actions';
 import Combobox from 'react-widgets/lib/Combobox';
 import 'react-widgets/lib/less/react-widgets.less';
 
 export default class Register extends React.Component {
-    constructor () {
+    constructor() {
         super();
 
         this.roles = [
-            { id: 1, description: 'Administrator' },
-            { id: 2, description: 'Institution' },
-            { id: 3, description: 'Volunteer' },
-            { id: 4, description: 'Company' }
+            {id: 1, description: 'Administrator'},
+            {id: 2, description: 'Institution'},
+            {id: 3, description: 'Volunteer'},
+            {id: 4, description: 'Company'}
         ];
 
         this.state = {
@@ -41,94 +41,101 @@ export default class Register extends React.Component {
         this.context.router.push('/login');
     };
 
-    componentWillMount () {
+    componentWillMount() {
         UserStore.on('REGISTER_SUCCESS', this.onRegisterSuccess);
         UserStore.on('IMAGE_UPLOAD_SUCCESSFUL', this.onUploadSuccess);
     }
 
-    componentWillUnmount () {
+    componentWillUnmount() {
         UserStore.removeListener('REGISTER_SUCCESS', this.onRegisterSuccess);
         UserStore.removeListener('IMAGE_UPLOAD_SUCCESSFUL', this.onUploadSuccess);
     }
 
-    render () {
+    render() {
         return (
-            <div>
-                <h1 className='col-sm-offset-5'>Register Form</h1>
-                <form className='form-horizontal' onSubmit={ this.handleSubmit }>
-                    <div className='form-group'>
-                        <LabelForm htmlFor='formName' title='Name' className='control-label col-sm-2 col-sm-offset-1'/>
-                        <div className='col-sm-6'>
-                            <input id='formName' className='form-control' name='name' type='text'
-                                   required onChange={ this.handleChange } value={ this.state.name }
-                                   placeholder='Type your name...'/>
+            <div class='panel panel-headline'>
+                <div class='panel-heading'>
+                    <h3 class='panel-title'>Register form</h3>
+                    <p class='panel-subtitle'>Use this form if you are new to Helpwin</p>
+                </div>
+                <div class='panel-body'>
+                    <form className='form-horizontal' onSubmit={ this.handleSubmit }>
+                        <div className='form-group'>
+                            <LabelForm htmlFor='formName' title='Name'
+                                       className='control-label col-sm-2 col-sm-offset-1'/>
+                            <div className='col-sm-6'>
+                                <input id='formName' className='form-control' name='name' type='text'
+                                       required onChange={ this.handleChange } value={ this.state.name }
+                                       placeholder='Type your name...'/>
+                            </div>
                         </div>
-                    </div>
-                    <div className='form-group'>
-                        <LabelForm htmlFor='formEmail' title='Email'
-                                   className='control-label col-sm-2 col-sm-offset-1'/>
-                        <div className='col-sm-6'>
-                            <input id='formEmail' className='form-control' name='email' type='text'
-                                   required onChange={ this.handleChange } value={ this.state.email }
-                                   placeholder='Type your email...'/>
+                        <div className='form-group'>
+                            <LabelForm htmlFor='formEmail' title='Email'
+                                       className='control-label col-sm-2 col-sm-offset-1'/>
+                            <div className='col-sm-6'>
+                                <input id='formEmail' className='form-control' name='email' type='text'
+                                       required onChange={ this.handleChange } value={ this.state.email }
+                                       placeholder='Type your email...'/>
+                            </div>
                         </div>
-                    </div>
-                    <div className='form-group'>
-                        <LabelForm htmlFor='birthdate' title='Birthdate'
-                                   className='control-label col-sm-2 col-sm-offset-1'/>
-                        <div className='col-sm-6'>
-                            <input id='birthdate' className='form-control' name='birthdate' type='date'
-                                   required onChange={ this.handleChange } value={ this.state.birthdate }
-                                   placeholder='Choose your birthdate...'/>
+                        <div className='form-group'>
+                            <LabelForm htmlFor='birthdate' title='Birthdate'
+                                       className='control-label col-sm-2 col-sm-offset-1'/>
+                            <div className='col-sm-6'>
+                                <input id='birthdate' className='form-control' name='birthdate' type='date'
+                                       required onChange={ this.handleChange } value={ this.state.birthdate }
+                                       placeholder='Choose your birthdate...'/>
+                            </div>
                         </div>
-                    </div>
-                    <div className='form-group'>
-                        <LabelForm htmlFor='password' title='Password'
-                                   className='control-label col-sm-2 col-sm-offset-1'/>
-                        <div className='col-sm-6'>
-                            <input id='password' className='form-control' name='password' type='password'
-                                   required onChange={ this.handleChange } value={ this.state.password }
-                                   placeholder='Type password...' minLength='6'/>
+                        <div className='form-group'>
+                            <LabelForm htmlFor='password' title='Password'
+                                       className='control-label col-sm-2 col-sm-offset-1'/>
+                            <div className='col-sm-6'>
+                                <input id='password' className='form-control' name='password' type='password'
+                                       required onChange={ this.handleChange } value={ this.state.password }
+                                       placeholder='Type password...' minLength='6'/>
+                            </div>
                         </div>
-                    </div>
-                    <div className='form-group'>
-                        <LabelForm htmlFor='retypepassword' title='Retype Password'
-                                   className='control-label col-sm-2 col-sm-offset-1'/>
-                        <div className='col-sm-6'>
-                            <input id='retypepassword' className='form-control' name='repassword' type='password'
-                                   required onChange={ this.handleChange } value={ this.state.repassword }
-                                   placeholder='Retype password...' minLength='6'/>
+                        <div className='form-group'>
+                            <LabelForm htmlFor='retypepassword' title='Retype Password'
+                                       className='control-label col-sm-2 col-sm-offset-1'/>
+                            <div className='col-sm-6'>
+                                <input id='retypepassword' className='form-control' name='repassword' type='password'
+                                       required onChange={ this.handleChange } value={ this.state.repassword }
+                                       placeholder='Retype password...' minLength='6'/>
+                            </div>
                         </div>
-                    </div>
-                    <div className='form-group'>
-                        <LabelForm htmlFor='profession' title='Profession'
-                                   className='control-label col-sm-2 col-sm-offset-1'/>
-                        <div className='col-sm-6'>
-                            <input id='profession' className='form-control' name='profession' type='text'
-                                   required onChange={ this.handleChange } value={ this.state.profession }
-                                   placeholder='Type profession...'/>
+                        <div className='form-group'>
+                            <LabelForm htmlFor='profession' title='Profession'
+                                       className='control-label col-sm-2 col-sm-offset-1'/>
+                            <div className='col-sm-6'>
+                                <input id='profession' className='form-control' name='profession' type='text'
+                                       required onChange={ this.handleChange } value={ this.state.profession }
+                                       placeholder='Type profession...'/>
+                            </div>
                         </div>
-                    </div>
-                    <div className='form-group'>
-                        <LabelForm htmlFor='image' title='Image' className='control-label col-sm-2 col-sm-offset-1'/>
-                        <div className='col-sm-6'>
-                            <input id='image' className='form-control file' name='image' type='file'
-                                   onChange={ (e) => this.handleChangeImage(e) } />
+                        <div className='form-group'>
+                            <LabelForm htmlFor='image' title='Image'
+                                       className='control-label col-sm-2 col-sm-offset-1'/>
+                            <div className='col-sm-6'>
+                                <input id='image' className='form-control file' name='image' type='file'
+                                       onChange={ (e) => this.handleChangeImage(e) }/>
+                            </div>
                         </div>
-                    </div>
-                    <div className='form-group'>
-                        <LabelForm htmlFor='role' title='Role' className='control-label col-sm-2 col-sm-offset-1'/>
-                        <div className='col-sm-6'>
-                            <Combobox valueField='id' textField='description' data={ this.roles }
-                                      onChange={ this.handleChangeDropdown } defaultValue={ this.state.role }/>
+                        <div className='form-group'>
+                            <LabelForm htmlFor='role' title='Role' className='control-label col-sm-2 col-sm-offset-1'/>
+                            <div className='col-sm-6'>
+                                <Combobox valueField='id' textField='description' data={ this.roles }
+                                          onChange={ this.handleChangeDropdown } defaultValue={ this.state.role }/>
+                            </div>
                         </div>
-                    </div>
-                    <div className='form-group'>
-                        <div className='col-sm-offset-3 col-sm-6'>
-                            <button type='submit' value='Submit' className='btn btn-default'>Submit</button>
+                        <div className='form-group'>
+                            <div className='col-sm-offset-3 col-sm-6'>
+                                <button type='submit' value='Submit' className='btn btn-default'>Submit</button>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         );
     }
@@ -170,7 +177,7 @@ export default class Register extends React.Component {
     handleSubmit = (event) => {
         event.preventDefault();
 
-        if (!this.validateEmail(this.state.email)){
+        if (!this.validateEmail(this.state.email)) {
             alert('Wrong email format.');
             return;
         }

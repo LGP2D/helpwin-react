@@ -34,7 +34,8 @@ export default class Footer extends React.Component {
                             </ul>
                         </div>
                         <div className='col-md-6 col-sm-6 col-xs-12'>
-                            <h2>© 2017 HelpWin LOGO</h2>
+                            <img className='brand-home' src='assets/img/helpwin-logo-circle.png' />
+                            <span class='light'> © 2017 HELP</span>WIN
                         </div>
                     </div>
             </footer>

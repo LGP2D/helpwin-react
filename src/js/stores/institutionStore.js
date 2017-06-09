@@ -48,21 +48,35 @@ class InstitutionStore extends EventEmitter {
                 break;
             }
             case 'GET_PROPOSAL_CANDIDATES': {
-                console.log('GET_PROPOSAL_CANDIDATES');
                 axios({
                     method: 'post',
-                    url: config.API_URL + 'actions/userProfiles',
+                    url: config.API_URL + 'actions/userProfiles/' + action.volunteeringProposal,
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json'
-                    },
-                    data: {
-                      uniqueId: action.volunteeringProposal
                     }
                 }).then(response => {
                     this.proposalCandidates = response.data;
                     console.log(this.proposalCandidates);
                     this.emit('UPDATE_PROPOSAL_CANDIDATES');
+                }).catch(error => {
+                    console.log(error);
+                });
+                break;
+            }
+            case 'GET_PROPOSAL_VOLUNTEERS': {
+                axios({
+                    method: 'post',
+                    url: config.API_URL + 'actions/acceptedUsers/' + action.volunteeringProposal,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'Authorization': UserStore.getJwt
+                    }
+                }).then(response => {
+                    this.data = response.data;
+                    console.log(this.data);
+                    this.emit('UPDATE_PROPOSAL_VOLUNTEERS');
                 }).catch(error => {
                     console.log(error);
                 });
@@ -129,14 +143,11 @@ class InstitutionStore extends EventEmitter {
             case 'ACCEPT_VOLUNTEER': {
                 axios({
                     method: 'POST',
-                    url: config.API_URL + 'actions/acceptUser/' + action.userUniqueId,
+                    url: config.API_URL + 'actions/acceptUser/' + action.actionId + '/' + action.userUniqueId,
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
                         'Authorization': UserStore.getJwt
-                    },
-                    data: {
-                        uniqueId: action.uniqueId
                     }
                 }).then(response => {
                     console.log(response.data);
@@ -149,18 +160,35 @@ class InstitutionStore extends EventEmitter {
             case 'REJECT_VOLUNTEER': {
                 axios({
                     method: 'POST',
-                    url: config.API_URL + 'actions/declineUser/' + action.userUniqueId,
+                    url: config.API_URL + 'actions/declineUser/' + action.actionId + '/' + action.userUniqueId,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'Authorization': UserStore.getJwt
+                    }
+                }).then(response => {
+                    console.log(response.data);
+                    this.emit('REJECT_VOLUNTEER_SUCCESSFUL');
+                }).catch(error => {
+                    console.log(error);
+                });
+                break;
+            }
+            case 'EVALUATE_VOLUNTEER': {
+                axios({
+                    method: 'POST',
+                    url: config.API_URL + 'user/evaluate/' + action.actionId + '/' + action.status,
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
                         'Authorization': UserStore.getJwt
                     },
                     data: {
-                        uniqueId: action.uniqueId
+                        uniqueId: action.userUniqueId
                     }
                 }).then(response => {
                     console.log(response.data);
-                    this.emit('REJECT_VOLUNTEER_SUCCESSFUL');
+                    this.emit('EVALUATE_VOLUNTEER_SUCCESSFUL');
                 }).catch(error => {
                     console.log(error);
                 });

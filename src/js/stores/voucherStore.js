@@ -8,7 +8,12 @@ class VoucherStore extends EventEmitter {
 
     constructor () {
         super();
+        this.error = false;
         this.vouchers = [];
+    }
+
+    isError () {
+        return this.error;
     }
 
     getVouchers () {
@@ -85,6 +90,28 @@ class VoucherStore extends EventEmitter {
                     this.emit('CHANGE_VOUCHERS_COMPANY');
                 }).catch(error => {
                     console.log(error);
+                });
+                break;
+            }
+            case 'REDEEM_VOUCHER' : {
+                axios({
+                    method: 'post',
+                    url: config.API_URL + 'voucher/exchangeVoucher',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'Authorization': UserStore.getJwt
+                    },
+                    data : {
+                        uniqueId: action.uniqueId
+                    }
+                }).then(response => {
+                    this.error = false;
+                    this.emit('REDEEMED_VOUCHER');
+                }).catch(error => {
+                    console.log(error);
+                    this.error = true;
+                    this.emit('REDEEMED_VOUCHER');
                 });
                 break;
             }

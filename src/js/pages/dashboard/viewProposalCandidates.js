@@ -1,19 +1,19 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
 import InstitutionActions from 'app/actions/institutionActions';
 import InstitutionStore from 'app/stores/institutionStore';
+import { UserStore } from 'app/stores';
 import config from 'app/stores/config';
-
 
 import 'react-bootstrap-table/dist/react-bootstrap-table.min.css';
 
 export default class viewProposalCandidates extends React.Component {
+
     constructor (props) {
         super(props);
         this.state = {
-            data: [],
-            action: this.props.params.id
+            data: []
         };
     }
 
@@ -21,7 +21,7 @@ export default class viewProposalCandidates extends React.Component {
         InstitutionStore.on('UPDATE_PROPOSAL_CANDIDATES', this.updateTable);
         InstitutionStore.on('ACCEPT_VOLUNTEER_SUCCESSFUL', this.acceptSuccess);
         InstitutionStore.on('REJECT_VOLUNTEER_SUCCESSFUL', this.rejectSuccess);
-        InstitutionActions.getCandidates(this.state.action);
+        InstitutionActions.getCandidates(this.props.id);
     }
 
     componentWillUnmount () {
@@ -41,13 +41,11 @@ export default class viewProposalCandidates extends React.Component {
     };
 
     render () {
-        const { location } = this.props;
-
         return (
 
-            <div className='panel panel-headline'>
+            <div className='panel'>
                 <div className='panel-heading'>
-                    <h3 className='panel-title'>Proposal Candidates</h3>
+                    <h3 className='panel-title'>Candidates</h3>
                     <div className='right'>
                         <button type='button' className='btn-toggle-collapse'>
                             <i className='ti ti-angle-up' />
@@ -58,22 +56,17 @@ export default class viewProposalCandidates extends React.Component {
                     </div>
                 </div>
                 <div className='panel-body'>
-                    <BootstrapTable data={ this.state.data } striped={ true } hover={ true }>
-                        <TableHeaderColumn dataField='institution' dataFormat={ this.imageFormatter } isKey={ true } />
-                        <TableHeaderColumn dataFormat={ this.nameFormatter }>
+                    <BootstrapTable data={ this.state.data } striped = { true } bordered = { false } hover={ true } search>
+                        <TableHeaderColumn dataField='institution'
+                                           dataFormat={ this.imageFormatter } width='20%' isKey={ true } />
+                        <TableHeaderColumn dataField='name'>
                             Name
                         </TableHeaderColumn>
-                        <TableHeaderColumn dataFormat={ this.emailFormatter }>
-                            Email
-                        </TableHeaderColumn>
-                        <TableHeaderColumn dataFormat={ this.birthdateFormatter }>
-                            Birthdate
-                        </TableHeaderColumn>
-                        <TableHeaderColumn dataFormat={ this.professionFormatter }>
+                        <TableHeaderColumn dataField='profession'>
                             Profession
                         </TableHeaderColumn>
-                        <TableHeaderColumn dataFormat={ (cell, row, id) => this.acceptButtonFormatter(cell, row, this.state.action) } />
-                        <TableHeaderColumn dataFormat={ (cell, row, id) => this.denyButtonFormatter(cell, row, this.state.action) } />
+                        <TableHeaderColumn dataFormat={ this.acceptButtonFormatter.bind(this) } />
+                        <TableHeaderColumn dataFormat={ this.denyButtonFormatter.bind(this) } />
                 </BootstrapTable>
                 </div>
             </div>
@@ -81,23 +74,25 @@ export default class viewProposalCandidates extends React.Component {
         );
     }
 
-    acceptButtonFormatter = (cell, row, id) => {
+    acceptButtonFormatter (cell, row) {
         return(
-            <button onClick={ accept.bind(null, cell, row.uniqueId, id) } name={ row.uniqueId }>Accept</button>
+            <button className='btn btn-info btn-sm'
+                    onClick={ accept.bind(this) }>Accept</button>
         );
 
-        function accept (cell, row, id) {
-            InstitutionActions.acceptVolunteer(id, row);
+        function accept () {
+            InstitutionActions.acceptVolunteer(this.props.id, UserStore.getUserData.uniqueId);
         }
     };
 
-    denyButtonFormatter = (cell, row, id) => {
+    denyButtonFormatter (cell, row) {
         return(
-            <button onClick={ deny.bind(null, cell, row.uniqueId, id) } name={ row.uniqueId }>Reject</button>
+            <button className='btn btn-danger btn-sm'
+                onClick={ deny.bind(this) }>Reject</button>
         );
 
-        function deny (cell, row, id) {
-            InstitutionActions.rejectVolunteer(id, row);
+        function deny () {
+            InstitutionActions.rejectVolunteer(this.props.id, UserStore.getUserData.uniqueId);
         }
     };
 
@@ -105,47 +100,13 @@ export default class viewProposalCandidates extends React.Component {
         this.setState({
             data: InstitutionStore.getCandidates()
         });
-        console.log('CANDIDATES');
     };
 
 
     imageFormatter = (cell, row) =>{
         return (
-            <img height='50' src={ config.API_STATIC_URL + row.imageUrl } />
+            <img class='img img-responsive' style={ { maxHeight: '50px' } }
+                 src={ config.API_STATIC_URL + row.imageUrl } />
         );
     };
-
-    nameFormatter = (cell, row) =>{
-        console.log('NAME');
-        console.log(row);
-        return (
-            <div className='text-center'>
-                <span className='volunteering-table-text-margin'>{ row.name }</span>
-            </div>
-        );
-    }
-
-    emailFormatter = (cell, row) =>{
-        return (
-            <div className='text-center'>
-                <span className='volunteering-table-text-margin'>{ row.email }</span>
-            </div>
-        );
-    }
-
-    birthdateFormatter = (cell, row) =>{
-        return (
-            <div className='text-center'>
-                <span className='volunteering-table-text-margin'>{ row.birthDate }</span>
-            </div>
-        );
-    }
-
-    professionFormatter = (cell, row) =>{
-        return (
-            <div className='text-center'>
-                <span className='volunteering-table-text-margin'>{ row.profession }</span>
-            </div>
-        );
-    }
 }

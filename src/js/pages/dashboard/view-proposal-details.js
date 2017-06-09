@@ -1,9 +1,14 @@
 import React, { PropTypes } from 'react';
 import GoogleMap from 'google-map-react';
 
+import Candidates from 'app/pages/dashboard/viewProposalCandidates';
+import Volunteers from 'app/pages/dashboard/view-proposal-volunteers';
+
+import { UserStore } from 'app/stores';
 import { VolunteeringActions } from 'app/actions';
 import { VolunteeringStore } from 'app/stores';
 
+import If from 'app/components/shared/conditional';
 import config from 'app/stores/config';
 
 const Marker = ({ text }) => <img style={ { width: 'auto', height: '30px' } } src='assets/img/map-marker-128.png' />;
@@ -27,6 +32,7 @@ export default class ViewProposalDetails extends React.Component {
 
         this.state = {
             data: null,
+            candidates: [],
             actions: [],
             signup: false
         };
@@ -52,6 +58,13 @@ export default class ViewProposalDetails extends React.Component {
 
         return (
             <div>
+                <If test={ UserStore.getUserRole <= 3 }>
+                    <div>
+                        <Candidates id={ router.params.id } />
+                        <Volunteers id={ router.params.id } />
+                    </div>
+                </If>
+
                 <div class='panel panel-headline'>
                     <div class='panel-heading'>
                         <h3 class='panel-title'>{ proposal && proposal.user.name }</h3>
@@ -140,6 +153,7 @@ export default class ViewProposalDetails extends React.Component {
                         </button>
                     </div>
                 </div>
+
                 <div class='modal fade' id='confirm-help' tabIndex='-1' role='dialog' aria-labelledby='myModalLabel'
                      aria-hidden='true'>
                     <div class='modal-dialog'>
@@ -188,7 +202,9 @@ export default class ViewProposalDetails extends React.Component {
 
     updateActions = (key) => {
         this.state[key] = VolunteeringStore.getActions();
-        this.state.signup = this.containsAction(this.context.router.params.id);
+        if(UserStore.getUserRole === 3) {
+            this.state.signup = this.containsAction(this.context.router.params.id);
+        }
         this.setState(this.state);
     };
 }

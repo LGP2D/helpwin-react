@@ -90,13 +90,12 @@ export default class VolunteerProposals extends React.Component {
 
     updateProposals = (key) => {
         let data = VolunteeringStore.getActions();
-        console.log(this.state.actions);
-        for(let pId in data) {
-            let proposal = data[pId];
-            for (let pUId in this.state.actions) {
-                let userProposal = this.state.actions[pUId];
-                if(userProposal.action.id === proposal.id) {
-                    data.splice(pId, 1);
+        let i = data.length;
+        while(i--) {
+            let k = this.state.actions.length;
+            while(k--) {
+                if(data[i].id === this.state.actions[k].action.id) {
+                    data.splice(i, 1);
                 }
             }
         }

@@ -147,9 +147,10 @@ export default class MyVolunteerProposals extends React.Component {
             case 'REJECTED':
                 state = 'danger';
                 description = 'REJECTED';
+                break;
             case 'SUCCEED':
-                state = 'success';
-                description = '';
+                state = 'default';
+                description = 'COMPLETED';
                 break;
         }
         return (

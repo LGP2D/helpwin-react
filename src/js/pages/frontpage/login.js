@@ -1,10 +1,10 @@
 import React from 'react';
-import {UserActions} from 'app/actions';
-import {UserStore} from 'app/stores';
+import { UserActions } from 'app/actions';
+import { UserStore } from 'app/stores';
 import LabelForm from 'app/components/frontpage/forms/FormLabel';
 
 export default class Login extends React.Component {
-    constructor() {
+    constructor () {
         super();
 
         this.state = {
@@ -18,12 +18,12 @@ export default class Login extends React.Component {
         router: React.PropTypes.object.isRequired
     };
 
-    componentWillMount() {
+    componentWillMount () {
         UserStore.on('LOGIN_SUCCESS', this.onLoginSuccessful);
         UserStore.on('LOGIN_ERROR', this.onLoginError);
     }
 
-    componentWillUnmount() {
+    componentWillUnmount () {
         UserStore.removeListener('LOGIN_SUCCESS', this.onLoginSuccessful);
         UserStore.removeListener('LOGIN_ERROR', this.onLoginError);
     }

@@ -27,6 +27,13 @@ export default {
         });
     },
 
+    redeemVoucher: (uniqueId) => {
+        dispatcher.dispatch({
+            type: 'REDEEM_VOUCHER',
+            uniqueId: uniqueId
+        });
+    },
+
     deleteVoucher: (uniqueId) => {
         dispatcher.dispatch({
             type: 'DELETE_VOUCHER',

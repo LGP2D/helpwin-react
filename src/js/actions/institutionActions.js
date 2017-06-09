@@ -7,10 +7,17 @@ export default {
         });
     },
 
-    getCandidates: (volunteeringProposal) => {
+    getCandidates: (id) => {
         dispatcher.dispatch({
             type: 'GET_PROPOSAL_CANDIDATES',
-            volunteeringProposal: volunteeringProposal
+            volunteeringProposal: id
+        });
+    },
+
+    getVolunteers: (id) => {
+        dispatcher.dispatch({
+            type: 'GET_PROPOSAL_VOLUNTEERS',
+            volunteeringProposal: id
         });
     },
 
@@ -34,19 +41,28 @@ export default {
         });
     },
 
-    acceptVolunteer: (uniqueId, userUniqueId) => {
+    acceptVolunteer: (actionId, userUniqueId) => {
         dispatcher.dispatch({
             type: 'ACCEPT_VOLUNTEER',
-            uniqueId: uniqueId,
+            proposalId: actionId,
             userUniqueId: userUniqueId
         });
     },
 
-    rejectVolunteer: (uniqueId, userUniqueId) => {
+    rejectVolunteer: (actionId, userUniqueId) => {
         dispatcher.dispatch({
             type: 'REJECT_VOLUNTEER',
-            uniqueId: uniqueId,
+            actionId: actionId,
             userUniqueId: userUniqueId
+        });
+    },
+
+    evaluateVolunteer: (actionId, userUniqueId, status) => {
+        dispatcher.dispatch({
+            type: 'EVALUATE_VOLUNTEER',
+            actionId: actionId,
+            userUniqueId: userUniqueId,
+            status: status
         });
     }
 }

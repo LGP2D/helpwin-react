@@ -6,14 +6,14 @@ import Combobox from 'react-widgets/lib/Combobox';
 import 'react-widgets/lib/less/react-widgets.less';
 
 export default class Register extends React.Component {
-    constructor() {
+    constructor () {
         super();
 
         this.roles = [
-            {id: 1, description: 'Administrator'},
-            {id: 2, description: 'Institution'},
-            {id: 3, description: 'Volunteer'},
-            {id: 4, description: 'Company'}
+            { id: 1, description: 'Administrator' },
+            { id: 2, description: 'Institution' },
+            { id: 3, description: 'Volunteer' },
+            { id: 4, description: 'Company' }
         ];
 
         this.state = {
@@ -41,12 +41,12 @@ export default class Register extends React.Component {
         this.context.router.push('/login');
     };
 
-    componentWillMount() {
+    componentWillMount () {
         UserStore.on('REGISTER_SUCCESS', this.onRegisterSuccess);
         UserStore.on('IMAGE_UPLOAD_SUCCESSFUL', this.onUploadSuccess);
     }
 
-    componentWillUnmount() {
+    componentWillUnmount () {
         UserStore.removeListener('REGISTER_SUCCESS', this.onRegisterSuccess);
         UserStore.removeListener('IMAGE_UPLOAD_SUCCESSFUL', this.onUploadSuccess);
     }
@@ -131,7 +131,7 @@ export default class Register extends React.Component {
                         </div>
                         <div className='form-group'>
                             <div className='col-sm-offset-3 col-sm-6'>
-                                <button type='submit' value='Submit' className='btn btn-default'>Submit</button>
+                                <button type='submit' value='Submit' className='btn btn-info'>Submit</button>
                             </div>
                         </div>
                     </form>

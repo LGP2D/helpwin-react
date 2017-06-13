@@ -58,7 +58,7 @@ export default class ViewProposalDetails extends React.Component {
 
         return (
             <div>
-                <If test={ UserStore.getUserRole <= 3 }>
+                <If test={ UserStore.getUserRole < 3 }>
                     <div>
                         <Candidates id={ router.params.id } />
                         <Volunteers id={ router.params.id } />

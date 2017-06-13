@@ -10,6 +10,7 @@ import 'react-bootstrap-table/dist/react-bootstrap-table.min.css';
 import config from 'app/stores/config';
 
 export default class ListVouchersCollaborator extends AuthorizedComponent {
+
     constructor () {
         super();
 
@@ -72,6 +73,7 @@ export default class ListVouchersCollaborator extends AuthorizedComponent {
     };
 
     render () {
+        console.log(this.state.data);
         return (
             <div className='panel panel-headline'>
                 <div className='panel-heading'>

@@ -1,9 +1,9 @@
-import React, {PropTypes} from 'react';
-import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
+import React, { PropTypes } from 'react';
+import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
 import InstitutionActions from 'app/actions/institutionActions';
 import InstitutionStore from 'app/stores/institutionStore';
-import {UserStore} from 'app/stores';
+import { UserStore } from 'app/stores';
 import config from 'app/stores/config';
 
 import 'react-bootstrap-table/dist/react-bootstrap-table.min.css';

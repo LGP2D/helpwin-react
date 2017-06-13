@@ -17,11 +17,16 @@ export default class viewProposalCandidates extends React.Component {
         };
     }
 
+    static contextTypes = {
+        router: PropTypes.object.isRequired
+    };
+
     componentWillMount () {
+        const { router } = this.context;
         InstitutionStore.on('UPDATE_PROPOSAL_CANDIDATES', this.updateTable);
         InstitutionStore.on('ACCEPT_VOLUNTEER_SUCCESSFUL', this.acceptSuccess);
         InstitutionStore.on('REJECT_VOLUNTEER_SUCCESSFUL', this.rejectSuccess);
-        InstitutionActions.getCandidates(this.props.id);
+        InstitutionActions.getCandidates(router.params.id);
     }
 
     componentWillUnmount () {
@@ -41,8 +46,9 @@ export default class viewProposalCandidates extends React.Component {
     };
 
     render () {
-        return (
+        const { router } = this.context;
 
+        return (
             <div className='panel'>
                 <div className='panel-heading'>
                     <h3 className='panel-title'>Candidates</h3>

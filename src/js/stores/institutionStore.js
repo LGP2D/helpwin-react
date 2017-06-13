@@ -143,7 +143,7 @@ class InstitutionStore extends EventEmitter {
             case 'ACCEPT_VOLUNTEER': {
                 axios({
                     method: 'POST',
-                    url: config.API_URL + 'actions/acceptUser/' + action.actionId + '/' + action.userUniqueId,
+                    url: config.API_URL + 'actions/acceptUser/' + action.proposalId + '/' + action.userUniqueId,
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
@@ -160,7 +160,7 @@ class InstitutionStore extends EventEmitter {
             case 'REJECT_VOLUNTEER': {
                 axios({
                     method: 'POST',
-                    url: config.API_URL + 'actions/declineUser/' + action.actionId + '/' + action.userUniqueId,
+                    url: config.API_URL + 'actions/declineUser/' + action.proposalId + '/' + action.userUniqueId,
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',

@@ -81,13 +81,14 @@ export default class viewProposalCandidates extends React.Component {
     }
 
     acceptButtonFormatter (cell, row) {
+        const { router } = this.context;
         return(
             <button className='btn btn-info btn-sm'
                     onClick={ accept.bind(this) }>Accept</button>
         );
 
         function accept () {
-            InstitutionActions.acceptVolunteer(this.props.id, UserStore.getUserData.uniqueId);
+            InstitutionActions.acceptVolunteer(router.params.id, row.uniqueId);
         }
     };
 
@@ -98,7 +99,8 @@ export default class viewProposalCandidates extends React.Component {
         );
 
         function deny () {
-            InstitutionActions.rejectVolunteer(this.props.id, UserStore.getUserData.uniqueId);
+            const { router } = this.context;
+            InstitutionActions.rejectVolunteer(router.params.id, row.uniqueId);
         }
     };
 

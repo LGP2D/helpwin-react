@@ -37,7 +37,7 @@ export default class ListInstitutionProposals extends React.Component {
     openModal = (cell, row) => {
         //InstitutionActions.getCandidates(row);
         //this.setState({ modalIsOpen: true });
-        this.context.router.push('/dashboard/candidates/' + row.uniqueId);
+        this.context.router.push('/dashboard/candidates/' + row.id);
     };
 
     afterOpenModal = () => {

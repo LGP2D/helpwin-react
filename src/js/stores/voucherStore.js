@@ -10,6 +10,7 @@ class VoucherStore extends EventEmitter {
         super();
         this.error = false;
         this.vouchers = [];
+        this.credits = 0;
     }
 
     isError () {
@@ -106,6 +107,7 @@ class VoucherStore extends EventEmitter {
                         uniqueId: action.uniqueId
                     }
                 }).then(response => {
+                    this.credits = action.credits;
                     this.error = false;
                     this.emit('REDEEMED_VOUCHER');
                 }).catch(error => {
@@ -139,6 +141,8 @@ class VoucherStore extends EventEmitter {
             }
         }
     }
+
+    get getCreditsToRemove () { return this.credits; }
 }
 
 const voucherStore = new VoucherStore;

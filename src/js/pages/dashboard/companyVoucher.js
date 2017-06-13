@@ -1,5 +1,5 @@
 import React from 'react';
-import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
+import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
 import VoucherActions from 'app/actions/voucherActions';
 import VoucherStore from 'app/stores/voucherStore';
@@ -31,7 +31,7 @@ export default class CompanyVoucher extends React.Component {
     }
 
     render() {
-        const {location} = this.props;
+        const { location } = this.props;
 
         return (
             <div>
@@ -163,16 +163,19 @@ export default class CompanyVoucher extends React.Component {
 
     redeemFormatter (cell, row) {
         return (
-            <button className='btn btn-info' onClick={ this.onClickRedeem.bind(this, event, row.uniqueId) }>
+            <button className='btn btn-info' onClick={ this.onClickRedeem.bind(this, event, row.uniqueId, row.credits) }>
                 Redeem</button>
         );
     }
 
-    onClickRedeem (event, id) {
-        VoucherActions.redeemVoucher(id);
+    onClickRedeem (event, id, credits) {
+        VoucherActions.redeemVoucher(id, credits);
     }
 
     onRedeem () {
+        var coins = document.getElementById("coins").innerHTML;
+        coins -= VoucherStore.getCreditsToRemove;
+        $('#coins').text(coins);
         document.getElementById("redeem-voucher-message").innerHTML =
             VoucherStore.isError() ? "Unable to redeem voucher, either you don't have enough credits or this voucher" +
                 " is not available." : "Success, this voucher was redeemed!";

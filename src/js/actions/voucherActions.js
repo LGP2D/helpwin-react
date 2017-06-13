@@ -27,10 +27,11 @@ export default {
         });
     },
 
-    redeemVoucher: (uniqueId) => {
+    redeemVoucher: (uniqueId, credits) => {
         dispatcher.dispatch({
             type: 'REDEEM_VOUCHER',
-            uniqueId: uniqueId
+            uniqueId: uniqueId,
+            credits: credits
         });
     },
 

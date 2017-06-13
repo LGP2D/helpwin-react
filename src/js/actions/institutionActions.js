@@ -64,5 +64,12 @@ export default {
             userUniqueId: userUniqueId,
             status: status
         });
+    },
+
+    volunteersToEvaluate: (actionId) => {
+        dispatcher.dispatch({
+           type: 'VOLUNTEERS_TO_EVALUATE',
+            actionId: actionId
+        });
     }
 }

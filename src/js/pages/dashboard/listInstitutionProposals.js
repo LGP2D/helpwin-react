@@ -115,6 +115,9 @@ export default class ListInstitutionProposals extends React.Component {
                         <TableHeaderColumn dataFormat={ this.buttonFormatter }>
                             Choose candidates
                         </TableHeaderColumn>
+                        <TableHeaderColumn dataFormat={ this.evaluateFormatter }>
+                            Evaluate candidates
+                        </TableHeaderColumn>
                     </BootstrapTable>
                     <Modal isOpen={ this.state.modalIsOpen } style={ customStyles } contentLabel='Example Modal'>
                         <table class='table table-condensed'>
@@ -219,4 +222,16 @@ export default class ListInstitutionProposals extends React.Component {
             </button>
         );
     };
+
+    evaluateFormatter = (cell, row) => {
+        return(
+            <button className='btn btn-info' onClick={ () => this.evaluate(cell,row) } type='button' name={ row }>
+                Evaluate
+            </button>
+        );
+    };
+
+    evaluate = (cell, row) => {
+        this.context.router.push('/dashboard/evaluate/' + row.id);
+    }
 }

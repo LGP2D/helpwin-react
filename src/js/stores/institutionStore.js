@@ -11,6 +11,7 @@ class InstitutionStore extends EventEmitter {
         this.data = [];
         this.proposalCandidates = [];
         this.institutions = [];
+        this.candidatesToEval = [];
     }
 
     getAll (){
@@ -24,6 +25,10 @@ class InstitutionStore extends EventEmitter {
 
     get getInstitutions () {
         return this.institutions;
+    }
+
+    candidatesToEval () {
+        return this.candidatesToEval;
     }
 
     handleActions (action) {
@@ -189,6 +194,24 @@ class InstitutionStore extends EventEmitter {
                 }).then(response => {
                     console.log(response.data);
                     this.emit('EVALUATE_VOLUNTEER_SUCCESSFUL');
+                }).catch(error => {
+                    console.log(error);
+                });
+                break;
+            }
+            case 'VOLUNTEERS_TO_EVALUATE': {
+                axios({
+                    method: 'POST',
+                    url: config.API_URL + 'actions/acceptedUsers/' + action.actionId,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'Authorization': UserStore.getJwt
+                    }
+                }).then(response => {
+                    console.log(response.data);
+                    this.candidatesToEval = response.data;
+                    this.emit('FETCH_VOLUNTEERS_SUCCESSFUL');
                 }).catch(error => {
                     console.log(error);
                 });

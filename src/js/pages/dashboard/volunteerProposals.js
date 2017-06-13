@@ -94,8 +94,10 @@ export default class VolunteerProposals extends React.Component {
         while(i--) {
             let k = this.state.actions.length;
             while(k--) {
-                if(data[i].id === this.state.actions[k].action.id) {
-                    data.splice(i, 1);
+                if(data[i] !== undefined) {
+                    if (data[i].id === this.state.actions[k].action.id) {
+                        data.splice(i, 1);
+                    }
                 }
             }
         }

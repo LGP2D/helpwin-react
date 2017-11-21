@@ -1,4 +1,4 @@
-# Helpwin
+# Helpwin (Frontend in React)
 
 Helpwin main focus is to ease the access and offering of volunteering, by centralizing and speeding up the cataloging and selection process. An additional important aspect is the rewarding system, where volunteers can exchange Helpwin credit for discount vouchers.
 Besides energizing volunteering, it will also be possible to optimize volunteer profiling and task matching based on volunteer skills via an innovative web platform.

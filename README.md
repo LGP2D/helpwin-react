@@ -1,4 +1,12 @@
-# helpwin-react
+# Helpwin
+
+Helpwin main focus is to ease the access and offering of volunteering, by centralizing and speeding up the cataloging and selection process. An additional important aspect is the rewarding system, where volunteers can exchange Helpwin credit for discount vouchers.
+Besides energizing volunteering, it will also be possible to optimize volunteer profiling and task matching based on volunteer skills via an innovative web platform.
+
+<img src="https://image.prntscr.com/image/yv4iA2iQQlCTWq8CKP_Eig.png" />
+<img src="https://image.prntscr.com/image/_OcIWkQ1SIePwY3M94uCFg.png" />
+<img src="https://image.prntscr.com/image/zQAeudwtT-OO6J5rI8LqtA.png" />
+<img src="https://image.prntscr.com/image/4nEeiXNDSN2T-1wfdx-2JA.png" />
 
 ## Installation
 
